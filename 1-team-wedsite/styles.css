@@ -1,5 +1,28 @@
+main{
+
+
+
+}
+
 body{
 
-    background-color: black;
+    background-color: #ffffff;
 
+}
+
+nav li{
+
+    display: inline;
+
+}
+
+nav ul{
+    background-color:#000099;
+
+}
+
+li a{
+    color:#ffffff;
+    text-decoration: none;
+    font-size: 30px;
 }
