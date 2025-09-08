@@ -6,20 +6,39 @@ main{
 
 body{
 
-    background-color: #ffffff;
+    background-color: #dddddd;
 
 }
 
 nav li{
 
     display: inline;
-
+    margin-left : 50px;
+    margin-top: 0px;
 }
 
 nav ul{
+    margin-top: -8px;
+    margin-left: -8px;
+    margin-right: -8px;
     background-color:#000099;
 
 }
+
+nav button{
+
+    background-color: #000099;
+    border-color: #ffffff;
+    border-width: 4px;
+
+}
+
+nav button:hover{
+
+    background-color: #3333bb;
+
+}
+
 
 li a{
     color:#ffffff;
