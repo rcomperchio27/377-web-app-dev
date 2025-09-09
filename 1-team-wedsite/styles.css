@@ -5,27 +5,57 @@ main{
 }
 
 body{
-
+    font-family: Arial;
     background-color: #dddddd;
 
 }
 
 table{
+    align-content: center;
+    background-color: #aaaaaa;
+    border-width: 3px;
+    border-color: #000000;
+    border-style: solid;
+}
 
+th{
     border-color: #000000;
     border-width: 2px;
+    border-style: solid;
+    width: 50px;
+    height: 25px;   
+}
+
+td{ 
+    text-align: left;
+    vertical-align: top;
+    border-color: #000000;
+    border-width: 2px;
+    border-style: solid;
+    width: 220px;
+    height: 120px;
+}
+
+.notmonth{
+
+    color: #555555;
 
 }
 
+h2{
+    
+    text-align: center;
+
+}
 
 nav li{
-
     display: inline;
     margin-left : 50px;
     margin-top: 0px;
 }
 
 nav ul{
+    display: fixed;
     margin-top: -8px;
     margin-left: -8px;
     margin-right: -8px;
