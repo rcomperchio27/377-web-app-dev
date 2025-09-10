@@ -7,7 +7,7 @@ main{
 body{
     font-family: Arial;
     background-color: #dddddd;
-
+    text-align: center;
 }
 
 table{
@@ -27,13 +27,24 @@ th{
 }
 
 td{ 
-    text-align: left;
-    vertical-align: top;
+    text-align: center;
     border-color: #000000;
     border-width: 2px;
     border-style: solid;
     width: 220px;
     height: 120px;
+}
+
+td div{
+    width: 200px;
+    height: 120px;
+}
+
+.day{
+    margin-top: -5px;
+    text-align: left;
+    vertical-align: top;
+    font-size: 20px;
 }
 
 .notmonth{
@@ -48,30 +59,37 @@ h2{
 
 }
 
+nav{
+
+    display: fixed;
+    
+
+}
+
 nav li{
     display: inline;
-    margin-left : 50px;
+    margin-left : 20px;
     margin-top: 0px;
 }
 
 nav ul{
+    padding: 2px;
     display: fixed;
-    margin-top: -8px;
-    margin-left: -8px;
+    margin: 0%;
+    margin-left: auto;
     margin-right: -8px;
     background-color:#000099;
 
 }
 
-nav button{
-
+nav a{
     background-color: #000099;
-    border-color: #ffffff;
+    border-color: #888888;
     border-width: 4px;
 
 }
 
-nav button:hover{
+nav a:hover{
 
     background-color: #3333bb;
 
