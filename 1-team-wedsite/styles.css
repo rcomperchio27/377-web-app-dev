@@ -7,7 +7,6 @@ main{
 body{
     font-family: Arial;
     background-color: #dddddd;
-    text-align: center;
 }
 
 table{
@@ -54,9 +53,25 @@ td div{
 }
 
 h2{
-    
+    font-size: 30px;
     text-align: center;
 
+}
+
+h3{
+    text-align: center;
+}
+
+p{
+    text-align: center;
+}
+
+.roster{
+    margin-left: auto;
+    margin-right: auto;
+    padding: 15px;
+    width: 350px;
+    text-align: left;
 }
 
 nav{
@@ -73,13 +88,11 @@ nav li{
 }
 
 nav ul{
+    text-align: center;
     padding: 2px;
     display: fixed;
     margin: 0%;
-    margin-left: auto;
-    margin-right: -8px;
     background-color:#000099;
-
 }
 
 nav a{
