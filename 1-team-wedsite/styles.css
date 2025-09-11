@@ -74,9 +74,11 @@ p{
     text-align: left;
     font-size: 40px;
     background-color: #888888;
-    padding-top: 20px;
 }
+.roster ul li{
 
+    padding-top: 20px
+}
 nav{
 
     display: fixed;
