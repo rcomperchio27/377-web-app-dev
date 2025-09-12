@@ -160,7 +160,6 @@ li a{
     margin-left: -40px;
     background-color: #888888;
     width: 210;
-    position:sticky;
 
 }
 
@@ -169,5 +168,5 @@ li a{
 }
 
 blockquote{
-    text-align:left ;
+    text-align:right ;
 }
