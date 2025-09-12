@@ -81,7 +81,7 @@ p{
 }
 nav{
 
-    display:inline;
+    display:fixed;
     position: absolute;
 
 }
