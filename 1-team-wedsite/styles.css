@@ -159,11 +159,15 @@ li a{
     text-align: left;
     margin-left: -40px;
     background-color: #888888;
-    width: 200;
-    position:absolute;
+    width: 210;
+    position:sticky;
 
 }
 
 #mediabar li{
     list-style: none;
+}
+
+blockquote{
+    text-align:left ;
 }
