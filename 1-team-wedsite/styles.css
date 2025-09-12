@@ -81,7 +81,7 @@ p{
 }
 nav{
 
-    display:fixed;
+    display:block;
 
 }
 
@@ -168,5 +168,5 @@ li a{
 }
 
 .tweet{
-    margin-right: 0.1%;
+    float: left;
 }
