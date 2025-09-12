@@ -157,7 +157,7 @@ li a{
 
 #mediabar{
     text-align: left;
-    position:absolute top;
+    padding-left: -50px;
     background-color: #888888;
     width: 200;
     position:absolute;
