@@ -159,8 +159,8 @@ li a{
     text-align: left;
     margin-left: -40px;
     background-color: #888888;
-    width: 200px;
-    position:sticky;
+    width: 210px;
+    position:absolute;
 
 }
 
