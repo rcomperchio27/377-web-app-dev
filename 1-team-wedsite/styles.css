@@ -156,7 +156,8 @@ li a{
 }
 
 #mediabar{
-
+    text-align: left;
+    position:absolute top;
     background-color: #888888;
     width: 200;
     position:absolute;
@@ -165,5 +166,4 @@ li a{
 
 #mediabar li{
     list-style: none;
-    padding-left: -100px;
 }
