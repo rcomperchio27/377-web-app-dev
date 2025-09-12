@@ -169,5 +169,5 @@ li a{
 }
 
 blockquote{
-    text-align:right ;
+    margin-right: auto;
 }
