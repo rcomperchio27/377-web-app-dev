@@ -161,6 +161,8 @@ li a{
     width: 200;
     position:absolute;
 
-    
+}
 
+#mediabar li{
+    text-decoration: none;
 }
