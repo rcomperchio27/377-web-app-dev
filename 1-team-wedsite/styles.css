@@ -171,13 +171,10 @@ li a{
     height: 250px;
 }
 
-#mediabar ul{
-
-    display: inline;
-}
 
 #mediabar li{
     list-style: none;
+    display: inline;
 }
 
 .tweet{
