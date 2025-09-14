@@ -180,8 +180,14 @@ li a{
     width: 407px;
 
     background-color: #000099;
+}
+
+#firsticon{
+
+    padding-left: 0px;
 
 }
+
 
 #mediabar li{
     list-style: none;
