@@ -80,7 +80,7 @@ p{
     width: 650px;
     text-align: left;
     font-size: 40px;
-    background-color: #4e8ff0;
+    background-color: #000099;
 }
 .roster ul li{
 
@@ -143,13 +143,13 @@ li a{
 #tickets a{
     color: #ffffff;
     font-size: 40px;
-    background-color: #888888;
+    background-color: #000099;
     padding: 10px;
 }
 
 #tickets a:hover{
 
-    background-color: #555555;
+    background-color: #3333bb;
 
 
 }
