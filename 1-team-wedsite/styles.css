@@ -80,12 +80,12 @@ p{
     padding: 15px;
     width: 650px;
     text-align: left;
-    font-size: 40px;
+    font-size: 30px;
     background-color: #ffffff;
 }
 #roster ul li{
     color: #000099;
-
+    padding-top: 20px
 }
 nav{
     background-color:#000099;
