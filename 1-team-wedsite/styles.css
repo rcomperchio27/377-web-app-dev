@@ -26,6 +26,7 @@ th{
 }
 
 td{ 
+    color: #000000;
     text-align: center;
     border-color: #000000;
     border-width: 2px;
@@ -71,7 +72,7 @@ h3{
 
 p{
     text-align: center;
-    color: #000000;
+
 }
 
 .roster{
