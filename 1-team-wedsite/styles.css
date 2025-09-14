@@ -165,8 +165,10 @@ li a{
 }
 
 #mediabar{
+    margin-left: auto;
+    margin-right: auto;
     text-align: left;
-
+    padding-top: -10px;
     background-color: #888888;
     height: 250px;
 }
@@ -175,7 +177,7 @@ li a{
 #mediabar li{
     list-style: none;
     display: inline;
-    padding-left: 100px;
+    padding-left: 30px;
 }
 
 .tweet{
