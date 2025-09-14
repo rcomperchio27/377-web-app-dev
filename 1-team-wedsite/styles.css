@@ -97,6 +97,7 @@ nav li{
     display: inline;
     margin-left : 20px;
     margin-top: 0px;
+    width: 100%;
 }
 
 nav ul{
