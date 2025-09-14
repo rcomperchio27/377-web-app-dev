@@ -26,7 +26,6 @@ th{
 }
 
 td{ 
-    color: #000000;
     text-align: center;
     border-color: #000000;
     border-width: 2px;
@@ -178,4 +177,11 @@ li a{
 
 .tweet{
     float: right;
+}
+
+.center{
+
+    margin-left: auto;
+    margin-right: auto;
+
 }
