@@ -5,6 +5,7 @@ main{
 }
 
 body{
+    padding-top: 20px;
     font-family: Arial;
     background-color: #f5e068d8;
 }
