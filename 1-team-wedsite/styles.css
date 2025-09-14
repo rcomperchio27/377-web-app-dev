@@ -5,7 +5,7 @@ main{
 }
 
 body{
-    padding-bottom: 15px;
+    padding-bottom: 5px;
     font-family: Arial;
     background-color: #f5e068d8;
 }
@@ -92,6 +92,7 @@ nav{
     background-color:#000099;
     display:fixed;
     padding: -10px;
+    padding-bottom: 10px;
 }
 
 nav li{
