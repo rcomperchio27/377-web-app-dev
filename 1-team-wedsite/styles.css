@@ -1,16 +1,13 @@
-main{
-
-
-
+main {
+    font-family: Arial;
 }
 
-body{
+body { 
     padding-bottom: 2px;
-    font-family: Arial;
     background-color: #f5e068d8;
 }
 
-table{
+table {
     align-content: center;
     background-color: #bbbbbb;
     border-width: 3px;
@@ -18,7 +15,7 @@ table{
     border-style: solid;
 }
 
-th{
+th {
     border-color: #000000;
     border-width: 2px;
     border-style: solid;
@@ -26,7 +23,7 @@ th{
     height: 25px;   
 }
 
-td{ 
+td { 
     text-align: center;
     border-color: #000000;
     border-width: 2px;
@@ -35,46 +32,42 @@ td{
     height: 120px;
 }
 
-td div{
+td div {
     width: 200px;
     height: 120px;
 }
 
-.day{
+.day {
     margin-top: -5px;
     text-align: left;
     vertical-align: top;
     font-size: 20px;
 }
 
-.notmonth{
-
+.notmonth {
     color: #555555;
-
 }
 
-h1{
+h1 {
     font-size: 50px;
     text-align: center;
 }
 
 
-h2{
+h2 {
     font-size: 30px;
     text-align: center;
-
 }
 
-h3{
+h3 {
     text-align: center;
 }
 
-p{
+p {
     text-align: center;
-
 }
 
-#roster{
+#roster {
     margin-left: auto;
     margin-right: auto;
     padding: 15px;
@@ -83,57 +76,53 @@ p{
     font-size: 30px;
     background-color: #ffffff;
 }
-#roster ul li{
+#roster ul li {
     color: #000099;
     padding-top: 10px
 }
-nav{
+nav {
     background-color:#000099;
     display:fixed;
     padding: 10px;
 }
 
-nav li{
+nav li {
     display: inline;
     margin-left : 20px;
     margin-top: 0px;
     width: 100%;
 }
 
-nav ul{
+nav ul {
     text-align: center;
     padding: 2px;
     display: fixed;
     margin: 0%;
-
 }
 
-nav a{
+nav a {
     background-color: #000099;
     border-color: #888888;
     border-width: 4px;
     font-size: 30px;
 }
 
-nav a:hover{
-
+nav a:hover {
     background-color: #3333bb;
-
 }
 
-a{
+a {
     color: #000000;
 }
 
-li a{
+li a {
     color:#ffffff;
     text-decoration: none;
     font-size: 30px;
 }
 
 
-#tickets{
-
+#tickets {
     margin-left: auto;
     margin-right: auto;
     width: 500px;
@@ -141,28 +130,23 @@ li a{
     text-align: center;
 }
 
-#tickets a{
+#tickets a {
     color: #ffffff;
     font-size: 40px;
     background-color: #000099;
     padding: 10px;
 }
 
-#tickets a:hover{
-
+#tickets a:hover {
     background-color: #3333bb;
-
-
 }
 
 
-#tickets p{
-
+#tickets p {
     font-size: 20px;
-
 }
 
-#mediabar{
+#mediabar {
     margin-left: auto;
     margin-right: auto;
     text-align: center;
@@ -171,53 +155,44 @@ li a{
     width: 400px;
 }
 
-#mediabar ul{
+#mediabar ul {
     margin-left: auto;
     margin-right: auto;
     padding: 5px;
     width: 427px;
-
     background-color: #000099;
 }
 
-.notfirst{
-
+.notfirst {
     padding-left: 30px;
-
 }
 
 
-#mediabar li{
+#mediabar li {
     list-style: none;
     display: inline;
 }
 
-#schedule{
+#schedule {
     margin-left: auto;
     margin-right: auto;
 }
 
-.logo{
+.logo {
     float: right;
     width: auto;
     height: auto;
 }
 
-.content{
-
+.content {
     padding-top: 10px;
-
 }
 
-.info{
-
+.info {
     font-size: 20px;
-
-
 }
 
-#medianews{
-
+#medianews {
     float: right;
     text-align: center;
     font-size: 24px;
