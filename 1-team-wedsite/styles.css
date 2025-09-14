@@ -91,19 +91,19 @@ p{
 nav{
     background-color:#000099;
     display:fixed;
-    padding: -10px;
+    padding: 10px;
 }
 
 nav li{
     display: inline;
     margin-left : 20px;
     margin-top: 0px;
-    width: 100%;
+    width: 110%;
 }
 
 nav ul{
     text-align: center;
-    padding: 2px;
+    padding: 5px;
     display: fixed;
     margin: 0%;
 
@@ -112,7 +112,7 @@ nav ul{
 nav a{
     background-color: #000099;
     border-color: #888888;
-    border-width: 4px;
+    border-width: 6px;
 
 }
 
@@ -177,7 +177,7 @@ li a{
     margin-left: auto;
     margin-right: auto;
     padding: 5px;
-    width: 407px;
+    width: 427px;
 
     background-color: #000099;
 }
