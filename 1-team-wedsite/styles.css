@@ -181,5 +181,10 @@ li a{
 }
 
 #schedule{
-    margin: auto;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#logo{
+    float: right;
 }
