@@ -82,11 +82,7 @@ p{
 nav{
     background-color:#000099;
     display:fixed;
-    padding: 4rem 2rem;
-    padding-top: 4rem;
-    padding-right: 2rem;
-    padding-bottom: 4rem;
-    padding-left: 2rem;
+
 }
 
 nav li{
