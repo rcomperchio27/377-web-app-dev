@@ -170,8 +170,11 @@ li a{
     background-color: #888888;
     height: 250px;
     position:absolute;
-    display: inline;
+}
 
+#mediabar ul{
+
+    display: inline;
 }
 
 #mediabar li{
