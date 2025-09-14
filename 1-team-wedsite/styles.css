@@ -174,8 +174,10 @@ li a{
 }
 
 #mediabar ul{
+    margin-left: auto;
+    margin-right: auto;
     padding: 5px;
-    width: 600px;
+    width: 500px;
 
     background-color: #888888;
 
