@@ -199,6 +199,8 @@ li a{
 
 .logo{
     float: right;
+    width: auto;
+    height: auto;
 }
 
 .content{
