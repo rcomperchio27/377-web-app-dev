@@ -166,10 +166,9 @@ li a{
 
 #mediabar{
     text-align: left;
-    margin-left: -40px;
+
     background-color: #888888;
     height: 250px;
-    position:absolute;
 }
 
 #mediabar ul{
