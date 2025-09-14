@@ -80,7 +80,7 @@ p{
     padding-top: 20px
 }
 nav{
-
+    background-color:#000099;
     display:fixed;
 
 }
@@ -96,7 +96,7 @@ nav ul{
     padding: 2px;
     display: fixed;
     margin: 0%;
-    background-color:#000099;
+
 }
 
 nav a{
