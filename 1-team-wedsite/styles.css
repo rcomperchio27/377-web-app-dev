@@ -167,7 +167,8 @@ li a{
 #mediabar{
     margin-left: auto;
     margin-right: auto;
-    text-align: left;
+    text-align: center;
+    padding-top: -10px;
     background-color: #888888;
     height: 250px;
     width: 400px;
