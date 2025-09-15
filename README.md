@@ -9,5 +9,6 @@ This project includes the following languages:
 - PHP
 - SQL
 - Python
-
+ 
  All code copyright 2025
+ 
