@@ -5,35 +5,96 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title> HTML Form Examples</title>
         <script>
-            let history = ''
+            function register() {
+                var success = true;
+
+                var username = document.forms[1].elements['username'].value;
+                if (username == '') {
+                    success = false;
+                    alert('User name is required');
+                }
+
+                var terms = document.forms[1].elements['agreement'].checked;
+                if (!terms) {
+                    success = false;
+                    alert('you must agree to the terms of service');
+                }
+
+                if (success) {
+                    alert('User account created successfully!');
+                }
+
+
+            }
+            function login() {
+
+                let username = document.getElementById('username').value;
+                let password = document.forms[0].elements['password'].value;
+
+                alert('Access Denied for user ' + username + ' and password ' + password);
+            }
+
             function doSubmit() {
                 let firstName = document.getElementById('firstName').value;
                 let lastName = document.getElementById('lastName').value;
                 // alert('Thank you, ' + firstName + '!');
-                
                 document.getElementById("output").innerHTML += firstName + ' ' + lastName + ' <span style="color:red"> submitted </span> the form. <br/>';
-
             }
 
         </script>
     </head>
     <body>
-        <h1>HTML Form Examples</h1>
+        <h1>Form Examples</h1>
+
+        <h2>Login Form</h2>
+
+        <form>
+            Username: <input name="username" id="username" type="text" placeholder="Enter your username">
+            <br>
+            Password: <input name="password" id="password" type="password" placeholder="Enter your password">
+            <br>
+            <input value="Login" type="button" onclick="login()">
+        </form>
+
+       <h2>User Registration Form</h2>
 
         <form>
             <h2>Student Handbook Acknowledgement</h2>
 
             First Name: <input type="text" id="firstName" /> <br />
             Last Name: <input type="text" id="lastName" /> <br />
-            School:
+            Username: <input name="username" type="text" placeholder="Username"><br>
+
+            I am a...<br>
+            <!-- The for attribute of the lable connects to the id attribute of the input -->
+            <input id="student" name="usertype" type="radio" value="Student">
+            <label for="student">Student</label>
+            <br>
+            <input id="teacher" name="usertype" type="radio" value="Teacher">
+            <label for="teacher">Teacher</label>
+            <br>
+
+            select your school:<br>
             <select>
+                <option selected hidden="true">Select Something</option>
                 <option>Hanover High School</option>
                 <option>Hanover Middle School</option>
                 <option>Center School</option>
                 <option>Cedar School</option>
             </select><br />
-            I agree to the handbook policies <input type="checkbox" /><br />
-            <input type="button" value="I Agree" onclick="doSubmit()" />
+
+            Age: <input name="age" type="number" placeholder="Your age" min="1" max="100">
+            <br>
+            DOB: <input name="dob" type="date" placeholder="Your date of birth">
+            <br>
+            <input id="agreement" name="agreement" type="checkbox">
+            <label for="agreement">I agree to the terms of service...</label>
+            <br>
+
+            <input value="Register" type="button" onclick="register()"> 
+      
+            <!-- I agree to the handbook policies <input type="checkbox" /><br />
+            <input type="button" value="I Agree" onclick="doSubmit()" />  -->
         </form>
 
         
