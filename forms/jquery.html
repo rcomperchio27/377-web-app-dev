@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Jquery Examples</title>
+        <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+        <script>
+        
+            function calculateCelcius(fahrenheit) {
+                let celsius = (fahrenheit - 32) * 5 / 9;
+                $('#celsuis').val(celsius);
+            }
+        
+            function toggleInputs() {
+                if ($('.test-input').prop('disabled')) {
+                    $('.test-input').prop('disabled', false).prop('placeholder', 'DISABLED!');
+                } else {
+                    $('.test-input').prop('disabled', true).prop('placeholder', 'RE-ENABLED!');
+                }
+            }
+            
+            function  updateDateTime() {
+                // old way
+                // document.getElementById('dateTime').innerHTML = new Date();
+                
+                // with jquery
+                $('#dateTime').html(new Date());
+                
+            }
+            
+
+        </script>
+    </head>
+
+    <body>
+        <h1>Jquery Examples</h1> 
+
+        <input type="button" value="Click to display current date and time" onclick="updateDateTime()" />
+        <div id="dateTime"></div>
+
+        <input type="text" placeholder="Feild 1" class="test-input" /><br>
+        <input type="text" placeholder="Feild 2" class="test-input" /><br>
+        <input type="text" placeholder="Feild 3" class="test-input" /><br>
+
+        <input type="button" value="Click to Toggle Input Fields" onclick="toggleInputs()" />
+
+        <h2>Temperature Converter</h2>   
+
+            <input type="text" id="celsius" placeholder="Enter a value" onchange="calculateFahrenheit(this.value)" /> &#176;F <br>
+            <input type="text" id="fahrenheit" placeholder="Enter a value" onchange="calculateCelcius(this.value)" /> &#176;C
+
+        <div></div>
+
+
+    </body>
+</html>
