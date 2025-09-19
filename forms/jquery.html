@@ -7,9 +7,13 @@
         <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
         <script>
         
-            function calculateCelcius(fahrenheit) {
+            function calculateFahrenheit(fahrenheit) {
                 let celsius = (fahrenheit - 32) * 5 / 9;
-                $('#celsuis').val(celsius);
+                $('#fahrenheit').val(celsius);
+            }
+            function calculateCelcius(celsius) {
+                let fahrenheit = (celsius * 9 / 5) + 32;
+                $('#celsuis').val(fahrenheit);
             }
         
             function toggleInputs() {
