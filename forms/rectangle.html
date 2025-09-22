@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rectangle</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script>
+        function calculateArea() {
+            let height = $('#width').val();
+            let width = $('#height').val();
+            $('p').hide();
+            $('table').show();
+            $('#area').html = height * width;
+        }
+
+
+    </script>
+</head>
+<body>
+    <h1>Rectangle Formulas</h1>
+
+    <br>
+    Height: <input id="height" text="Height" value="" /> <br>
+    Width: <input id="width" text="Width" value="" /> <br>
+
+    <input type="button" value="Get Statistics" onclick="calculateArea()" /><br>
+
+    <p>Your Answer will appear here</p>
+    <table hidden="true">
+        <tr>
+            <td>
+                Area
+            </td>
+            <td id="area">
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Perimiter
+            </td>
+            <td id="perimiter">
+
+            </td>
+        </tr>
+    </table>
+
+</body>
+</html>
