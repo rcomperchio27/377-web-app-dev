@@ -11,7 +11,8 @@
             let width = $('#height').val();
             $('p').hide();
             $('table').show();
-            $('#area').html = height * width;
+            $('#area').html(height * width);
+            $('#perimiter').html(2 * height + 2 * width);
         }
 
 
