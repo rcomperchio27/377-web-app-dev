@@ -51,7 +51,7 @@ function calculateRmsError() {
         measurmentssum += measurments[i];
     }
 
-    barmeasurments = measurmentssum / (measurments.length);
+    barmeasurments = Math.round((measurmentssum / (measurments.length)) * (sigfig + 1)) / (sigfig + 1);
 
     let xiBarxSq = 0;
 
