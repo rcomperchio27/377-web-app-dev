@@ -12,47 +12,52 @@
 <body>
     <h1>Equation Calculator</h1>
 
-    <div id="density">
-        <h2>Density</h2>
+    <span id="density">
+        <h2>Density of a cube</h2>
 
         Mass (kilograms)<input type="text" id="densityMass" placeholder="Enter the mass" /> <br>
-        Length (meters)<input type="text" id="densityLength" placeholder="Enter the length" /> <br>
+        Length of its side(meters)<input type="text" id="densityLength" placeholder="Enter the length" /> <br>
         <input type="button" value="Calculate" onclick="calculateDensity()" />
-        <div id="densityResult">
-
+        <div>
+            <p id="densityResult">The answer will appear here</p>
         </div>
-    </div>
-    
-    <div id="Rms Error">
-        <h2>Rms Error</h2>
+    </span>
+   
+    <span id="velocity">
+        <h2>Speed</h2>
 
-        List of measurments<input type="text" id="rmsErrorMeasurements" placeholder="1, 2, 3, 4, 5, 6, 7" /><br>
-        <input type="button" value="Calculate" onclick="calculateRmsError()" />
-        <div id="RmsResult">
-
-        </div>
-    </div>
-
-    <div id="velocity">
-        <h2>Velocity</h2>
-
-        Length (meters)<input type="text" id="velocityLength" placeholder="Enter the length" /> <br>
+        Distance (meters)<input type="text" id="velocityLength" placeholder="Enter the distance traveled" /> <br>
         Time (seconds)<input type="text" id="velocityTime" placeholder="Enter the time" /> <br>
         <input type="button" value="Calculate" onclick="calculateVelocity()" />
-        <div id="velocityResult">
-
+        <div>
+            <p id="velocityResult">The answer will appear here</p>
         </div>
         
-    </div>
-    <div id="acceleration">
+    </span>
+    <span id="acceleration">
         <h2>Acceleration</h2>
 
         Length (meters)<input type="text" id="accelerationLength" placeholder="Enter the length" /> <br>
         Time (seconds)<input type="text" id="accelerationTime" placeholder="Enter the time" /> <br>
         <input type="button" value="Calculate" onclick="calculateAcceleration()" />
-        <div id="accelerationResult">
-
+        <div>
+            <p id="accelerationResult">The answer will appear here</p>
         </div>
-    </div>
+    </span>
+     
+    <span id="Rms Error">
+        <h2>Rms Error</h2>
+
+        List of measurments<input type="text" id="rmsErrorMeasurements" placeholder="1, 2, 3, 4, 5, 6, 7" /><br>
+        Lowest amount of significant figures<input id="sigfig" type="number" min="1" /> <br>
+        Lowest amount of decimals <input id="decimal" type="number" min="0" /> <br>
+
+        <input type="button" value="Calculate" onclick="calculateRmsError()" />
+
+        <div>
+            <p id="RmsResult">The answer will appear here</p>
+        </div>
+    </span>
+
 </body>
 </html>
