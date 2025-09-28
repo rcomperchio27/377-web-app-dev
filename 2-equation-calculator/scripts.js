@@ -54,35 +54,33 @@ function calculateRmsError() {
     // console.log('sigfig:' + sigfig);
     // console.log(decimin);
 
-    // decimals = 
+    // defines sigfig and decimal values
     let sigfig = parseFloat($('#sigfig').val()) + 1;
     let decimal = 1 * (parseFloat($('#decimal').val()) + 1); 
 
+    // changes from string to float
     for (i = 0; i < input.length; i++) {
         measurments[i] = parseFloat(input[i]);
     }
 
+    // sum of all the measurements
     let measurmentssum = 0; 
     for (i = 0; i < measurments.length; i++) {
         measurmentssum += measurments[i];
     }
+    let barmeasurments = Math.round((measurmentssum / (measurments.length)) * (10 ** sigfig), sigfig) / (10 ** sigfig);
 
-    barmeasurments = Math.round((measurmentssum / (measurments.length)) * (10 ** sigfig), sigfig) / (10 ** sigfig);
-
+    // sum of (x - xbar)squared
     let xiBarxSq = 0;
-
     for (i = 0; i < measurments.length; i++) {
         xiBarx = Math.abs(measurments[i] - barmeasurments);
         xiBarx = Math.pow(xiBarx, 2);
         xiBarxSq += xiBarx;
     }
     
-    
-    
+    // final operations and rounding
     let error = Math.sqrt(xiBarxSq / (measurments.length * (measurments.length - 1)));
     error = Math.round((error * (10 ** decimal)), decimal) / (10 ** decimal);
-    console.log(measurments);
-    console.log(barmeasurments);
 
     $('#RmsResult').html(' Your result is: ' + barmeasurments + '&plusmn;' + error);
 }
