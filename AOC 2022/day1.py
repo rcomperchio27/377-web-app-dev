@@ -1,4 +1,4 @@
-file = open('day1-data.txt', 'r')
+file = open('day1-test.txt', 'r')
 lines = file.readlines()
 
 def part1():
@@ -47,5 +47,21 @@ def part2():
 
     print(max + max2 + max3)
 
+def part2b():
 
-part2()
+    total = 0
+    totals = []
+    for line in lines:
+        line = line.strip()
+        if line == '':
+            totals.append(total)
+            total = 0
+        else:
+            total += int(line)
+
+    totals.append(total)
+    totals.sort(reverse=True)
+    print('part 2:' + sum(totals[0:3]))
+
+
+part2b()
