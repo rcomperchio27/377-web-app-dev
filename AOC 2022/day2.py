@@ -1,4 +1,4 @@
-file = open('day2-test.txt', 'r')
+file = open('day2-data.txt', 'r')
 lines = file.readlines()
 
 def part1():
@@ -36,24 +36,27 @@ def part2():
         line = line.split(' ')
         print(line)
         if line[1] == "X":
-            total += 1
             if line[0] == "A":
-                total += 2
-            elif line[0] == "C":
+                total += 3
+            elif line[0] == "B":
                 total += 1
-        elif line[1] == "Y":
-            total += 2
-            if line[0] == "B":
-                total += 2
             elif line[0] == "C":
-                total += 4
+                total += 2            
+        elif line[1] == "Y":
+            total += 3
+            if line[0] == "A":
+                total += 1
+            elif line[0] == "B":
+                total += 2
+            else:
+                total += 3
         elif line[1] == "Z":
             total += 6
             if line[0] == "A":
                 total += 2
             elif line[0] == "B":
                 total += 3
-            else:
+            elif line[0] == "C":
                 total += 1
         print(total)
     print("total score:" + str(total))
