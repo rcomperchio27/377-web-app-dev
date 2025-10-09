@@ -2,6 +2,10 @@
     fill:green;
 }
 
+#controls {
+    text-align: center;
+    width: 500px;
+}
 #message {
     fill:red;
     font-family: Arial, sans-serif;
@@ -14,6 +18,10 @@
     font-family: Arial, sans-serif;
     font-size: 24pt;
     text-anchor: middle;
+}
+
+#winnings {
+    font-weight: bold;
 }
 
 #puck {
@@ -31,4 +39,16 @@
     stroke: #000000;
     fill: #000000;
     visibility:hidden;
+}
+
+.spacer {
+    margin-left: 30px;
+}
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+button, input {
+    font-size: 14pt;
 }
