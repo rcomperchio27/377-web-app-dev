@@ -35,13 +35,15 @@ function shuffleDeck() {
         }
     }
 
-    // USE A READILY AVALIABLE SHUFFLE ALGORITHM (GIVE CREDIT OT THE AUTHOR) (caps)
-
+    // made by someone online
+    //   ()declare function => 
+    deck.sort(() => Math.random() - 0.5);
+    
     console.log(deck);
 
 }
 
 function dealCard() {
     let nextCard = deck.pop();
-    $('#card').html(nextCard);
+    $('#card').html(nextCard.rank + " of " + nextCard.suit);
 }

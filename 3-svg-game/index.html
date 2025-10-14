@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="scripts.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+</head>
+<body>
+    <h1>Chess</h1>
+    <svg width="400" height="400">
+        <symbol id="darksquare">
+            <rect width="50" height="50" />
+        </symbol>
+        <symbol id="lightsquare">
+            <rect width="50" height="50" />
+        </symbol>
+        <symbol id="row1">
+            <use href="#lightsquare" transform="translate(0,0)" />
+            <use href="#lightsquare" transform="translate(100,0)" /> 
+            <use href="#lightsquare" transform="translate(200,0)" /> 
+            <use href="#lightsquare" transform="translate(300,0)" /> 
+            <use href="#darksquare" transform="translate(50,0)" />
+            <use href="#darksquare" transform="translate(150,0)" /> 
+            <use href="#darksquare" transform="translate(250,0)" /> 
+            <use href="#darksquare" transform="translate(350,0)" /> 
+        </symbol>
+        <symbol id="row2">
+            <use href="#lightsquare" transform="translate(50,0)" />
+            <use href="#lightsquare" transform="translate(150,0)" /> 
+            <use href="#lightsquare" transform="translate(250,0)" /> 
+            <use href="#lightsquare" transform="translate(350,0)" /> 
+            <use href="#darksquare" transform="translate(0,0)" />
+            <use href="#darksquare" transform="translate(100,0)" /> 
+            <use href="#darksquare" transform="translate(200,0)" /> 
+            <use href="#darksquare" transform="translate(300,0)" /> 
+        </symbol>
+        <use href="#row1" />
+        <use href="#row2" transform="translate(0, 50)"/>
+        <use href="#row1" transform="translate(0, 100)"/>
+        <use href="#row2" transform="translate(0, 150)"/>
+        <use href="#row1" transform="translate(0, 200)"/>
+        <use href="#row2" transform="translate(0, 250)"/>
+        <use href="#row1" transform="translate(0, 300)"/>
+        <use href="#row2" transform="translate(0, 350)"/>
+    </svg>
+
+</body>
+</html>
