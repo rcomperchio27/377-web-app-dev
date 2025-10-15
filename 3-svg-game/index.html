@@ -9,43 +9,34 @@
     <link rel="stylesheet" type="text/css" href="styles.css" />
 </head>
 <body>
-    <h1>Chess</h1>
-    <svg width="400" height="400">
-        <symbol id="darksquare">
-            <rect width="50" height="50" />
+    <h1>Game</h1>
+    <svg width="618" height="618">
+        <symbol class="tile" id="tile" >
+            <rect x="0" y="0" width="64" height="64" />
+            <text class="text" x="32" y="38"></text>
+        </symbol> 
+        <!-- Make 81 -->
+        <symbol id="grid">
+            <use href="#tile" x="0" y="0" id="tile1" transform=" translate(0, 0)"/>
+            <use href="#tile" x="0" y="0" id="tile2" transform=" translate(67, 0)"/>
+            <use href="#tile" x="0" y="0" id="tile3" transform=" translate(134, 0)"/>
+            <use href="#tile" x="0" y="0" id="tile4" transform=" translate(0, 67)"/>            
+            <use href="#tile" x="0" y="0" id="tile5" transform=" translate(67, 67)"/>
+            <use href="#tile" x="0" y="0" id="tile6" transform=" translate(134, 67)"/>
+            <use href="#tile" x="0" y="0" id="tile7" transform=" translate(0, 134)"/>            
+            <use href="#tile" x="0" y="0" id="tile8" transform=" translate(67, 134)"/>
+            <use href="#tile" x="0" y="0" id="tile9" transform=" translate(134, 134)"/>
         </symbol>
-        <symbol id="lightsquare">
-            <rect width="50" height="50" />
-        </symbol>
-        <symbol id="row1">
-            <use href="#lightsquare" transform="translate(0,0)" />
-            <use href="#lightsquare" transform="translate(100,0)" /> 
-            <use href="#lightsquare" transform="translate(200,0)" /> 
-            <use href="#lightsquare" transform="translate(300,0)" /> 
-            <use href="#darksquare" transform="translate(50,0)" />
-            <use href="#darksquare" transform="translate(150,0)" /> 
-            <use href="#darksquare" transform="translate(250,0)" /> 
-            <use href="#darksquare" transform="translate(350,0)" /> 
-        </symbol>
-        <symbol id="row2">
-            <use href="#lightsquare" transform="translate(50,0)" />
-            <use href="#lightsquare" transform="translate(150,0)" /> 
-            <use href="#lightsquare" transform="translate(250,0)" /> 
-            <use href="#lightsquare" transform="translate(350,0)" /> 
-            <use href="#darksquare" transform="translate(0,0)" />
-            <use href="#darksquare" transform="translate(100,0)" /> 
-            <use href="#darksquare" transform="translate(200,0)" /> 
-            <use href="#darksquare" transform="translate(300,0)" /> 
-        </symbol>
-        <use href="#row1" />
-        <use href="#row2" transform="translate(0, 50)"/>
-        <use href="#row1" transform="translate(0, 100)"/>
-        <use href="#row2" transform="translate(0, 150)"/>
-        <use href="#row1" transform="translate(0, 200)"/>
-        <use href="#row2" transform="translate(0, 250)"/>
-        <use href="#row1" transform="translate(0, 300)"/>
-        <use href="#row2" transform="translate(0, 350)"/>
-    </svg>
 
+        <use href="#grid" id="smallgrid1" x="0" y="0" transform=" translate(5, 5)" />
+        <use href="#grid" id="smallgrid2" x="0" y="0" transform=" translate(210, 5) "/>
+        <use href="#grid" id="smallgrid3" x="0" y="0" transform=" translate(415, 5) "/>
+        <use href="#grid" id="smallgrid4" x="0" y="0" transform=" translate(5, 210) "/>
+        <use href="#grid" id="smallgrid5" x="0" y="0" transform=" translate(210, 210) "/>
+        <use href="#grid" id="smallgrid6" x="0" y="0" transform=" translate(415, 210) "/>
+        <use href="#grid" id="smallgrid7" x="0" y="0" transform=" translate(5, 415) "/>
+        <use href="#grid" id="smallgrid8" x="0" y="0" transform=" translate(210, 415) "/>
+        <use href="#grid" id="smallgrid9" x="0" y="0" transform=" translate(415, 415) "/>
+    </svg>
 </body>
 </html>

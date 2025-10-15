@@ -1,11 +1,19 @@
-#darksquare {
-    fill:tan;
+.line {
+    stroke-width: 10;
+    stroke: black;
 }
 
-#lightsquare {
-    fill:bisque;
+text {
+    fill: black;
+    font-size: 25px;
+    text-anchor: middle;
+}
+
+
+.tile {
+    fill: white;
 }
 
 svg {
-    background-color: bisque;
+    background-color: black;
 }
