@@ -27,19 +27,28 @@ function createPuzzle() {
 
 function loadPuzzle() {
     let side = 64;
-    let padding = 3;
+    let xpadding = 3;
+    let ypadding = 3;
     let border = 5;
 
-    for (y = 0; y < 9 * side; y += side) {
-        for (x = 0; x < 9 * side; x += side) {
+    for (y = 0; y < 9; y ++) {
+        xpadding = 3
+        for (x = 0; x < 9; x++) {
             let square = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
             let text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-            square.setAttribute('y', y + ((padding) * (y / 50) + border));
-            square.setAttribute('x', x + ((padding) * (x / 50) + border));
+            if (x % 3 == 0 ) {
+                xpadding += 3
+            } 
+            if (y % 3 == 0) {
+                ypadding -= 3
+
+            }
+            square.setAttribute('y', (y * side) + ((3 * y) + border + ypadding));
+            square.setAttribute('x', (x * side) + ((3 * x) + border + xpadding));
             square.setAttribute('width', side);
             square.setAttribute('height', side);
             square.setAttribute('class', 'tile');
-            square.setAttribute('id', ((y / side) * 9) + (x / side));
+            square.setAttribute('id', (y * 9) + (x));
             svg.appendChild(square);
         }
     }
