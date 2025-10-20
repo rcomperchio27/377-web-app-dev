@@ -9,6 +9,8 @@ let grid = [0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0
 ];
 
+let blanklist = [];
+
 function createPuzzle(currentRow) {
     for (number = 0; number < 9; number++) {
         let numpicked = true;
@@ -25,6 +27,10 @@ function createPuzzle(currentRow) {
         }
         console.log(grid)
     }
+    for (i = 0; i < $('#remove').val(); i++) {
+        blanklist.push(Math.floor(Math.random(0, 1) * 81))
+    }
+    console.log(blanklist)
 }
 
 function loadPuzzle() {
@@ -49,20 +55,36 @@ function loadPuzzle() {
             text.setAttribute('y', (row * side) + ((3 * row) + ypadding + ytextIndent));
             text.setAttribute('x', (column * side) + ((3 * column) + xpadding + xtextIndent));
             text.setAttribute('class', 'text');
-            text.setAttribute('id', ('text' + (row * 9) + (column)));
+            text.setAttribute('id', ('text' + (parseInt(row * 9) + parseInt(column))));
 
             square.setAttribute('y', (row * side) + ((3 * row) + ypadding));
             square.setAttribute('x', (column * side) + ((3 * column) + xpadding));
             square.setAttribute('width', side);
             square.setAttribute('height', side);
             square.setAttribute('class', 'tile');
-            square.setAttribute('id',('tile' + (row * 9) + (column)));
+            square.setAttribute('id',('tile' + (parseInt(row * 9) + parseInt(column))));
+            square.setAttribute('onclick', 'tileclicked(id)')
+
             svg.appendChild(square);
             svg.appendChild(text);
-            text.innerHTML = String(grid[(row * 9) + (column)]);
+
+            blank = true
+            for (i = 0; i < blanklist.length; i++) {
+                if ((parseInt(row * 9) + parseInt(column)) == blanklist[i]) {
+                    blank = false;
+                }
+            }
+            if (blank) {
+                text.innerHTML = String(grid[(parseInt(row * 9) + parseInt(column))]);
+            }
         }
     }
+}
 
-    $('#line').remove().appendTo('svg');
-
+function tileclicked(tileid) {
+    textid = 'text' + tileid.substring(4);
+    console.log('text' + tileid.substring(4))
+    console.log($('#' + textid).html())
+    $('#' + textid).html((parseInt($('#' + textid).html()) + 1) % 10);
+    console.log(tileid)
 }

@@ -12,8 +12,9 @@
 </head>
 <body>
     <h1>Game</h1>
-    <input type="button" onclick="loadPuzzle()" value="Load Puzzle"/> <br>
-    <input type="number" min="1" max="9" placeholder="Enter Number Here"/> <br>
+    <input type="button" onclick="loadPuzzle()" value="Load Puzzle"/>
+    <input type="number" id="remove" min="1" max="81" placeholder="Numbers you want to remove (1-100)"/> <br>
+    <!-- <input type="number" id="number" min="1" max="9" placeholder="Enter Number Here"/> <br> -->
 
     <svg width="618" height="618" id="svg">
         <symbol class="tile" id="tile" >
