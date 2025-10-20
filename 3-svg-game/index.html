@@ -13,16 +13,13 @@
 <body>
     <h1>Game</h1>
     <input type="button" onclick="loadPuzzle()" value="Load Puzzle"/> <br>
-    <input type="button" onclick="createPuzzle()" value="Create Puzzle"/> <br>
+    <input type="number" min="1" max="9" placeholder="Enter Number Here"/> <br>
 
     <svg width="618" height="618" id="svg">
         <symbol class="tile" id="tile" >
             <rect x="0" y="0" width="64" height="64" />
             <text class="text" x="32" y="38"></text>
         </symbol> 
-        <!-- <symbol id="line">
-            <line x1="200" y1="-100" x2="200" y2="600" stroke="#333333" stroke-width="20"></line>
-        </symbol> -->
     </svg>
 </body>
 </html>
