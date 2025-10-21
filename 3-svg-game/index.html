@@ -4,22 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script src="scripts.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script src="scripts.js"></script>
 
 
     <link rel="stylesheet" type="text/css" href="styles.css" />
 </head>
 <body>
-    <h1>Game</h1>
-    <input type="button" onclick="loadPuzzle()" value="Load Puzzle"/> <br>
+    <h1>Sudoku</h1>
+    <p> Click on the squares to change the number, when your done with the puzzle click the "check puzzle" button below</p>
+    <!-- <input type="button" onclick="loadPuzzle()" value="Load Puzzle"/> <br> -->
     <!-- <input type="number" id="remove" min="1" max="81" placeholder="Numbers you want to remove (1-100)"/> <br> -->
-
     <svg width="618" height="618" id="svg">
         <symbol class="tile" id="tile" >
             <rect x="0" y="0" width="64" height="64" />
             <text class="text" x="32" y="38"></text>
         </symbol> 
-    </svg>
+    </svg> <br>
+    <input type="button" onclick="checkPuzzle()" value="Check Puzzle"/>
+
 </body>
 </html>

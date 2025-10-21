@@ -1,13 +1,14 @@
-let grid = [0, 0, 0, 0, 0, 0, 0, 0, 0, 
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 
-            0, 0, 0, 0, 0, 0, 0, 0, 0
-];
+// let solution = [0, 0, 0, 0, 0, 0, 0, 0, 0, 
+//             0, 0, 0, 0, 0, 0, 0, 0, 0, 
+//             0, 0, 0, 0, 0, 0, 0, 0, 0, 
+//             0, 0, 0, 0, 0, 0, 0, 0, 0, 
+//             0, 0, 0, 0, 0, 0, 0, 0, 0, 
+//             0, 0, 0, 0, 0, 0, 0, 0, 0, 
+//             0, 0, 0, 0, 0, 0, 0, 0, 0, 
+//             0, 0, 0, 0, 0, 0, 0, 0, 0, 
+//             0, 0, 0, 0, 0, 0, 0, 0, 0
+// ];
+
 
 let solution = [0, 0, 0, 6, 0, 0, 8, 0, 4, 
                 6, 0, 0, 0, 0, 0, 2, 0, 0, 
@@ -20,23 +21,38 @@ let solution = [0, 0, 0, 6, 0, 0, 8, 0, 4,
                 9, 4, 0, 5, 0, 2, 0, 1, 3
 ];
 
+let grid = [0, 0, 0, 6, 0, 0, 8, 0, 4, 
+                6, 0, 0, 0, 0, 0, 2, 0, 0, 
+                0, 7, 8, 4, 2, 5, 6, 0, 0, 
+                3, 0, 0, 0, 7, 0, 0, 6, 0, 
+                0, 0, 5, 0, 4, 0, 1, 0, 0, 
+                0, 0, 0, 1, 5, 0, 0, 0, 0, 
+                7, 0, 0, 0, 3, 0, 0, 0, 0, 
+                0, 2, 0, 0, 0, 0, 9, 0, 0, 
+                9, 4, 0, 5, 0, 2, 0, 1, 3
+];
+
 let blanklist = [];
+
+$(document).ready(function() {
+    loadPuzzle();
+});
 
 function createPuzzle(currentRow) {
     for (number = 0; number < 9; number++) {
         let numpicked = true;
         while (numpicked) {
             let num = Math.ceil(Math.random(0, 1) * 9);
-            checkRow = (num != grid[(currentRow * 9) - 9] && num != grid[(currentRow * 9) - (1)] && num != grid[(currentRow * 9) - (2)] && num != grid[(currentRow * 9) - (3)] && num != grid[(currentRow * 9) - (4)]
-            && num != grid[(currentRow * 9) - (5)] && num != grid[(currentRow * 9) - (6)] && num != grid[(currentRow * 9) - (7)] && num != grid[(currentRow * 9) - (8)]);
+            checkRow = (num != solution[(currentRow * 9) - 9] && num != solution[(currentRow * 9) - (1)] && num != solution[(currentRow * 9) - (2)] && num != solution[(currentRow * 9) - (3)] && num != solution[(currentRow * 9) - (4)]
+            && num != solution[(currentRow * 9) - (5)] && num != solution[(currentRow * 9) - (6)] && num != solution[(currentRow * 9) - (7)] && num != solution[(currentRow * 9) - (8)]);
 
             if (checkRow) {
                 numpicked = false;
-                grid[((currentRow - 1) * 9) + number] = num;
+                solution[((currentRow - 1) * 9) + number] = num;
                 
             }           
         }
-        console.log(grid)
+        console.log(solution)
     }
     for (i = 0; i < $('#remove').val(); i++) {
         blanklist.push(Math.floor(Math.random(0, 1) * 81))
@@ -45,7 +61,7 @@ function createPuzzle(currentRow) {
 }
 
 function loadPuzzle() {
-    createPuzzle(1)
+    // createPuzzle(1)
     let side = 64;
     let xpadding = 3;
     let ypadding = 3;
@@ -86,14 +102,14 @@ function loadPuzzle() {
             }
 
             if (blank == false) {
-                text.innerHTML = String(solution[(parseInt(row * 9) + parseInt(column))]);
+                text.innerHTML = String(grid[(parseInt(row * 9) + parseInt(column))]);
             }
 
             if ($('#text' + (parseInt(row * 9) + parseInt(column))).html() == '0') {
                 $('#text' + (parseInt(row * 9) + parseInt(column))).html('')
-                text.setAttribute('class', 'text');
-            } else  {
-                text.setAttribute('class', 'given');
+                square.setAttribute('class', 'tile');
+            } else  {   
+                square.setAttribute('class', 'given');
             }
         }
     }
@@ -101,15 +117,26 @@ function loadPuzzle() {
 
 function tileclicked(tileid) {
     textid = 'text' + tileid.substring(4);
-    console.log($('#' + textid).className)
-    // if ($('#' + textid).getAttribute('class') != 'given') {
-    //     if ($('#' + textid).html() == '') {
-    //             $('#' + textid).html(0)
-    //     }
-    //     $('#' + textid).html((parseInt($('#' + textid).html()) + 1) % 10);
-    //     if ($('#' + textid).html() == 0) {
-    //         $('#' + textid).html('')
-    //     }
-    // }
+    if ($('#' + tileid).attr('class') == 'given') {
+        return
+    }
+    if ($('#' + textid).html() == '') {
+            $('#' + textid).html(0)
+    }
+    $('#' + textid).html((parseInt($('#' + textid).html()) + 1) % 10);
+    if ($('#' + textid).html() == 0) {
+        $('#' + textid).html('')
+    }
+    grid[tileid.substring(4)] = $('#' + textid).html()
     
+}
+
+function checkPuzzle() {
+    for (i = 0; i < 81; i++) {
+        if (grid[i] == solution[i]) {
+            $('#tile' + i).css('fill', 'green');
+        } else {
+            $('#tile' + i).css('fill', 'red');
+        }
+    }
 }
