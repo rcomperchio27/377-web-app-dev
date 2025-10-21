@@ -9,6 +9,17 @@ let grid = [0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0
 ];
 
+let solution = [0, 0, 0, 6, 0, 0, 8, 0, 4, 
+                6, 0, 0, 0, 0, 0, 2, 0, 0, 
+                0, 7, 8, 4, 2, 5, 6, 0, 0, 
+                3, 0, 0, 0, 7, 0, 0, 6, 0, 
+                0, 0, 5, 0, 4, 0, 1, 0, 0, 
+                0, 0, 0, 1, 5, 0, 0, 0, 0, 
+                7, 0, 0, 0, 3, 0, 0, 0, 0, 
+                0, 2, 0, 0, 0, 0, 9, 0, 0, 
+                9, 4, 0, 5, 0, 2, 0, 1, 3
+];
+
 let blanklist = [];
 
 function createPuzzle(currentRow) {
@@ -54,7 +65,6 @@ function loadPuzzle() {
             } 
             text.setAttribute('y', (row * side) + ((3 * row) + ypadding + ytextIndent));
             text.setAttribute('x', (column * side) + ((3 * column) + xpadding + xtextIndent));
-            text.setAttribute('class', 'text');
             text.setAttribute('id', ('text' + (parseInt(row * 9) + parseInt(column))));
 
             square.setAttribute('y', (row * side) + ((3 * row) + ypadding));
@@ -68,14 +78,22 @@ function loadPuzzle() {
             svg.appendChild(square);
             svg.appendChild(text);
 
-            blank = true
+            blank = false
             for (i = 0; i < blanklist.length; i++) {
                 if ((parseInt(row * 9) + parseInt(column)) == blanklist[i]) {
-                    blank = false;
+                    blank = true;
                 }
             }
-            if (blank) {
-                text.innerHTML = String(grid[(parseInt(row * 9) + parseInt(column))]);
+
+            if (blank == false) {
+                text.innerHTML = String(solution[(parseInt(row * 9) + parseInt(column))]);
+            }
+
+            if ($('#text' + (parseInt(row * 9) + parseInt(column))).html() == '0') {
+                $('#text' + (parseInt(row * 9) + parseInt(column))).html('')
+                text.setAttribute('class', 'text');
+            } else  {
+                text.setAttribute('class', 'given');
             }
         }
     }
@@ -83,8 +101,15 @@ function loadPuzzle() {
 
 function tileclicked(tileid) {
     textid = 'text' + tileid.substring(4);
-    console.log('text' + tileid.substring(4))
-    console.log($('#' + textid).html())
-    $('#' + textid).html((parseInt($('#' + textid).html()) + 1) % 10);
-    console.log(tileid)
+    console.log($('#' + textid).className)
+    // if ($('#' + textid).getAttribute('class') != 'given') {
+    //     if ($('#' + textid).html() == '') {
+    //             $('#' + textid).html(0)
+    //     }
+    //     $('#' + textid).html((parseInt($('#' + textid).html()) + 1) % 10);
+    //     if ($('#' + textid).html() == 0) {
+    //         $('#' + textid).html('')
+    //     }
+    // }
+    
 }

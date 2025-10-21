@@ -9,6 +9,9 @@ text {
     text-anchor: middle;
 }
 
+.given {
+    fill:#aaaaaa;
+}
 
 .tile {
     fill: white;
