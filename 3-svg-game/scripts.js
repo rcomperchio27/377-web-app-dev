@@ -38,30 +38,79 @@ $(document).ready(function() {
     loadPuzzle();
 });
 
-function createPuzzle(currentRow) {
+function firstBox() {
+    let firstbox = []
     for (number = 0; number < 9; number++) {
         let numpicked = true;
         while (numpicked) {
             let num = Math.ceil(Math.random(0, 1) * 9);
-            checkRow = (num != solution[(currentRow * 9) - 9] && num != solution[(currentRow * 9) - (1)] && num != solution[(currentRow * 9) - (2)] && num != solution[(currentRow * 9) - (3)] && num != solution[(currentRow * 9) - (4)]
-            && num != solution[(currentRow * 9) - (5)] && num != solution[(currentRow * 9) - (6)] && num != solution[(currentRow * 9) - (7)] && num != solution[(currentRow * 9) - (8)]);
+            checkBox = (num != solution[0] && num != solution[1] && num != solution[2] && num != solution[9] && num != solution[10]
+            && num != solution[11] && num != solution[18] && num != solution[19] && num != solution[20]);
 
-            if (checkRow) {
+            if (checkBox) {
                 numpicked = false;
-                solution[((currentRow - 1) * 9) + number] = num;
-                
+                firstbox.push(num)
             }           
         }
-        console.log(solution)
     }
-    for (i = 0; i < $('#remove').val(); i++) {
-        blanklist.push(Math.floor(Math.random(0, 1) * 81))
+    for (i = 0; i < 3; i++) {
+        solution[i] = firstbox[i]
+        solution[i + 9] = firstbox[i + 3]
+        solution[i + 18] = firstbox[i + 6]
     }
-    console.log(blanklist)
+    console.log(solution)
+}
+
+function secondBox() {
+    let secondbox = []
+    for (number = 0; number < 9; number++) {
+        let numpicked = true;
+        while (numpicked) {
+            let num = Math.ceil(Math.random(0, 1) * 9);
+            let checkBox = (num != solution[0] && num != solution[1] && num != solution[2] && num != solution[9] && num != solution[10]
+            && num != solution[11] && num != solution[18] && num != solution[19] && num != solution[20]);
+            let checkleft = (solution[secondbox.length] != num)
+            console.log(solution[secondbox.length])
+            if (checkBox && checkleft) {
+                numpicked = false;
+                secondbox.push(num)
+            }           
+        }
+    }
+    for (i = 0; i < 3; i++) {
+        solution[i] = secondbox[i]
+        solution[i + 9] = secondbox[i + 3]
+        solution[i + 18] = secondbox[i + 6]
+    }
+    console.log(solution)
+}
+
+function createPuzzle(currentRow) {
+    firstBox()
+    secondBox()
+    // for (number = 0; number < 9; number++) {
+    //     let numpicked = true;
+    //     while (numpicked) {
+    //         let num = Math.ceil(Math.random(0, 1) * 9);
+    //         checkRow = (num != solution[(currentRow * 9) - 9] && num != solution[(currentRow * 9) - (1)] && num != solution[(currentRow * 9) - (2)] && num != solution[(currentRow * 9) - (3)] && num != solution[(currentRow * 9) - (4)]
+    //         && num != solution[(currentRow * 9) - (5)] && num != solution[(currentRow * 9) - (6)] && num != solution[(currentRow * 9) - (7)] && num != solution[(currentRow * 9) - (8)]);
+
+    //         if (checkRow) {
+    //             numpicked = false;
+    //             solution[((currentRow - 1) * 9) + number] = num;
+                
+    //         }           
+    //     }
+    //     console.log(solution)
+    // }
+    // for (i = 0; i < $('#remove').val(); i++) {
+    //     blanklist.push(Math.floor(Math.random(0, 1) * 81))
+    // }
+    // console.log(blanklist)
 }
 
 function loadPuzzle() {
-    // createPuzzle(1)
+    createPuzzle()
     let side = 64;
     let xpadding = 3;
     let ypadding = 3;
@@ -108,6 +157,9 @@ function loadPuzzle() {
             if ($('#text' + (parseInt(row * 9) + parseInt(column))).html() == '0') {
                 $('#text' + (parseInt(row * 9) + parseInt(column))).html('')
                 square.setAttribute('class', 'tile');
+                square.addEventListener('mouseover', function() {
+                this.style.cursor = 'pointer';
+                });
             } else  {   
                 square.setAttribute('class', 'given');
             }
@@ -133,10 +185,11 @@ function tileclicked(tileid) {
 
 function checkPuzzle() {
     for (i = 0; i < 81; i++) {
-        if (grid[i] == solution[i]) {
-            $('#tile' + i).css('fill', 'green');
-        } else {
-            $('#tile' + i).css('fill', 'red');
+        if (grid[i] == solution[i] && $('#tile' + i).attr('class') != "given") {
+            $('#tile' + i).css('fill', 'lightgreen');
+        } else if ($('#tile' + i).attr('class') != "given") {
+            $('#tile' + i).css('fill', 'lightcoral');
         }
+        $('#tile' + i).attr("onclick", '')
     }
 }
