@@ -1,5 +1,10 @@
-#checkPuzzle {
-    font-size: 20px;
+#changePuzzle {
+    display: inline-block;
+    text-align: center;
+}
+
+#note {
+    font-size: 15px;
 }
 
 #rules {
@@ -17,6 +22,10 @@
 body {
     padding: 20px;
     font-family: Arial;
+}
+
+input, p {
+    font-size: 20px;
 }
 
 svg {

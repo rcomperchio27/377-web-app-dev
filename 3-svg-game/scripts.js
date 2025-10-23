@@ -1,16 +1,6 @@
-// let solution = [0, 0, 0, 0, 0, 0, 0, 0, 0, 
-//             0, 0, 0, 0, 0, 0, 0, 0, 0, 
-//             0, 0, 0, 0, 0, 0, 0, 0, 0, 
-//             0, 0, 0, 0, 0, 0, 0, 0, 0, 
-//             0, 0, 0, 0, 0, 0, 0, 0, 0, 
-//             0, 0, 0, 0, 0, 0, 0, 0, 0, 
-//             0, 0, 0, 0, 0, 0, 0, 0, 0, 
-//             0, 0, 0, 0, 0, 0, 0, 0, 0, 
-//             0, 0, 0, 0, 0, 0, 0, 0, 0
-// ];
+let currentPuzzle = 0;
 
-
-let solution = [2, 3, 9, 6, 1, 7, 8, 5, 4, 
+let solutions = [[2, 3, 9, 6, 1, 7, 8, 5, 4, 
                 6, 5, 4, 3, 9, 8, 2, 7, 1, 
                 1, 7, 8, 4, 2, 5, 6, 3, 9, 
                 3, 1, 2, 8, 7, 9, 4, 6, 5, 
@@ -18,10 +8,9 @@ let solution = [2, 3, 9, 6, 1, 7, 8, 5, 4,
                 4, 9, 7, 1, 5, 6, 3, 8, 2, 
                 7, 8, 1, 9, 3, 4, 5, 2, 6, 
                 5, 2, 3, 7, 6, 1, 9, 4, 8, 
-                9, 4, 6, 5, 8, 2, 7, 1, 3
-];
+                9, 4, 6, 5, 8, 2, 7, 1, 3], 
 
-let grid = [0, 0, 0, 6, 0, 0, 8, 0, 4, 
+                [0, 0, 0, 6, 0, 0, 8, 0, 4, 
                 6, 0, 0, 0, 0, 0, 2, 0, 0, 
                 0, 7, 8, 4, 2, 5, 6, 0, 0, 
                 3, 0, 0, 0, 7, 0, 0, 6, 0, 
@@ -29,8 +18,33 @@ let grid = [0, 0, 0, 6, 0, 0, 8, 0, 4,
                 0, 0, 0, 1, 5, 0, 0, 0, 0, 
                 7, 0, 0, 0, 3, 0, 0, 0, 0, 
                 0, 2, 0, 0, 0, 0, 9, 0, 0, 
-                9, 4, 0, 5, 0, 2, 0, 1, 3
-];
+                9, 4, 0, 5, 0, 2, 0, 1, 3]]
+
+let solution = solutions[0]
+
+let grids = [['', '', '', 6, '', '', 8, '', 4, 
+            6, '', '', '', '', '', 2, '', '', 
+            '', 7, 8, 4, 2, 5, 6, '', '', 
+            3, '', '', '', 7, '', '', 6, '', 
+            '', '', 5, '', 4, '', 1, '', '', 
+            '', '', '', 1, 5, '', '', '', '', 
+            7, '', '', '', 3, '', '', '', '', 
+            '', 2, '', '', '', '', 9, '', '', 
+            9, 4, '', 5, '', 2, '', 1, 3], 
+            
+           ['', 9, '', '', '', '', 4, '', '', 
+            '', '', '', '', '', '', 6, 2, '', 
+            5, 1, '', 6, 7, '', '', 3, '', 
+            '', 5, '', '', '', 9, '', 7, '', 
+            '', '', 2, 1, 6, '', 5, 9, 8, 
+            '', '', '', 2, '', '', '', '', '', 
+            4, '', 5, '', 9, 6, '', '', 3, 
+            '', '', 8, '', '', '', '', '', '', 
+            9, 6, '', '', '', 4, 7, 5, '']]
+
+let grid = grids[0];
+
+
 
 let blanklist = [];
 
@@ -109,8 +123,33 @@ function createPuzzle(currentRow) {
     // console.log(blanklist)
 }
 
+function lastPuzzle() {
+    if (currentPuzzle == 0) {
+        currentPuzzle = 4
+    } else {
+        currentPuzzle -= 1
+    }
+    $('#currentPuzzle').html('Puzzle ' + String(currentPuzzle + 1))
+    solution = solutions[currentPuzzle];
+    grid = grids[currentPuzzle];
+    loadPuzzle()
+}
+
+function nextPuzzle() {
+    if (currentPuzzle == 4) {
+        currentPuzzle = 0
+    } else {
+        currentPuzzle += 1
+    }
+    $('#currentPuzzle').html('Puzzle ' + String(currentPuzzle + 1))
+    solution = solutions[currentPuzzle];
+    grid = grids[currentPuzzle];
+    loadPuzzle()
+}
+
 function loadPuzzle() {
-    // createPuzzle()
+    // delete the previous puzzle
+    // for (i = 0, i < svg.length)
     let side = 64;
     let xpadding = 3;
     let ypadding = 3;
@@ -143,24 +182,28 @@ function loadPuzzle() {
             svg.appendChild(square);
             svg.appendChild(text);
 
-            blank = false
-            for (i = 0; i < blanklist.length; i++) {
-                if ((parseInt(row * 9) + parseInt(column)) == blanklist[i]) {
-                    blank = true;
-                }
-            }
+            // blank = false
+            // for (i = 0; i < blanklist.length; i++) {
+            //     if ((parseInt(row * 9) + parseInt(column)) == blanklist[i]) {
+            //         blank = true;
+            //     }
+            // }
 
-            if (blank == false) {
-                text.innerHTML = String(grid[(parseInt(row * 9) + parseInt(column))]);
-            }
+            // if (blank == false) {
+            //     text.innerHTML = String(grid[(parseInt(row * 9) + parseInt(column))]);
+            // }
 
-            if ($('#text' + (parseInt(row * 9) + parseInt(column))).html() == '0') {
+            text.innerHTML = String(grid[(parseInt(row * 9) + parseInt(column))]);
+
+            if ($('#text' + (parseInt(row * 9) + parseInt(column))).html() == '0' || $('#text' + (parseInt(row * 9) + parseInt(column))).html() == '') {
                 $('#text' + (parseInt(row * 9) + parseInt(column))).html('')
+                square.removeAttribute('class')
                 square.setAttribute('class', 'tile');
                 square.addEventListener('mouseover', function() {
                 this.style.cursor = 'pointer';
                 });
-            } else  {   
+            } else {   
+                square.removeAttribute('class')
                 square.setAttribute('class', 'given');
             }
         }
@@ -168,8 +211,12 @@ function loadPuzzle() {
 }
 
 function tileclicked(tileid) {
+    $('#backbutton').attr('onclick', '')
+    $('#nextbutton').attr('onclick', '')
+    console.log('a')
     textid = 'text' + tileid.substring(4);
     if ($('#' + tileid).attr('class') == 'given') {
+        console.log('b')
         return
     }
     if ($('#' + textid).html() == '') {
@@ -184,6 +231,8 @@ function tileclicked(tileid) {
 }
 
 function checkPuzzle() {
+    $('#backbutton').attr('onclick', '')
+    $('#nextbutton').attr('onclick', '')
     for (i = 0; i < 81; i++) {
         if (grid[i] == solution[i] && $('#tile' + i).attr('class') != "given") {
             $('#tile' + i).css('fill', 'lightgreen');
@@ -192,4 +241,5 @@ function checkPuzzle() {
         }
         $('#tile' + i).attr("onclick", '')
     }
+
 }

@@ -16,9 +16,14 @@
         <p>Fill in the missing numbers, each column can only have one of each number 1-9, each row can also only have one of each number 1-9, and each sub square can only have one of each number 1-9.</p>
         <p>Click on the squares to change the number, when your done with the puzzle click the "check puzzle" button below to see if you are correct.</p>
         <p>The Squares that are green have the correct number and the squares that are red have the incorrect number</p>
+        <p id="note">Note: after you click on a tile you will not be able to switch puzzles</p>
     </div>
-    <input id="checkPuzzle" type="button" onclick="checkPuzzle()" value="Check Puzzle"/><br>
-
+    <div id="changePuzzle">
+        <input id="backbutton" type="button" onclick="lastPuzzle()" value='<'/>
+        <span id="currentPuzzle">Puzzle 1</span>
+        <input id="nextbutton" type="button" onclick="nextPuzzle()" value='>'/>
+    </div>
+    <br>
     <!-- <input type="button" onclick="loadPuzzle()" value="Load Puzzle"/> <br> -->
     <!-- <input type="number" id="remove" min="1" max="81" placeholder="Numbers you want to remove (1-100)"/> <br> -->
     <svg id="svg">
@@ -27,5 +32,8 @@
             <text class="text" x="32" y="38"></text>
         </symbol> 
     </svg>
+    <br>
+    <input id="checkPuzzle" type="button" onclick="checkPuzzle()" value="Check Puzzle"/><br>
+
 </body>
 </html>
