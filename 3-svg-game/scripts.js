@@ -44,9 +44,9 @@ let solutions = [[2, 3, 9, 6, 1, 7, 8, 5, 4,
                 6, 5, 3, 9, 4, 8, 2, 1, 7, 
                 8, 7, 6, 3, 2, 1, 4, 5, 9, 
                 5, 4, 9, 7, 8, 6, 1, 2, 3, 
-                2, 3, 1, 4, 9, 5, 8, 7, 6]]
+                2, 3, 1, 4, 9, 5, 8, 7, 6]];
 
-let solution = solutions[0]
+let solution = solutions[0];
 
 let grids = [['', '', '', 6, '', '', 8, '', 4, 
             6, '', '', '', '', '', 2, '', '', 
@@ -92,7 +92,7 @@ let grids = [['', '', '', 6, '', '', 8, '', 4,
             '', '', '', 9, 4, '', 2, 1, 7, 
             8, '', '', '', '', '', 4, '', 9, 
             5, 4, '', 7, '', '', '', 2, 3, 
-            2, '', '', '', 9, '', '', '', 6]]
+            2, '', '', '', 9, '', '', '', 6]];
 
 let grid = grids[0];
 
@@ -105,7 +105,7 @@ $(document).ready(function() {
 });
 
 function firstBox() {
-    let firstbox = []
+    let firstbox = [];
     for (number = 0; number < 9; number++) {
         let numpicked = true;
         while (numpicked) {
@@ -115,69 +115,69 @@ function firstBox() {
 
             if (checkBox) {
                 numpicked = false;
-                firstbox.push(num)
+                firstbox.push(num);
             }           
         }
     }
     for (i = 0; i < 3; i++) {
-        solution[i] = firstbox[i]
-        solution[i + 9] = firstbox[i + 3]
-        solution[i + 18] = firstbox[i + 6]
+        solution[i] = firstbox[i];
+        solution[i + 9] = firstbox[i + 3];
+        solution[i + 18] = firstbox[i + 6];
     }
-    console.log(solution)
+    console.log(solution);
 }
 
 function secondBox() {
-    let secondbox = []
+    let secondbox = [];
     for (number = 0; number < 9; number++) {
         let numpicked = true;
         while (numpicked) {
             let num = Math.ceil(Math.random(0, 1) * 9);
             let checkBox = (num != solution[0] && num != solution[1] && num != solution[2] && num != solution[9] && num != solution[10]
             && num != solution[11] && num != solution[18] && num != solution[19] && num != solution[20]);
-            let checkleft = (solution[secondbox.length] != num)
-            console.log(solution[secondbox.length])
+            let checkleft = (solution[secondbox.length] != num);
+            console.log(solution[secondbox.length]);
             if (checkBox && checkleft) {
                 numpicked = false;
-                secondbox.push(num)
+                secondbox.push(num);
             }           
         }
     }
     for (i = 0; i < 3; i++) {
-        solution[i] = secondbox[i]
-        solution[i + 9] = secondbox[i + 3]
-        solution[i + 18] = secondbox[i + 6]
+        solution[i] = secondbox[i];
+        solution[i + 9] = secondbox[i + 3];
+        solution[i + 18] = secondbox[i + 6];
     }
-    console.log(solution)
+    console.log(solution);
 }
 
 function createPuzzle(currentRow) {
-    firstBox()
-    secondBox()
+    firstBox();
+    secondBox();
 }
 
 function lastPuzzle() {
     if (currentPuzzle == 0) {
-        currentPuzzle = 4
+        currentPuzzle = 4;
     } else {
-        currentPuzzle -= 1
+        currentPuzzle -= 1;
     }
-    $('#currentPuzzle').html('Puzzle ' + String(currentPuzzle + 1))
+    $('#currentPuzzle').html('Puzzle ' + String(currentPuzzle + 1));
     solution = solutions[currentPuzzle];
     grid = grids[currentPuzzle];
-    loadPuzzle()
+    loadPuzzle();
 }
 
 function nextPuzzle() {
     if (currentPuzzle == 4) {
-        currentPuzzle = 0
+        currentPuzzle = 0;
     } else {
-        currentPuzzle += 1
+        currentPuzzle += 1;
     }
-    $('#currentPuzzle').html('Puzzle ' + String(currentPuzzle + 1))
+    $('#currentPuzzle').html('Puzzle ' + String(currentPuzzle + 1));
     solution = solutions[currentPuzzle];
     grid = grids[currentPuzzle];
-    loadPuzzle()
+    loadPuzzle();
 }
 
 function loadPuzzle() {
@@ -211,7 +211,7 @@ function loadPuzzle() {
             square.setAttribute('height', side);
             square.setAttribute('class', 'tile');
             square.setAttribute('id',('tile' + (parseInt(row * 9) + parseInt(column))));
-            square.setAttribute('onclick', 'tileclicked(id)')
+            square.setAttribute('onclick', 'tileclicked(id)');
 
             svg.appendChild(square);
             svg.appendChild(text);
@@ -219,14 +219,14 @@ function loadPuzzle() {
             text.innerHTML = String(grid[(parseInt(row * 9) + parseInt(column))]);
 
             if ($('#text' + (parseInt(row * 9) + parseInt(column))).html() == '0' || $('#text' + (parseInt(row * 9) + parseInt(column))).html() == '') {
-                $('#text' + (parseInt(row * 9) + parseInt(column))).html('')
-                square.removeAttribute('class')
+                $('#text' + (parseInt(row * 9) + parseInt(column))).html('');
+                square.removeAttribute('class');
                 square.setAttribute('class', 'tile');
                 square.addEventListener('mouseover', function() {
                 this.style.cursor = 'pointer';
                 });
             } else {   
-                square.removeAttribute('class')
+                square.removeAttribute('class');
                 square.setAttribute('class', 'given');
             }
         }
@@ -236,16 +236,16 @@ function loadPuzzle() {
 function tileclicked(tileid) {
     textid = 'text' + tileid.substring(4);
     if ($('#' + tileid).attr('class') == 'given') {
-        return
+        return;
     }
     if ($('#' + textid).html() == '') {
-            $('#' + textid).html(0)
+            $('#' + textid).html(0);
     }
     $('#' + textid).html((parseInt($('#' + textid).html()) + 1) % 10);
     if ($('#' + textid).html() == 0) {
-        $('#' + textid).html('')
+        $('#' + textid).html('');
     }
-    grid[tileid.substring(4)] = $('#' + textid).html()
+    grid[tileid.substring(4)] = $('#' + textid).html();
     
 }
 
@@ -256,7 +256,7 @@ function checkPuzzle() {
         } else if ($('#tile' + i).attr('class') != "given") {
             $('#tile' + i).css('fill', 'lightcoral');
         }
-        $('#tile' + i).attr("onclick", '')
+        $('#tile' + i).attr("onclick", '');
     }
 
 }
