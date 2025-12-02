@@ -29,42 +29,19 @@ def part2():
     count = 0
     for line in lines:
         line = line.strip()
-        print(line[0], line[1:])
         direction = line[0].upper()
         amount = int(line[1:])
-        prevnum = num
-        if direction == 'L':
-            num -= amount
-        elif direction == 'R':
-            num += amount
-        if num == 0:
-            total += 1
-            print(num)
-            print(total)
-        while num >= 100:
-            print(num)
-            num -= 100
-            total += 1
-            print(total)
-        while num < 0:
-            print(num)
-            num += 100
-            total += 1
-            print(total)
-
-        count += 1
-        # num = num % 100
-        print(num)
-        print(total)
-
-        # if count == 30:
-        #     time.sleep(180)
-
-
+        for i in range(amount):
+            if direction == 'L':
+                num = (num - 1) % 100
+            else:
+                num = (num + 1) % 100
+            if num == 0:
+                total += 1
 
     print(total)
 
 part2()
 
 # 6681 < x > 6739
-# != 6698, 6708
+# != 6698, 6708, 6703, 6712
