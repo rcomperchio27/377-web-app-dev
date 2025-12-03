@@ -26,11 +26,12 @@ def part1():
 def part2():
     total = 0
     num = 50 
-    count = 0
+
     for line in lines:
         line = line.strip()
         direction = line[0].upper()
         amount = int(line[1:])
+        
         for i in range(amount):
             if direction == 'L':
                 num = (num - 1) % 100
