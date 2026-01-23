@@ -1,4 +1,4 @@
-file = open('day7-data.txt', 'r')
+file = open('day7-test.txt', 'r')
 lines = file.readlines()
 
 import time
