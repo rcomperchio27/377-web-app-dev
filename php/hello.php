@@ -13,10 +13,34 @@
 
             $count = 0;
             for ($i = 0; $i < 10; $i++) {
-                echo "Hello<br>"; 
+                echo "Hello";
+                print('<br>');
                 $count++;
             }
             echo $count;
+
+            $firstName = "Will";
+            $lastName = "Davidson";
+
+            $fullName = $firstName . " " . $lastName;
+            
+            echo $fullName;
+
+            // String Concatenation
+            echo "<p>" . $fullName . " is in Web App Development" . "</p>";
+
+            // String Interpolation
+            echo "<p>$fullName is in Web App Development</p>";
+
+            // String Interpolation only works wit hdouble quotes
+            echo '<p>$fullName is in Web App Development</p>';
+
+
+
+
+            ECHO "<p>case in-sensitive</p>";
+
+
 
             ?>
 
