@@ -8,6 +8,16 @@
 
         <h2>Movies</h2>
 
+<?php
+
+for ($i = 0; $i < 26; $i++)
+{
+    $letter = chr($i + ord("A"));
+    echo "<a href='index.php?filter=$letter'>$letter</a> ";
+
+}
+echo "<a href='index.php'>all</a>";
+?>
         <table border="1">
             <tr>
                 <th>Id</th>
@@ -17,19 +27,30 @@
             </tr>
 <?php 
 
-$servername = "192.168.25.236";
+$servername = "localhost";
 $username = "root";
 $password = "password";
-$dbname = "hmbd";
+$dbname = "hmdb";
 
 // connect to the database and make sure it was successful
 $connection = new mysqli($servername, $username, $password, $dbname);
-if ($connection->connection_error) 
+if ($connection->connect_error) 
 {
-    die("Connection failed: " . $connection->connection_error);
+    die("Connection failed: " . $connection->connect_error);
 }
 
-$sql = "SELECT * FROM movie";
+extract($_REQUEST);
+if (!isset($filter))
+{
+    $filter = '';
+}
+
+$sql =<<<SQL
+SELECT *
+FROM movie
+WHERE mov_title LIKE '$filter%'
+ORDER BY mov_title
+SQL;
 
 $result = $connection->query($sql);
 
@@ -37,8 +58,8 @@ while ($row = $result->fetch_assoc()) {
     echo "<tr>";
     echo "<td>" . $row["mov_id"] . "</td>";
     echo "<td>" . $row["mov_title"] . "</td>";
-    echo "<td>" . $row["mov_durration"] . "</td>";
-    echo "<td>" . $row["mov_release"] . "</td>";
+    echo "<td>" . $row["mov_duration"] . "</td>";
+    echo "<td>" . $row["mov_release_year"] . "</td>";
     echo "</tr>";
 }
 
