@@ -1,18 +1,13 @@
-<!-- print the name of the title of the movie for the given id -->
+<html>
+    <head>
+        <title>Detail</title>
+    </head>
+
+    <body>
 <?php
 
-$servername = "localhost";
-$username = "root";
-$password = "password";
-$dbname = "hmdb";
+$connection = get_connection();
 
-$connection = new mysqli($servername, $username, $password, $dbname);
-if ($connection->connect_error) 
-{
-    die("Connection failed: " . $connection->connect_error);
-}
-
-extract($_REQUEST);
 if (!isset($id)) {
     echo "<h1>No movie found</h1>";
 } elseif ($id > 5118) {
@@ -43,15 +38,17 @@ echo "<h1>" . $result["mov_title"] . "</h1>";
             </tr>
             <tr>
 
-<?php 
-echo "<td><input type=''>" . $result["mov_id"] . "</input></td>";
-echo "<td>" . $result["mov_title"] . "</td>";
-echo "<td>" . $result["mov_genre"] . "</td>";
-echo "<td>" . $result["mov_rating"] . "</td>";
-echo "<td>" . $result["mov_mpaa"] . "</td>";
-echo "<td>" . $result["mov_duration"] . "</td>";
-echo "<td>" . $result["mov_release_year"] . "</td>";
-echo "</tr>";
+<?php
+echo "<td><input type='text' value='$result[mov_id]' /></td>";
+echo "<td><input type='text' value='$result[mov_title]' /></input></td>";
+echo "<td><input type='text' value='$result[mov_genre]' /></td>";
+echo "<td><input type='text' value='$result[mov_rating]' /></td>";
+echo "<td><input type='text' value='$result[mov_mpaa]' /></td>";
+echo "<td><input type='text' value='$result[mov_duration]' /></td>";
+echo "<td><input type='text' value='$result[mov_release_year]' /></td>";
 }
 ?>
+</tr>
 </table>
+</body>
+</html>
