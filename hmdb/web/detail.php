@@ -6,6 +6,18 @@
  * Displays the details for a single movie. This page expects to be included within index.php.
  *************************************************************************************************/
 
+if ($id == -1) {
+$row['mov_id'] = -1;
+$row['mov_title'] = '';
+$row['mov_genre'] = '';
+$row['mov_rating'] = NULL;
+$row['mov_mpaa'] = '';
+$row['mov_duration'] = NULL;
+$row['mov_release_year'] = NULL;
+
+echo '<h2>New Movie</h2>';
+
+} else {
 $sql =<<<SQL
 SELECT *
   FROM movie
@@ -19,10 +31,13 @@ $result = $connection->query($sql);
 
 // Store the ONE result in an associative array
 $row = $result->fetch_assoc();
+echo '<h2>' . $row["mov_title"] . '</h2>';
+
+}
 
 ?>
-
-<h2><?php echo $row["mov_title"]; ?></h2>
+<!-- 
+<h2><?php echo $row["mov_title"]; ?></h2> -->
 <form action="save.php" method="POST">
     <input type="hidden" class="form-control" name="id" value="<?php echo $row["mov_id"]; ?>">
 

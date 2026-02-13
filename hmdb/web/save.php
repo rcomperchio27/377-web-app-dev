@@ -17,6 +17,13 @@ $mpaa = $connection->real_escape_string($mpaa);
 $rating = $connection->real_escape_string($rating);
 $release_year = $connection->real_escape_string($release_year);
 
+$add =<<<SQL
+INSERT INTO movie
+(mov_title, mov_genre, mov_rating, mov_mpaa, mov_duration, mov_release_year)
+VALUES 
+('$title', '$genre', $rating, '$mpaa', $duration, $release_year)
+SQL;
+
 $update =<<<SQL
 UPDATE movie
    SET mov_title = '$title',
@@ -28,7 +35,11 @@ UPDATE movie
  WHERE mov_id = $id
 SQL;
 
+if ($id == -1) {
+$connection->query($add);
+} else {
 $connection->query($update);
+}
 
 header('Location: index.php?content=list');
 ?>
