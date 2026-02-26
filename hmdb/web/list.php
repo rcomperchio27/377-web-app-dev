@@ -26,7 +26,7 @@ for ($i = 0; $i < 26; $i++)
 }
 
 ?>
-<a href="detail.php?id=-1" class="btn btn-primary" role="button">Add</a>
+<a href="index.php?content=detail&id=-1" class="btn btn-primary" role="button">Add</a>
 
 <table class="table table-bordered table-hover">
     <thead class="thead-dark">

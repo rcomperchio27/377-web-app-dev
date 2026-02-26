@@ -72,7 +72,11 @@ echo '<h2>' . $row["mov_title"] . '</h2>';
     </div>
 
     <button type="sumbit" class="btn btn-primary">Save</button>
-    <a href="delete.php?id=<?php echo $row["mov_id"]; ?>" class="btn btn-danger" role="button">Delete</a>
+    <?php 
+    if ($id > 0) {
+    echo '<a href="delete.php?id=<?php echo $row["mov_id"]; ?>" class="btn btn-danger" role="button">Delete</a>';
+    }
+    ?>
     <a href="index.php?content=list" class="btn btn-secondary" role="button">Cancel</a>
 
 </form>
