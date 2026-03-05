@@ -4,11 +4,6 @@
 
 <?php
 
-for ($i = 1; $i < 10; $i++)
-{
-    echo "<a href='index.php?content=list&filter=$i'>$i</a> ";
-}
-
 for ($i = 0; $i < 26; $i++)
 {
     $letter = chr($i + ord("A"));
@@ -40,9 +35,9 @@ else
 
 $sql =<<<SQL
 SELECT *
-FROM country
-WHERE country_name LIKE '%filter%'
-ORDER BY country_name
+  FROM country
+ WHERE country_name LIKE '$filter%'
+ ORDER BY country_name
 SQL;
 
 $result = $connection->query($sql);

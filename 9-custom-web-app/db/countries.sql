@@ -5,7 +5,7 @@ CREATE TABLE `countries`.`country` (
   `country_name` VARCHAR(100) NOT NULL,
   `country_abbreviation` VARCHAR(10) NULL,
   `country_continent` VARCHAR(45) NOT NULL,
-  `country_flag` VARCHAR(100) NULL,
+  `country_flag` VARCHAR(1000) NULL,
   `country_capital` VARCHAR(45) NULL,
   `country_leader` VARCHAR(45) NULL,
   `country_independence_year` INT NULL,
@@ -20,7 +20,7 @@ CREATE TABLE `countries`.`country` (
 
 INSERT INTO country (country_name, country_abbreviation, country_continent, country_flag, country_capital, country_leader, country_independence_year, country_area, country_population) VALUES
 ('United States', 'USA', 'North America', NULL, 'Washington, D.C.', 'Joe Biden', 1776, 9833520, 331000000),
-('Canada', 'CAN', 'North America', NULL, 'Ottawa', 'Justin Trudeau', 1867, 9984670, 38000000),
+('Canada', 'CAN', 'North America', 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Flag_of_Canada_%28Pantone%29.svg/1920px-Flag_of_Canada_%28Pantone%29.svg.png', 'Ottawa', 'Justin Trudeau', 1867, 9984670, 38000000),
 ('United Kingdom', 'UK', 'Europe', NULL, 'London', 'Rishi Sunak', 1707, 243610, 67000000),
 ('Australia', 'AUS', 'Oceania', NULL, 'Canberra', 'Anthony Albanese', 1901, 7692024, 26000000),
 ('India', 'IND', 'Asia', NULL, 'New Delhi', 'Narendra Modi', 1947, 3287263, 1400000000),
