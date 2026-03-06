@@ -3,20 +3,23 @@ from sys import argv
 
 SPECIALS = "!@#$%^&*()-=_+[][];:'<>,./?~`"
 
-script, l, p = argv
-print(script)
-print(l)
-print(p)
-
 if (len(argv) == 3):
     length = int(argv[1])
-else:
+    includeNumber = "0" in argv[2]
+    includeLower = "a" in argv[2]
+    includeUpper = "A" in argv[2]
+    includeSpecial = "!" in argv[2]
+elif len(argv) == 1:
+
     length = int(input('How long should the password be?: '))
     includeNumber = input('Include a number? [Y/N] : ').upper()[0] == "Y"
     includeLower = input('Include a lowercase letter? [Y/N] : ').upper()[0] == "Y"
     includeUpper = input('Include an uppercase letter? [Y/N] : ').upper()[0] == "Y"
     includeSpecial = input('Include a special character? [Y/N]: ').upper()[0] == "Y"
-
+else:
+    print("Expected usage: password-generator.py [length] [pattern]")
+    print("where pattern contains one or more of the following: Aa0!")
+    exit()
 password = []
 if includeNumber:
     password.append(str(random.randint(0, 9)))
