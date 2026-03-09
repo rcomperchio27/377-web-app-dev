@@ -18,33 +18,57 @@ $result = $connection->query($sql);
 
 // Store the ONE result in an associative array
 $row = $result->fetch_assoc();
-echo '<h2>' . $row["country_name"] . '   (' . $row["country_abbreviation"]. ')</h2>';
 
 ?>
 
-<input type="hidden" class="form-control" name="id" value="<?php echo $row["country_id"]; ?>">
-<img height="200" src='<?php echo $row["country_flag"]; ?>'></img>
-<br>
-<br>
+<input type="hidden" class="form-control" name="country_id" value="<?php echo $row["country_id"]; ?>">
 
-<div class="mb-3" bordered="true">
-    <label for="continent" class="form-label">Continent</label>
-    <p class="form-text"> <?php echo $row["country_continent"]; ?></p>
-</div>
+<form action="save.php" method="POST">
 
+    <div class="input-group mb-3" bordered="true">
+        <input type="text" class="form-control" name="country_name" value='<?php echo $row["country_name"]; ?>'>
+        <span class="input-group-text">(</span>
+        <input type="text" class="form-control" name="country_abbreviation" value='<?php echo $row["country_abbreviation"]; ?>'>
+        <span class="input-group-text">)</span>
+    </div>
 
-<div class="mb-3">
-    <label for="mpaa" class="form-label">Capital</label>
-    <input type="text" class="form-control" name="capital" value="<?php echo $row["country_capital"]; ?>">
-</div>
+    <div class="mb-3" bordered="true">
+        <img height="200" name="country_flag" src='<?php echo $row["country_flag"]; ?>'></img>
+        <input type="text" class="form-control" name="country_continent" value="<?php echo $row["country_continent"]; ?>">
+    </div>
+    <!-- <br>
+    <br> -->
 
-<div class="mb-3">
-    <label for="duration" class="form-label">President</label>
-    <input type="text" class="form-control" name="leader" value="<?php echo $row["country_leader"]; ?>">
-</div>
+    <div class="mb-3" bordered="true">
+        <label for="country_continent" class="form-label">Continent</label>
+        <input type="text" class="form-control" name="country_continent" value="<?php echo $row["country_continent"]; ?>">
+    </div>
 
-<div class="mb-3">
-    <label for="release_year" class="form-label">Independence</label>
-    <input type="text" class="form-control" name="independence_year" value="<?php echo $row["country_independence_year"]; ?>">
-</div>
-<a href="index.php?content=list" class="btn btn-secondary" role="button">Back</a>
+    <div class="mb-3">
+        <label for="country_capital" class="form-label">Capital</label>
+        <input type="text" class="form-control" name="country_capital" value="<?php echo $row["country_capital"]; ?>">
+    </div>
+
+    <div class="mb-3">
+        <label for="country_leader" class="form-label">President</label>
+        <input type="text" class="form-control" name="country_leader" value="<?php echo $row["country_leader"]; ?>">
+    </div>
+
+    <div class="mb-3">
+        <label for="country_independence_year" class="form-label">Independence</label>
+        <input type="text" class="form-control" name="country_independence_year" value="<?php echo $row["country_independence_year"]; ?>">
+    </div>
+
+    <div class="mb-3">
+        <label for="country_area" class="form-label">Area</label>
+        <input type="text" class="form-control" name="country_area" value="<?php echo $row["country_area"]; ?>">
+    </div>
+    
+    <div class="mb-3">
+        <label for="country_population" class="form-label">Population</label>
+        <input type="text" class="form-control" name="country_population" value="<?php echo $row["country_population"]; ?>">
+    </div>
+
+    <button type="sumbit" class="btn btn-primary">Save</button>
+    <a href="index.php?content=list" class="btn btn-secondary" role="button">Back</a>
+</form>
