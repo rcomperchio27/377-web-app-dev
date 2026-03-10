@@ -2,8 +2,24 @@
 /*************************************************************************************************
  * detail.php
  *
- * Displays the details for a single movie. This page expects to be included within index.php.
+ * Displays the details for a single country. This page expects to be included within index.php.
  *************************************************************************************************/
+
+if ($id == -1) {
+$row['country_id'] = -1;
+$row['country_name'] = '';
+$row['country_abbreviation'] = '';
+$row['country_continent'] = '';
+$row['country_flag'] = '';
+$row['country_capital'] = '';
+$row['country_leader'] = '';
+$row['country_independence_year'] = NULL;
+$row['country_area'] = NULL;
+$row['country_population'] = NULL;
+
+echo '<h2>New Country</h2>';
+
+} else {
 
 $sql =<<<SQL
 SELECT *
@@ -18,12 +34,16 @@ $result = $connection->query($sql);
 
 // Store the ONE result in an associative array
 $row = $result->fetch_assoc();
+echo '<h2>' . $row["country_name"] . '</h2>';
 
+}
 ?>
 
-<input type="hidden" class="form-control" name="country_id" value="<?php echo $row["country_id"]; ?>">
-
 <form action="save.php" method="POST">
+
+    <div class="input-group mb-3" bordered="true">
+        <input type="hidden" class="form-control" name="country_id" value="<?php echo $row["country_id"]; ?>">
+    </div>
 
     <div class="input-group mb-3" bordered="true">
         <input type="text" class="form-control" name="country_name" value='<?php echo $row["country_name"]; ?>'>
@@ -34,7 +54,7 @@ $row = $result->fetch_assoc();
 
     <div class="mb-3" bordered="true">
         <img height="200" name="country_flag" src='<?php echo $row["country_flag"]; ?>'></img>
-        <input type="text" class="form-control" name="country_continent" value="<?php echo $row["country_continent"]; ?>">
+        <input type="text" class="form-control" name="country_flag" value="<?php echo $row["country_flag"]; ?>">
     </div>
     <!-- <br>
     <br> -->
@@ -68,7 +88,15 @@ $row = $result->fetch_assoc();
         <label for="country_population" class="form-label">Population</label>
         <input type="text" class="form-control" name="country_population" value="<?php echo $row["country_population"]; ?>">
     </div>
-
+    
     <button type="sumbit" class="btn btn-primary">Save</button>
+    
+    <?php 
+    if ($id > 0) {
+        echo '<a href=delete.php?id=';
+        echo "$id";
+        echo ' class="btn btn-danger" role="button">Delete</a>';   
+    }
+    ?>
     <a href="index.php?content=list" class="btn btn-secondary" role="button">Back</a>
 </form>

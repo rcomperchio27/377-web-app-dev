@@ -10,6 +10,7 @@ for ($i = 0; $i < 26; $i++)
     echo "<a href='index.php?content=list&filter=$letter'>$letter</a> ";
 }
 ?>
+<!-- <a href="index.php?content=detail&id=-1" class="btn btn-primary" role="button">Add</a> -->
 
 <table class="table table-bordered table-hover">
     <thead class="thead-dark">
@@ -41,7 +42,7 @@ SELECT *
 SQL;
 
 $result = $connection->query($sql);
-
+$recordCount = 0;
 while ($row = $result->fetch_assoc())
 {
     echo "<tr>";
@@ -49,7 +50,21 @@ while ($row = $result->fetch_assoc())
     echo "<td>" . $row["country_abbreviation"] . "</td>";
     echo "<td>" . $row["country_continent"] . "</td>";
     echo "</tr>";
+
+    $recordCount++;
 }
 ?>
     </tbody>
 </table>
+
+<?php
+
+$code =<<<JS
+<script>
+document.getElementById('record-count').innerHTML = '(' + $recordCount + ' records)';
+</script>
+JS;
+
+echo $code;
+
+?>
