@@ -22,7 +22,7 @@ INSERT INTO country (country_name, country_abbreviation, country_continent, coun
 ('United States', 'USA', 'North America', NULL, 'Washington, D.C.', 'Joe Biden', 1776, 9833520, 331000000),
 ('Canada', 'CAN', 'North America', 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Flag_of_Canada_%28Pantone%29.svg/1920px-Flag_of_Canada_%28Pantone%29.svg.png', 'Ottawa', 'Justin Trudeau', 1867, 9984670, 38000000),
 ('United Kingdom', 'UK', 'Europe', NULL, 'London', 'Rishi Sunak', 1707, 243610, 67000000),
-('Australia', 'AUS', 'Oceania', NULL, 'Canberra', 'Anthony Albanese', 1901, 7692024, 26000000),
+('Australia', 'AUS', 'Oceania', 'https://upload.wikimedia.org/wikipedia/commons/8/88/Flag_of_Australia_%28converted%29.svg', 'Canberra', 'Anthony Albanese', 1901, 7692024, 26000000),
 ('India', 'IND', 'Asia', NULL, 'New Delhi', 'Narendra Modi', 1947, 3287263, 1400000000),
 ('Brazil', 'BRA', 'South America', NULL, 'Brasília', 'Luiz Inácio Lula da Silva', 1822, 8515767, 214000000),
 ('Germany', 'DEU', 'Europe', NULL, 'Berlin', 'Olaf Scholz', 1871, 357022, 83000000),

@@ -1,21 +1,26 @@
 <h2>Countries <span id="record-count"></span></h2>
 
-<a href='index.php?content=list'>All</a>
-
-<?php
-
-for ($i = 0; $i < 26; $i++)
-{
-    $letter = chr($i + ord("A"));
-    echo "<a href='index.php?content=list&filter=$letter'>$letter</a> ";
-}
-?>
-<!-- <a href="index.php?content=detail&id=-1" class="btn btn-primary" role="button">Add</a> -->
 
 <table class="table table-bordered table-hover">
     <thead class="thead-dark">
-        <tr>
-            <th>Name</th>
+        <tr>    
+            <th>
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Name
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a href='index.php?content=list'>All</a>
+                    <?php
+                    for ($i = 0; $i < 26; $i++)
+                    {
+                        $letter = chr($i + ord("A"));
+                        echo "<a href='index.php?content=list&filter=$letter'>$letter</a> ";
+                    }
+                    ?>
+                </div>
+            </div>
+            </th>
             <th>Abbreviation</th>
             <th>Continent</th>
         </tr>
@@ -56,6 +61,7 @@ while ($row = $result->fetch_assoc())
 ?>
     </tbody>
 </table>
+<a href="index.php?content=detail&id=-1" class="btn btn-primary" role="button">Add</a>
 
 <?php
 

@@ -37,6 +37,12 @@ $row = $result->fetch_assoc();
 echo '<h2>' . $row["country_name"] . '</h2>';
 
 }
+if ($row["country_flag"] == NULL) {
+    $flag_url = 'https://png.pngtree.com/png-vector/20230407/ourmid/pngtree-placeholder-line-icon-vector-png-image_6691835.png';
+} else {
+    $flag_url = $row["country_flag"];
+}
+
 ?>
 
 <form action="save.php" method="POST">
@@ -48,12 +54,14 @@ echo '<h2>' . $row["country_name"] . '</h2>';
     <div class="input-group mb-3" bordered="true">
         <input type="text" class="form-control" name="country_name" value='<?php echo $row["country_name"]; ?>'>
         <span class="input-group-text">(</span>
-        <input type="text" class="form-control" name="country_abbreviation" value='<?php echo $row["country_abbreviation"]; ?>'>
+        <input type="text" class="form-control abrev" name="country_abbreviation"  maxlength="3" value='<?php echo $row["country_abbreviation"]; ?>'>
         <span class="input-group-text">)</span>
     </div>
 
     <div class="mb-3" bordered="true">
-        <img height="200" name="country_flag" src='<?php echo $row["country_flag"]; ?>'></img>
+        <img height="200" name="country_flag" src='<?php echo "$flag_url" ?>'></img>
+        <br>
+        <label for="country_flag" class="form-label">Flag</label>
         <input type="text" class="form-control" name="country_flag" value="<?php echo $row["country_flag"]; ?>">
     </div>
     <!-- <br>
