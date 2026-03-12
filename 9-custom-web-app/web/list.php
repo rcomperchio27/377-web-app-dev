@@ -1,5 +1,35 @@
-<h2>Countries <span id="record-count"></span></h2>
+<?php 
 
+$connection = get_connection();
+
+if (!isset($filtertypes)) {
+    $filtertypes = '';
+} else {
+    $allfilters = explode(':', $filtertypes);
+    $filters = [];
+    $filterslist = [];
+    for ($i = count($allfilters) - 1; $i > 0; $i--) {
+        if ($allfilters[$i] != '') {
+            $currentfilter = explode('=', $allfilters[$i])[0];
+            $filtervalue = explode('=', $allfilters[$i])[1];
+            print_r((explode(":" . $allfilters[$i], $filtertypes)[0]));
+            print_r((explode(":" . $allfilters[$i], $filtertypes)[1]));
+            if (in_array($currentfilter, $filterslist) == FALSE) {
+                $filters[] = [$currentfilter, $filtervalue];
+                $filterslist[] = $currentfilter;
+            } else {
+                // header('Location: index.php?content=list&filtertypes=' . explode(":" . $allfilters[$i], $filtertypes)[0] . explode(":" . $allfilters[$i], $filtertypes)[1]);
+                header('Location: index.php?content=list&filtertypes=' . explode(":" . $allfilters[$i], $filtertypes)[0] . explode(":" . $allfilters[$i], $filtertypes)[1]);
+                exit();
+            }
+        }
+    }
+}
+
+?>
+
+
+<h2>Countries <span id="record-count"></span></h2>
 
 <table class="table table-bordered table-hover">
     <thead class="thead-dark">
@@ -10,39 +40,102 @@
                     Name
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a href='index.php?content=list'>All</a>
                     <?php
+                    echo "<a href='index.php?content=list&filtertypes=" . $filtertypes . ":name=" . "none'>Clear</a><br> ";
                     for ($i = 0; $i < 26; $i++)
                     {
                         $letter = chr($i + ord("A"));
-                        echo "<a href='index.php?content=list&filter=$letter'>$letter</a> ";
+                        echo "<a href='index.php?content=list&filtertypes=" . $filtertypes . ":name=" . "$letter'>$letter</a> ";
                     }
                     ?>
                 </div>
             </div>
             </th>
-            <th>Abbreviation</th>
-            <th>Continent</th>
+            <th>
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Abbreviation
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <?php
+                    echo "<a href='index.php?content=list&filtertypes=" . $filtertypes . ":abrev=" . "none'>Clear</a><br> ";
+                    for ($i = 0; $i < 26; $i++)
+                    {
+                        $letter = chr($i + ord("A"));
+                        echo "<a href='index.php?content=list&filtertypes=" . $filtertypes . ":abrev=" . "$letter'>$letter</a> ";
+                    }
+                    ?>
+                </div>
+            </div>
+            </th>
+            <th><div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Continent
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <?php
+                        echo "<a href='index.php?content=list&filtertypes=" . $filtertypes . ":continent=" . "none'>Clear</a><br> ";
+                        echo "<a href='index.php?content=list&filtertypes=" . $filtertypes . ":continent=" . "North America'>North America</a><br> ";
+                        echo "<a href='index.php?content=list&filtertypes=" . $filtertypes . ":continent=" . "South America'>South America</a><br> ";
+                        echo "<a href='index.php?content=list&filtertypes=" . $filtertypes . ":continent=" . "Europe'>Europe</a><br> ";
+                        echo "<a href='index.php?content=list&filtertypes=" . $filtertypes . ":continent=" . "Asia'>Asia</a><br> ";
+                        echo "<a href='index.php?content=list&filtertypes=" . $filtertypes . ":continent=" . "Africa'>Africa</a><br> ";
+                        echo "<a href='index.php?content=list&filtertypes=" . $filtertypes . ":continent=" . "Oceania'>Oceania</a><br> ";
+                    ?>
+                </div></th>
         </tr>
     </thead>
     <tbody>
 <?php
-
-$connection = get_connection();
-
-if (!isset($filter))
-{
-    $filter = '';
+if (isset($filters)) {
+    for ($i = 0; $i < count($filters); $i++) {
+        if ($filters[$i][0] == 'abrev') {
+            $abrevfilter = $filters[$i][1];
+            if ($abrevfilter == 'none') {
+                $abrevfilter = '';
+            }
+        }
+        if ($filters[$i][0] == 'name') {
+            $namefilter = $filters[$i][1];
+            if ($namefilter == 'none') {
+                $namefilter = '';
+            }
+        }
+        if ($filters[$i][0] == 'continent') {
+            $continentfilter = $filters[$i][1];
+            if ($continentfilter == 'none') {
+                $continentfilter = '';
+            }
+        }
+        // print_r($filters[$i]);
+        // echo "<br>";
+    }
 }
-else
-{
-    $filter = $connection->real_escape_string($filter);
+
+if (!isset($namefilter)){
+    $namefilter = '';
+}else{
+    $namefilter = $connection->real_escape_string($namefilter);
+}
+
+if (!isset($abrevfilter)){
+    $abrevfilter = '';
+}else{
+    $abrevfilter = $connection->real_escape_string($abrevfilter);
+}
+
+if (!isset($continentfilter)){
+    $continentfilter = '';
+}else{
+    $continentfilter = $connection->real_escape_string($continentfilter);
 }
 
 $sql =<<<SQL
 SELECT *
   FROM country
- WHERE country_name LIKE '$filter%'
+ WHERE country_name LIKE '$namefilter%'
+ AND country_abbreviation LIKE '$abrevfilter%'
+ AND country_continent LIKE '$continentfilter%' -- is an AND so when there is none selected it looks for one like '' same as no filter
  ORDER BY country_name
 SQL;
 
