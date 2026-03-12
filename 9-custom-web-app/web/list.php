@@ -1,10 +1,10 @@
 <?php 
 
 $connection = get_connection();
-
 if (!isset($filtertypes)) {
     $filtertypes = '';
 } else {
+    $filtertypes = $connection->real_escape_string($filtertypes);
     $allfilters = explode(':', $filtertypes);
     $filters = [];
     $filterslist = [];
@@ -12,13 +12,12 @@ if (!isset($filtertypes)) {
         if ($allfilters[$i] != '') {
             $currentfilter = explode('=', $allfilters[$i])[0];
             $filtervalue = explode('=', $allfilters[$i])[1];
-            print_r((explode(":" . $allfilters[$i], $filtertypes)[0]));
-            print_r((explode(":" . $allfilters[$i], $filtertypes)[1]));
+            // print_r((explode(":" . $allfilters[$i], $filtertypes)[0]));
+            // print_r((explode(":" . $allfilters[$i], $filtertypes)[1]));
             if (in_array($currentfilter, $filterslist) == FALSE) {
                 $filters[] = [$currentfilter, $filtervalue];
                 $filterslist[] = $currentfilter;
             } else {
-                // header('Location: index.php?content=list&filtertypes=' . explode(":" . $allfilters[$i], $filtertypes)[0] . explode(":" . $allfilters[$i], $filtertypes)[1]);
                 header('Location: index.php?content=list&filtertypes=' . explode(":" . $allfilters[$i], $filtertypes)[0] . explode(":" . $allfilters[$i], $filtertypes)[1]);
                 exit();
             }

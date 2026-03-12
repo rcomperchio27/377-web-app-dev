@@ -54,7 +54,7 @@ if ($row["country_flag"] == NULL) {
     <div class="input-group mb-3" bordered="true">
         <input type="text" class="form-control" name="country_name" value='<?php echo $row["country_name"]; ?>'>
         <span class="input-group-text">(</span>
-        <input type="text" class="form-control abrev" name="country_abbreviation"  maxlength="3" value='<?php echo $row["country_abbreviation"]; ?>'>
+        <input type="text" class="form-control abrev" name="country_abbreviation"  maxlength="2" value='<?php echo $row["country_abbreviation"]; ?>'>
         <span class="input-group-text">)</span>
     </div>
 
