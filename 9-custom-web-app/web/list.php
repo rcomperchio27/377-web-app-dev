@@ -32,6 +32,9 @@ if (!isset($filtertypes)) {
     <thead class="thead-dark">
         <tr>    
             <th>
+                <a href='index.php?content=list' class="btn btn-danger" role="button">Clear Filters</a>
+            </th>
+            <th>
             <div class="dropdown">
                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Name
@@ -149,7 +152,8 @@ while ($row = $result->fetch_assoc())
         $flag_url = $row["country_flag"];
     }
     echo "<tr>";
-    echo "<td><img height='40' width='65' class='countryflag' name='country_flag' src='$flag_url' onerror=this.src='https://png.pngtree.com/png-vector/20230407/ourmid/pngtree-placeholder-line-icon-vector-png-image_6691835.png';></img><a class='countrylink' href='index.php?content=detail&id=". $row["country_id"] . "'>" . $row["country_name"] . "</a></td>";
+    echo "<td><img height='40' width='65' class='countryflag' name='country_flag' src='$flag_url' onerror=this.src='https://png.pngtree.com/png-vector/20230407/ourmid/pngtree-placeholder-line-icon-vector-png-image_6691835.png'></img></td>";
+    echo "<td><a class='countrylink' href='index.php?content=detail&id=". $row["country_id"] . "'>" . $row["country_name"] . "</a></td>";
     echo "<td>" . $row["country_abbreviation"] . "</td>";
     echo "<td>" . $row["country_continent"] . "</td>";
     echo "</tr>";

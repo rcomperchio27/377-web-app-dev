@@ -52,7 +52,7 @@ if ($row["country_flag"] == NULL) {
     </div>
 
     <div class="input-group mb-3" bordered="true">
-        <input type="text" class="form-control" name="country_name" value='<?php echo $row["country_name"]; ?>'>
+        <input id="nameform" onchange="isMissing()" type="text" class="form-control" name="country_name" value='<?php echo $row["country_name"]; ?>'>
         <span class="input-group-text">(</span>
         <input type="text" class="form-control abrev" name="country_abbreviation"  maxlength="2" value='<?php echo $row["country_abbreviation"]; ?>'>
         <span class="input-group-text">)</span>
@@ -69,7 +69,7 @@ if ($row["country_flag"] == NULL) {
 
     <div class="mb-3" bordered="true">
         <label for="country_continent" class="form-label">Continent</label>
-        <input type="text" class="form-control" name="country_continent" value="<?php echo $row["country_continent"]; ?>">
+        <input type="text" class="form-control" onchange="isMissing()" id="continentform" name="country_continent" value="<?php echo $row["country_continent"]; ?>">
     </div>
 
     <div class="mb-3">
@@ -96,8 +96,35 @@ if ($row["country_flag"] == NULL) {
         <label for="country_population" class="form-label">Population</label>
         <input type="text" class="form-control" name="country_population" value="<?php echo $row["country_population"]; ?>">
     </div>
-    
-    <button type="sumbit" class="btn btn-primary">Save</button>
+    <p id="save-failed"></p>
+    <button id="save-btn" type="sumbit" disabled="true" class="btn btn-primary">Save</button>
+    <?php 
+
+    $code =<<<JS
+    <script>
+    function isMissing() {
+        document.getElementById('save-btn').disabled = true;
+        if (document.getElementById('continentform').value == '') {
+            document.getElementById('save-failed').innerHTML = 'Field Continent necessary';
+        }
+        if (document.getElementById('nameform').value == '') {
+            document.getElementById('save-failed').innerHTML = 'Field Name necessary';
+        }
+        if (document.getElementById('nameform').value == '' && document.getElementById('continentform').value == '') {
+            document.getElementById('save-failed').innerHTML = 'Field Name and Continent necessary';
+        }
+        if (document.getElementById('nameform').value != '' && document.getElementById('continentform').value != '') {
+            document.getElementById('save-btn').disabled = false;
+            document.getElementById('save-failed').innerHTML = '';
+        }
+    }
+    isMissing()
+    </script>
+    JS;
+
+    echo $code;
+
+    ?>
     
     <?php 
     if ($id > 0) {
