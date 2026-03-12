@@ -13,11 +13,10 @@ CREATE TABLE `countries`.`country` (
   `country_population` INT NULL,
   PRIMARY KEY (`country_id`));
 
+-- Example
 -- INSERT INTO country (country_name, country_abbreviation, country_continent, country_flag, country_capital, country_leader, country_independence_year, country_area, country_population) VALUES ('United States of America', 'US', 'North America', NULL, 'Washington D.C.', 'President Donald Trump', 1776, 3796742, 331449281);
--- INSERT INTO country (country_name, country_abbreviation, country_continent, country_flag, country_capital, country_leader, country_independence_year, country_area, country_population) VALUES ('Canada', 'CA', 'North America', NULL, 'Ottawa', 'Prime Minister Mark Carney', 1867, 3855100, 36991981); 
--- INSERT INTO country (country_name, country_abbreviation, country_continent, country_flag, country_capital, country_leader, country_independence_year, country_area, country_population) VALUES ('Mexico', 'MX', 'North America', NULL, 'Mexico City', 'President Claudia Sheinbaum', 1836, 761610, 126014024); 
--- INSERT INTO country (country_name, country_abbreviation, country_continent, country_flag, country_capital, country_leader, country_independence_year, country_area, country_population) VALUES ('France', 'FR', 'Europe', NULL, 'Paris', 'President Emmanuel Macron', , ' sq mi', ''); 
 
+-- Test data set
 -- INSERT INTO country (country_name, country_abbreviation, country_continent, country_flag, country_capital, country_leader, country_independence_year, country_area, country_population) VALUES
 -- ('United States', 'USA', 'North America', NULL, 'Washington, D.C.', 'Joe Biden', 1776, 9833520, 331000000),
 -- ('Canada', 'CAN', 'North America', 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Flag_of_Canada_%28Pantone%29.svg/1920px-Flag_of_Canada_%28Pantone%29.svg.png', 'Ottawa', 'Justin Trudeau', 1867, 9984670, 38000000),
@@ -30,6 +29,7 @@ CREATE TABLE `countries`.`country` (
 -- ('South Africa', 'ZAF', 'Africa', NULL, 'Pretoria', 'Cyril Ramaphosa', 1910, 1221037, 60000000),
 -- ('France', 'FRA', 'Europe', NULL, 'Paris', 'Emmanuel Macron', 843, 551695, 67000000);
 
+-- Complete data set
 INSERT INTO country (country_name, country_abbreviation, country_continent, country_flag, country_capital, country_leader, country_independence_year, country_area, country_population) VALUES ('Afghanistan','AF','Asia','https://upload.wikimedia.org/wikipedia/commons/9/9a/Flag_of_Afghanistan.svg','Kabul','Hibatullah Akhundzada',1919,652230,41100000);
 INSERT INTO country (country_name, country_abbreviation, country_continent, country_flag, country_capital, country_leader, country_independence_year, country_area, country_population) VALUES ('Albania','AL','Europe','https://upload.wikimedia.org/wikipedia/commons/3/36/Flag_of_Albania.svg','Tirana','Bajram Begaj',1912,28748,2800000);
 INSERT INTO country (country_name, country_abbreviation, country_continent, country_flag, country_capital, country_leader, country_independence_year, country_area, country_population) VALUES ('Algeria','DZ','Africa','https://upload.wikimedia.org/wikipedia/commons/7/77/Flag_of_Algeria.svg','Algiers','Abdelmadjid Tebboune',1962,2381741,44900000);
@@ -64,7 +64,7 @@ INSERT INTO country (country_name, country_abbreviation, country_continent, coun
 INSERT INTO country (country_name, country_abbreviation, country_continent, country_flag, country_capital, country_leader, country_independence_year, country_area, country_population) VALUES ('Central African Republic','CF','Africa','https://upload.wikimedia.org/wikipedia/commons/6/6f/Flag_of_the_Central_African_Republic.svg','Bangui','Faustin-Archange Touadéra',1960,622984,5500000);
 INSERT INTO country (country_name, country_abbreviation, country_continent, country_flag, country_capital, country_leader, country_independence_year, country_area, country_population) VALUES ('Chad','TD','Africa','https://upload.wikimedia.org/wikipedia/commons/4/4b/Flag_of_Chad.svg','N''Djamena','Mahamat Déby',1960,1284000,18000000);
 INSERT INTO country (country_name, country_abbreviation, country_continent, country_flag, country_capital, country_leader, country_independence_year, country_area, country_population) VALUES ('Chile','CL','South America','https://upload.wikimedia.org/wikipedia/commons/7/78/Flag_of_Chile.svg','Santiago','Gabriel Boric',1818,756102,19500000);
-INSERT INTO country (country_name, country_abbreviation, country_continent, country_flag, country_capital, country_leader, country_independence_year, country_area, country_population) VALUES ('China','CN','Asia','https://upload.wikimedia.org/wikipedia/commons/f/fa/Flag_of_the_People''s_Republic_of_China.svg','Beijing','Xi Jinping',1949,9596961,1410000000);
+INSERT INTO country (country_name, country_abbreviation, country_continent, country_flag, country_capital, country_leader, country_independence_year, country_area, country_population) VALUES ('China','CN','Asia','https://upload.wikimedia.org/wikipedia/commons/f/fa/Flag_of_the_People%27s_Republic_of_China.svg','Beijing','Xi Jinping',1949,9596961,1410000000);
 INSERT INTO country (country_name, country_abbreviation, country_continent, country_flag, country_capital, country_leader, country_independence_year, country_area, country_population) VALUES ('Colombia','CO','South America','https://upload.wikimedia.org/wikipedia/commons/2/21/Flag_of_Colombia.svg','Bogotá','Gustavo Petro',1810,1141748,52000000);
 INSERT INTO country (country_name, country_abbreviation, country_continent, country_flag, country_capital, country_leader, country_independence_year, country_area, country_population) VALUES ('Comoros','KM','Africa','https://upload.wikimedia.org/wikipedia/commons/9/94/Flag_of_the_Comoros.svg','Moroni','Azali Assoumani',1975,2235,900000);
 INSERT INTO country (country_name, country_abbreviation, country_continent, country_flag, country_capital, country_leader, country_independence_year, country_area, country_population) VALUES ('Democratic Republic of the Congo','CD','Africa','https://upload.wikimedia.org/wikipedia/commons/6/6f/Flag_of_the_Democratic_Republic_of_the_Congo.svg','Kinshasa','Félix Tshisekedi',1960,2344858,102000000);
@@ -101,7 +101,7 @@ INSERT INTO country (country_name, country_abbreviation, country_continent, coun
 INSERT INTO country (country_name, country_abbreviation, country_continent, country_flag, country_capital, country_leader, country_independence_year, country_area, country_population) VALUES ('Guinea-Bissau','GW','Africa','https://upload.wikimedia.org/wikipedia/commons/0/01/Flag_of_Guinea-Bissau.svg','Bissau','Umaro Sissoco Embaló',1973,36125,2100000);
 INSERT INTO country (country_name, country_abbreviation, country_continent, country_flag, country_capital, country_leader, country_independence_year, country_area, country_population) VALUES ('Guyana','GY','South America','https://upload.wikimedia.org/wikipedia/commons/9/99/Flag_of_Guyana.svg','Georgetown','Irfaan Ali',1966,214969,800000);
 INSERT INTO country (country_name, country_abbreviation, country_continent, country_flag, country_capital, country_leader, country_independence_year, country_area, country_population) VALUES ('Haiti','HT','North America','https://upload.wikimedia.org/wikipedia/commons/5/56/Flag_of_Haiti.svg','Port-au-Prince','Ariel Henry',1804,27750,11500000);
-INSERT INTO country (country_name, country_abbreviation, country_continent, country_flag, country_capital, country_leader, country_independence_year, country_area, country_population) VALUES ('Honduras','HN','North America','https://upload.wikimedia.org/wikipedia/commons/8/82/Flag_of_Honduras.svg','Tegucigalpa','Xiomara Castro',1821,112492,10500000);
+INSERT INTO country (country_name, country_abbreviation, country_continent, country_flag, country_capital, country_leader, country_independence_year, country_area, country_population) VALUES ('Honduras','HN','North America','https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Flag_of_Honduras_%281949%E2%80%932022%2C_2026%E2%80%93present%29.svg/1920px-Flag_of_Honduras_%281949%E2%80%932022%2C_2026%E2%80%93present%29.svg.png','Tegucigalpa','Xiomara Castro',1821,112492,10500000);
 INSERT INTO country (country_name, country_abbreviation, country_continent, country_flag, country_capital, country_leader, country_independence_year, country_area, country_population) VALUES ('Hungary','HU','Europe','https://upload.wikimedia.org/wikipedia/commons/c/c1/Flag_of_Hungary.svg','Budapest','Tamás Sulyok',1918,93030,9700000);
 INSERT INTO country (country_name, country_abbreviation, country_continent, country_flag, country_capital, country_leader, country_independence_year, country_area, country_population) VALUES ('Iceland','IS','Europe','https://upload.wikimedia.org/wikipedia/commons/c/ce/Flag_of_Iceland.svg','Reykjavík','Halla Tómasdóttir',1944,103000,390000);
 INSERT INTO country (country_name, country_abbreviation, country_continent, country_flag, country_capital, country_leader, country_independence_year, country_area, country_population) VALUES ('India','IN','Asia','https://upload.wikimedia.org/wikipedia/en/4/41/Flag_of_India.svg','New Delhi','Droupadi Murmu',1947,3287263,1428000000);
@@ -217,93 +217,7 @@ INSERT INTO country (country_name, country_abbreviation, country_continent, coun
 INSERT INTO country (country_name, country_abbreviation, country_continent, country_flag, country_capital, country_leader, country_independence_year, country_area, country_population) VALUES ('Saint Lucia','LC','North America','https://upload.wikimedia.org/wikipedia/commons/9/9f/Flag_of_Saint_Lucia.svg','Castries','Philip J. Pierre',1979,617,180000);
 
 INSERT INTO country (country_name, country_abbreviation, country_continent, country_flag, country_capital, country_leader, country_independence_year, country_area, country_population) VALUES ('Saint Vincent and the Grenadines','VC','North America','https://upload.wikimedia.org/wikipedia/commons/6/6d/Flag_of_Saint_Vincent_and_the_Grenadines.svg','Kingstown','Ralph Gonsalves',1979,389,110000);
-INSERT INTO country (country_name, country_abbreviation, country_continent, country_flag, country_capital, country_leader, country_independence_year, country_area, country_population) VALUES ('Malaysia','MY','Asia','https://upload.wikimedia.org/wikipedia/commons/6/66/Flag_of_Malaysia.svg','Kuala Lumpur','Ibrahim Iskandar',1957,330803,34000000);
 
-INSERT INTO country (country_name, country_abbreviation, country_continent, country_flag, country_capital, country_leader, country_independence_year, country_area, country_population) VALUES ('Maldives','MV','Asia','https://upload.wikimedia.org/wikipedia/commons/0/0f/Flag_of_Maldives.svg','Malé','Mohamed Muizzu',1965,298,520000);
-
-INSERT INTO country (country_name, country_abbreviation, country_continent, country_flag, country_capital, country_leader, country_independence_year, country_area, country_population) VALUES ('Mali','ML','Africa','https://upload.wikimedia.org/wikipedia/commons/9/92/Flag_of_Mali.svg','Bamako','Assimi Goïta',1960,1240192,22000000);
-
-INSERT INTO country (country_name, country_abbreviation, country_continent, country_flag, country_capital, country_leader, country_independence_year, country_area, country_population) VALUES ('Malta','MT','Europe','https://upload.wikimedia.org/wikipedia/commons/7/73/Flag_of_Malta.svg','Valletta','Myriam Spiteri Debono',1964,316,540000);
-
-INSERT INTO country (country_name, country_abbreviation, country_continent, country_flag, country_capital, country_leader, country_independence_year, country_area, country_population) VALUES ('Marshall Islands','MH','Oceania','https://upload.wikimedia.org/wikipedia/commons/2/2e/Flag_of_the_Marshall_Islands.svg','Majuro','Hilda Heine',1986,181,42000);
-
-INSERT INTO country (country_name, country_abbreviation, country_continent, country_flag, country_capital, country_leader, country_independence_year, country_area, country_population) VALUES ('Mauritania','MR','Africa','https://upload.wikimedia.org/wikipedia/commons/4/43/Flag_of_Mauritania.svg','Nouakchott','Mohamed Ould Ghazouani',1960,1030700,4900000);
-
-INSERT INTO country (country_name, country_abbreviation, country_continent, country_flag, country_capital, country_leader, country_independence_year, country_area, country_population) VALUES ('Mauritius','MU','Africa','https://upload.wikimedia.org/wikipedia/commons/7/77/Flag_of_Mauritius.svg','Port Louis','Prithvirajsing Roopun',1968,2040,1300000);
-
-INSERT INTO country (country_name, country_abbreviation, country_continent, country_flag, country_capital, country_leader, country_independence_year, country_area, country_population) VALUES ('Mexico','MX','North America','https://upload.wikimedia.org/wikipedia/commons/f/fc/Flag_of_Mexico.svg','Mexico City','Claudia Sheinbaum',1810,1964375,129000000);
-
-INSERT INTO country (country_name, country_abbreviation, country_continent, country_flag, country_capital, country_leader, country_independence_year, country_area, country_population) VALUES ('Micronesia','FM','Oceania','https://upload.wikimedia.org/wikipedia/commons/e/e4/Flag_of_the_Federated_States_of_Micronesia.svg','Palikir','Wesley Simina',1986,702,110000);
-
-INSERT INTO country (country_name, country_abbreviation, country_continent, country_flag, country_capital, country_leader, country_independence_year, country_area, country_population) VALUES ('Moldova','MD','Europe','https://upload.wikimedia.org/wikipedia/commons/2/27/Flag_of_Moldova.svg','Chișinău','Maia Sandu',1991,33846,2500000);
-
-INSERT INTO country (country_name, country_abbreviation, country_continent, country_flag, country_capital, country_leader, country_independence_year, country_area, country_population) VALUES ('Monaco','MC','Europe','https://upload.wikimedia.org/wikipedia/commons/e/ea/Flag_of_Monaco.svg','Monaco','Albert II',1297,2,39000);
-
-INSERT INTO country (country_name, country_abbreviation, country_continent, country_flag, country_capital, country_leader, country_independence_year, country_area, country_population) VALUES ('Mongolia','MN','Asia','https://upload.wikimedia.org/wikipedia/commons/4/4c/Flag_of_Mongolia.svg','Ulaanbaatar','Ukhnaagiin Khürelsükh',1911,1564116,3400000);
-
-INSERT INTO country (country_name, country_abbreviation, country_continent, country_flag, country_capital, country_leader, country_independence_year, country_area, country_population) VALUES ('Montenegro','ME','Europe','https://upload.wikimedia.org/wikipedia/commons/6/64/Flag_of_Montenegro.svg','Podgorica','Jakov Milatović',2006,13812,620000);
-
-INSERT INTO country (country_name, country_abbreviation, country_continent, country_flag, country_capital, country_leader, country_independence_year, country_area, country_population) VALUES ('Morocco','MA','Africa','https://upload.wikimedia.org/wikipedia/commons/2/2c/Flag_of_Morocco.svg','Rabat','Mohammed VI',1956,446550,37000000);
-
-INSERT INTO country (country_name, country_abbreviation, country_continent, country_flag, country_capital, country_leader, country_independence_year, country_area, country_population) VALUES ('Mozambique','MZ','Africa','https://upload.wikimedia.org/wikipedia/commons/d/d0/Flag_of_Mozambique.svg','Maputo','Filipe Nyusi',1975,801590,33000000);
-
-INSERT INTO country (country_name, country_abbreviation, country_continent, country_flag, country_capital, country_leader, country_independence_year, country_area, country_population) VALUES ('Myanmar','MM','Asia','https://upload.wikimedia.org/wikipedia/commons/8/8c/Flag_of_Myanmar.svg','Naypyidaw','Min Aung Hlaing',1948,676578,55000000);
-
-INSERT INTO country (country_name, country_abbreviation, country_continent, country_flag, country_capital, country_leader, country_independence_year, country_area, country_population) VALUES ('Namibia','NA','Africa','https://upload.wikimedia.org/wikipedia/commons/0/00/Flag_of_Namibia.svg','Windhoek','Nangolo Mbumba',1990,825615,2600000);
-
-INSERT INTO country (country_name, country_abbreviation, country_continent, country_flag, country_capital, country_leader, country_independence_year, country_area, country_population) VALUES ('Nauru','NR','Oceania','https://upload.wikimedia.org/wikipedia/commons/3/30/Flag_of_Nauru.svg','Yaren','David Adeang',1968,21,12000);
-
-INSERT INTO country (country_name, country_abbreviation, country_continent, country_flag, country_capital, country_leader, country_independence_year, country_area, country_population) VALUES ('Nepal','NP','Asia','https://upload.wikimedia.org/wikipedia/commons/9/9b/Flag_of_Nepal.svg','Kathmandu','Ram Chandra Poudel',1768,147516,30500000);
-
-INSERT INTO country (country_name, country_abbreviation, country_continent, country_flag, country_capital, country_leader, country_independence_year, country_area, country_population) VALUES ('Netherlands','NL','Europe','https://upload.wikimedia.org/wikipedia/commons/2/20/Flag_of_the_Netherlands.svg','Amsterdam','Willem-Alexander',1581,41543,17800000);
-
-INSERT INTO country (country_name, country_abbreviation, country_continent, country_flag, country_capital, country_leader, country_independence_year, country_area, country_population) VALUES ('New Zealand','NZ','Oceania','https://upload.wikimedia.org/wikipedia/commons/3/3e/Flag_of_New_Zealand.svg','Wellington','Christopher Luxon',1907,268021,5200000);
-
-INSERT INTO country (country_name, country_abbreviation, country_continent, country_flag, country_capital, country_leader, country_independence_year, country_area, country_population) VALUES ('Nicaragua','NI','North America','https://upload.wikimedia.org/wikipedia/commons/1/19/Flag_of_Nicaragua.svg','Managua','Daniel Ortega',1821,130373,6900000);
-
-INSERT INTO country (country_name, country_abbreviation, country_continent, country_flag, country_capital, country_leader, country_independence_year, country_area, country_population) VALUES ('Niger','NE','Africa','https://upload.wikimedia.org/wikipedia/commons/f/f4/Flag_of_Niger.svg','Niamey','Abdourahamane Tchiani',1960,1267000,27000000);
-
-INSERT INTO country (country_name, country_abbreviation, country_continent, country_flag, country_capital, country_leader, country_independence_year, country_area, country_population) VALUES ('Nigeria','NG','Africa','https://upload.wikimedia.org/wikipedia/commons/7/79/Flag_of_Nigeria.svg','Abuja','Bola Tinubu',1960,923768,223000000);
-
-INSERT INTO country (country_name, country_abbreviation, country_continent, country_flag, country_capital, country_leader, country_independence_year, country_area, country_population) VALUES ('North Korea','KP','Asia','https://upload.wikimedia.org/wikipedia/commons/5/51/Flag_of_North_Korea.svg','Pyongyang','Kim Jong Un',1948,120540,26000000);
-
-INSERT INTO country (country_name, country_abbreviation, country_continent, country_flag, country_capital, country_leader, country_independence_year, country_area, country_population) VALUES ('North Macedonia','MK','Europe','https://upload.wikimedia.org/wikipedia/commons/7/79/Flag_of_North_Macedonia.svg','Skopje','Gordana Siljanovska-Davkova',1991,25713,1800000);
-
-INSERT INTO country (country_name, country_abbreviation, country_continent, country_flag, country_capital, country_leader, country_independence_year, country_area, country_population) VALUES ('Norway','NO','Europe','https://upload.wikimedia.org/wikipedia/commons/d/d9/Flag_of_Norway.svg','Oslo','Harald V',1905,385207,5500000);
-
-INSERT INTO country (country_name, country_abbreviation, country_continent, country_flag, country_capital, country_leader, country_independence_year, country_area, country_population) VALUES ('Oman','OM','Asia','https://upload.wikimedia.org/wikipedia/commons/d/dd/Flag_of_Oman.svg','Muscat','Haitham bin Tariq',1650,309500,4600000);
-
-INSERT INTO country (country_name, country_abbreviation, country_continent, country_flag, country_capital, country_leader, country_independence_year, country_area, country_population) VALUES ('Pakistan','PK','Asia','https://upload.wikimedia.org/wikipedia/commons/3/32/Flag_of_Pakistan.svg','Islamabad','Asif Ali Zardari',1947,881913,241000000);
-
-INSERT INTO country (country_name, country_abbreviation, country_continent, country_flag, country_capital, country_leader, country_independence_year, country_area, country_population) VALUES ('Palau','PW','Oceania','https://upload.wikimedia.org/wikipedia/commons/4/48/Flag_of_Palau.svg','Ngerulmud','Surangel Whipps Jr.',1994,459,18000);
-
-INSERT INTO country (country_name, country_abbreviation, country_continent, country_flag, country_capital, country_leader, country_independence_year, country_area, country_population) VALUES ('Panama','PA','North America','https://upload.wikimedia.org/wikipedia/commons/a/ab/Flag_of_Panama.svg','Panama City','José Raúl Mulino',1903,75417,4500000);
-
-INSERT INTO country (country_name, country_abbreviation, country_continent, country_flag, country_capital, country_leader, country_independence_year, country_area, country_population) VALUES ('Papua New Guinea','PG','Oceania','https://upload.wikimedia.org/wikipedia/commons/e/e3/Flag_of_Papua_New_Guinea.svg','Port Moresby','James Marape',1975,462840,10000000);
-
-INSERT INTO country (country_name, country_abbreviation, country_continent, country_flag, country_capital, country_leader, country_independence_year, country_area, country_population) VALUES ('Paraguay','PY','South America','https://upload.wikimedia.org/wikipedia/commons/2/27/Flag_of_Paraguay.svg','Asunción','Santiago Peña',1811,406752,6800000);
-
-INSERT INTO country (country_name, country_abbreviation, country_continent, country_flag, country_capital, country_leader, country_independence_year, country_area, country_population) VALUES ('Peru','PE','South America','https://upload.wikimedia.org/wikipedia/commons/c/cf/Flag_of_Peru.svg','Lima','Dina Boluarte',1821,1285216,34000000);
-
-INSERT INTO country (country_name, country_abbreviation, country_continent, country_flag, country_capital, country_leader, country_independence_year, country_area, country_population) VALUES ('Philippines','PH','Asia','https://upload.wikimedia.org/wikipedia/commons/9/99/Flag_of_the_Philippines.svg','Manila','Ferdinand Marcos Jr.',1898,300000,114000000);
-
-INSERT INTO country (country_name, country_abbreviation, country_continent, country_flag, country_capital, country_leader, country_independence_year, country_area, country_population) VALUES ('Poland','PL','Europe','https://upload.wikimedia.org/wikipedia/en/1/12/Flag_of_Poland.svg','Warsaw','Andrzej Duda',1918,312696,38000000);
-
-INSERT INTO country (country_name, country_abbreviation, country_continent, country_flag, country_capital, country_leader, country_independence_year, country_area, country_population) VALUES ('Portugal','PT','Europe','https://upload.wikimedia.org/wikipedia/commons/5/5c/Flag_of_Portugal.svg','Lisbon','Marcelo Rebelo de Sousa',1143,92212,10300000);
-
-INSERT INTO country (country_name, country_abbreviation, country_continent, country_flag, country_capital, country_leader, country_independence_year, country_area, country_population) VALUES ('Qatar','QA','Asia','https://upload.wikimedia.org/wikipedia/commons/6/65/Flag_of_Qatar.svg','Doha','Tamim bin Hamad Al Thani',1971,11586,2900000);
-
-INSERT INTO country (country_name, country_abbreviation, country_continent, country_flag, country_capital, country_leader, country_independence_year, country_area, country_population) VALUES ('Romania','RO','Europe','https://upload.wikimedia.org/wikipedia/commons/7/73/Flag_of_Romania.svg','Bucharest','Klaus Iohannis',1877,238397,19000000);
-
-INSERT INTO country (country_name, country_abbreviation, country_continent, country_flag, country_capital, country_leader, country_independence_year, country_area, country_population) VALUES ('Russia','RU','Europe','https://upload.wikimedia.org/wikipedia/en/f/f3/Flag_of_Russia.svg','Moscow','Vladimir Putin',1991,17098246,146000000);
-
-INSERT INTO country (country_name, country_abbreviation, country_continent, country_flag, country_capital, country_leader, country_independence_year, country_area, country_population) VALUES ('Rwanda','RW','Africa','https://upload.wikimedia.org/wikipedia/commons/1/17/Flag_of_Rwanda.svg','Kigali','Paul Kagame',1962,26338,14000000);
-
-INSERT INTO country (country_name, country_abbreviation, country_continent, country_flag, country_capital, country_leader, country_independence_year, country_area, country_population) VALUES ('Saint Kitts and Nevis','KN','North America','https://upload.wikimedia.org/wikipedia/commons/f/fe/Flag_of_Saint_Kitts_and_Nevis.svg','Basseterre','Terrance Drew',1983,261,47000);
-
-INSERT INTO country (country_name, country_abbreviation, country_continent, country_flag, country_capital, country_leader, country_independence_year, country_area, country_population) VALUES ('Saint Lucia','LC','North America','https://upload.wikimedia.org/wikipedia/commons/9/9f/Flag_of_Saint_Lucia.svg','Castries','Philip J. Pierre',1979,617,180000);
-
-INSERT INTO country (country_name, country_abbreviation, country_continent, country_flag, country_capital, country_leader, country_independence_year, country_area, country_population) VALUES ('Saint Vincent and the Grenadines','VC','North America','https://upload.wikimedia.org/wikipedia/commons/6/6d/Flag_of_Saint_Vincent_and_the_Grenadines.svg','Kingstown','Ralph Gonsalves',1979,389,110000);
 SELECT *
 FROM country
 ;

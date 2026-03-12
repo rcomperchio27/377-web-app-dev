@@ -59,7 +59,7 @@ if ($row["country_flag"] == NULL) {
     </div>
 
     <div class="mb-3" bordered="true">
-        <img height="200" name="country_flag" src='<?php echo "$flag_url" ?>'></img>
+        <img height="200" name="country_flag" onerror=this.src='https://png.pngtree.com/png-vector/20230407/ourmid/pngtree-placeholder-line-icon-vector-png-image_6691835.png'; src='<?php echo "$flag_url" ?>'></img>
         <br>
         <label for="country_flag" class="form-label">Flag</label>
         <input type="text" class="form-control" name="country_flag" value="<?php echo $row["country_flag"]; ?>">

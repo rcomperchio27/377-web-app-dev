@@ -12,8 +12,6 @@ if (!isset($filtertypes)) {
         if ($allfilters[$i] != '') {
             $currentfilter = explode('=', $allfilters[$i])[0];
             $filtervalue = explode('=', $allfilters[$i])[1];
-            // print_r((explode(":" . $allfilters[$i], $filtertypes)[0]));
-            // print_r((explode(":" . $allfilters[$i], $filtertypes)[1]));
             if (in_array($currentfilter, $filterslist) == FALSE) {
                 $filters[] = [$currentfilter, $filtervalue];
                 $filterslist[] = $currentfilter;
@@ -140,10 +138,18 @@ SQL;
 
 $result = $connection->query($sql);
 $recordCount = 0;
+
+
 while ($row = $result->fetch_assoc())
 {
+    
+    if ($row["country_flag"] == NULL) {
+        $flag_url = 'https://png.pngtree.com/png-vector/20230407/ourmid/pngtree-placeholder-line-icon-vector-png-image_6691835.png';
+    } else {
+        $flag_url = $row["country_flag"];
+    }
     echo "<tr>";
-    echo "<td><a href='index.php?content=detail&id=". $row["country_id"] . "'>" . $row["country_name"] . "</a></td>";
+    echo "<td><img height='40' width='65' class='countryflag' name='country_flag' src='$flag_url' onerror=this.src='https://png.pngtree.com/png-vector/20230407/ourmid/pngtree-placeholder-line-icon-vector-png-image_6691835.png';></img><a class='countrylink' href='index.php?content=detail&id=". $row["country_id"] . "'>" . $row["country_name"] . "</a></td>";
     echo "<td>" . $row["country_abbreviation"] . "</td>";
     echo "<td>" . $row["country_continent"] . "</td>";
     echo "</tr>";
