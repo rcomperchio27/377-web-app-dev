@@ -16,9 +16,20 @@ $country_continent = $connection->real_escape_string($country_continent);
 $country_flag = $connection->real_escape_string($country_flag);
 $country_capital = $connection->real_escape_string($country_capital);
 $country_leader = $connection->real_escape_string($country_leader);
-$country_independence_year = $connection->real_escape_string($country_independence_year);
-$country_area = $connection->real_escape_string($country_area);
-$country_population = $connection->real_escape_string($country_population);
+$country_independence_year = $connection = $country_independence_year;
+$country_area = $connection = ($country_area);
+$country_population = $connection = ($country_population);
+
+// Makes sure the following values can't be NULL
+if ($country_independence_year == '') {
+    $country_population = 0;
+}
+if (!isset($country_area)) {
+    $country_population = 0;
+}
+if ($country_population == NULL) {
+    $country_population = 0;
+}
 
 // SQL statement for adding a country
 $add =<<<SQL

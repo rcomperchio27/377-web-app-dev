@@ -14,9 +14,9 @@ $row['country_continent'] = '';
 $row['country_flag'] = '';
 $row['country_capital'] = '';
 $row['country_leader'] = '';
-$row['country_independence_year'] = NULL;
-$row['country_area'] = NULL;
-$row['country_population'] = NULL;
+$row['country_independence_year'] = 0;
+$row['country_area'] = 0;
+$row['country_population'] = 0;
 
 echo '<h2>New Country</h2>';
 
@@ -94,19 +94,19 @@ if ($row["country_flag"] == NULL) {
     <!-- Div for the Independence field -->
     <div class="mb-3">
         <label for="country_independence_year" class="form-label">Independence</label>
-        <input type="text" class="form-control" name="country_independence_year" value="<?php echo $row["country_independence_year"]; ?>">
+        <input type="number" min="0" step="1" id="independenceform" class="form-control" name="country_independence_year" value="<?php echo $row["country_independence_year"]; ?>">
     </div>
 
     <!-- Div for the Area field -->
     <div class="mb-3">
         <label for="country_area" class="form-label">Area</label>
-        <input type="text" class="form-control" name="country_area" value="<?php echo $row["country_area"]; ?>">
+        <input type="number" min="0" step="1" class="form-control" id="areaform" name="country_area" value="<?php echo $row["country_area"]; ?>">
     </div>
 
     <!-- Div for the Population field -->
     <div class="mb-3">
         <label for="country_population" class="form-label">Population</label>
-        <input type="text" class="form-control" name="country_population" value="<?php echo $row["country_population"]; ?>">
+        <input type="number" min="0" step="1" class="form-control" id="populationform" name="country_population" value="<?php echo $row["country_population"]; ?>">
     </div>
 
     <!-- Text for not filled necessary fields -->
@@ -150,6 +150,6 @@ if ($row["country_flag"] == NULL) {
     }
     ?>
     
-    // Back button to return to list page
+    <!--- Back button to return to list page --->
     <a href="index.php?content=list" class="btn btn-secondary" role="button">Back</a>
 </form>

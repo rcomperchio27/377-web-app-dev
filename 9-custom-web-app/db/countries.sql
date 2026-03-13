@@ -12,7 +12,7 @@ CREATE TABLE `countries`.`country` (
   `country_leader` VARCHAR(45) NULL,
   `country_independence_year` INT NULL,
   `country_area` INT NULL,
-  `country_population` INT NULL,
+  `country_population` INT NULL
   PRIMARY KEY (`country_id`));
 
 -- Example
