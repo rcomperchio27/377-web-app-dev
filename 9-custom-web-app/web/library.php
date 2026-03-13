@@ -1,4 +1,11 @@
 <?php
+
+/*************************************************************************************************
+ * library.php
+ *
+ * Common functions used across the Countries website
+ *************************************************************************************************/
+
 extract($_REQUEST);
 
 function get_connection(){
@@ -7,6 +14,7 @@ function get_connection(){
     $password = "password";
     $dbname = "countries";
 
+    // Connect to the database and make sure it was successful
     $connection = new mysqli($servername, $username, $password, $dbname);
     if ($connection->connect_error)
     {

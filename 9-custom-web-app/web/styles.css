@@ -1,7 +1,9 @@
+/* Id styles */
 #save-failed {
     color: red;
 }
 
+/* Class styles */
 .countryflag{ 
     padding-left: 5px;
 }
@@ -13,4 +15,10 @@
 
 .countrylink { 
     padding-left: 30px;
+}
+
+/* Tag styles */
+
+td {
+    font-size: 20px;
 }
