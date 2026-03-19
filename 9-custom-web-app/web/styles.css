@@ -4,6 +4,17 @@
 }
 
 /* Class styles */
+
+.alert-position {
+    display: none;
+    position: fixed;
+    left: 50%;
+    margin-left: -250px;
+    top: 100px;
+    width: 500px;
+    z-index: 10000;
+}
+
 .countryflag{ 
     padding-left: 5px;
 }

@@ -58,9 +58,18 @@ SQL;
 if ($country_id == -1) {
 $connection->query($add);
 } else {
-$connection->query($update);
+    try {
+    if ($connection->query($update)) {
+        http_response_code(200);
+    }
+    else 
+    {
+        http_response_code(401);
+    }
+}
+catch (Exception $e) {
+    http_response_code(401);
+}
 }
 
-// Returns to the list page
-header('Location: index.php?content=list');
 ?>

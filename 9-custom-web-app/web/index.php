@@ -20,14 +20,29 @@ include('library.php');
         <link rel="stylesheet" href="styles.css?v=<?php echo rand() ?>">
 
         <!-- Imports libraries -->
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
+        <script>     
+            function showAlert(type, title, message) {
+                $('#alert').hide();
+                $('#alert').removeClass('alert-success alert-info alert-warning alert-danger').addClass('alert-' + type);
+                $('#alertTitle').text(title);
+                $('#alertMessage').html(message);
+                $('#alert').fadeIn();
+            }
+        </script>
         <title>Countries</title>
     
     </head>
     <body>
+        <!-- Generic alert -->
+        <div id="alert" class="alert alert-position alert-success">
+            <a class="close" onclick="$('#alert').fadeOut()"><span aria-hidden="true">&times;</span></a>
+            <strong id="alertTitle">Success!</strong> <span id="alertMessage">Success message.</span>
+        </div>
+
         <!-- Content of the website -->
         <div class="container">
             <?php 

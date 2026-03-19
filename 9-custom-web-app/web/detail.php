@@ -54,14 +54,14 @@ if ($row["country_flag"] == NULL) {
 <form action="save.php" method="POST">
     <!-- Div for the id -->
     <div class="input-group mb-3" bordered="true">
-        <input type="hidden" class="form-control" name="country_id" value="<?php echo $row["country_id"]; ?>">
+        <input type="hidden" class="form-control" name="country_id" id="idform" value="<?php echo $row["country_id"]; ?>">
     </div>
 
     <!-- Div for the Name and Abbreviation fields -->
     <div class="input-group mb-3" bordered="true">
         <input id="nameform" onchange="isMissing()" type="text" class="form-control" name="country_name" value='<?php echo $row["country_name"]; ?>'>
         <span class="input-group-text">(</span>
-        <input type="text" class="form-control abrev" name="country_abbreviation"  maxlength="2" value='<?php echo $row["country_abbreviation"]; ?>'>
+        <input type="text" class="form-control abrev" id="abrevform" name="country_abbreviation"  maxlength="2" value='<?php echo $row["country_abbreviation"]; ?>'>
         <span class="input-group-text">)</span>
     </div>
 
@@ -70,7 +70,7 @@ if ($row["country_flag"] == NULL) {
         <img height="200" name="country_flag" onerror=this.src='https://png.pngtree.com/png-vector/20230407/ourmid/pngtree-placeholder-line-icon-vector-png-image_6691835.png'; src='<?php echo "$flag_url" ?>'></img>
         <br>
         <label for="country_flag" class="form-label">Flag</label>
-        <input type="text" class="form-control" name="country_flag" value="<?php echo $row["country_flag"]; ?>">
+        <input type="text" class="form-control" id="flagform" name="flagform" value="<?php echo $row["country_flag"]; ?>">
     </div>
 
     <!-- Div for the Continent field -->
@@ -82,13 +82,13 @@ if ($row["country_flag"] == NULL) {
     <!-- Div for the Capital field -->
     <div class="mb-3">
         <label for="country_capital" class="form-label">Capital</label>
-        <input type="text" class="form-control" name="country_capital" value="<?php echo $row["country_capital"]; ?>">
+        <input type="text" class="form-control" id="capitalform" name="country_capital" value="<?php echo $row["country_capital"]; ?>">
     </div>
 
     <!-- Div for the Leader field -->
     <div class="mb-3">
         <label for="country_leader" class="form-label">President</label>
-        <input type="text" class="form-control" name="country_leader" value="<?php echo $row["country_leader"]; ?>">
+        <input type="text" class="form-control" id="leaderform" name="country_leader" value="<?php echo $row["country_leader"]; ?>">
     </div>
 
     <!-- Div for the Independence field -->
@@ -113,7 +113,7 @@ if ($row["country_flag"] == NULL) {
     <p id="save-failed"></p>
 
     <!-- Save Button -->
-    <button id="save-btn" type="sumbit" disabled="true" class="btn btn-primary">Save</button>
+    <button id="save-btn" type="button" disabled="true" onclick="save()" class="btn btn-primary">Save</button>
     <?php 
 
     // JS code to check the required fields and give feedback
@@ -135,6 +135,7 @@ if ($row["country_flag"] == NULL) {
             document.getElementById('save-failed').innerHTML = '';
         }
     }
+    
     // Runs function inorder to check fields when it loads
     isMissing()
     </script>
@@ -153,3 +154,36 @@ if ($row["country_flag"] == NULL) {
     <!--- Back button to return to list page --->
     <a href="index.php?content=list" class="btn btn-secondary" role="button">Back</a>
 </form>
+
+<script>
+
+function save() {
+    var settings = {
+        'async': true,
+        'url': 'save.php?country_id=' + $('#idform').val() +
+        '&country_name=' + $('#nameform').val() +
+        '&country_abbreviation=' + $('#abrevform').val() +
+        '&country_flag=' + $('#flagform').val() +
+        '&country_continent=' + $('#continentform').val() +
+        '&country_capital=' + $('#capitalform').val() +
+        '&country_leader=' + $('#leaderform').val() +
+        '&country_independence_year=' + $('#independenceform').val() + 
+        '&country_area=' + $('#areaform').val() + 
+        '&country_population=' + $('#populationform').val(),
+
+
+
+        'method': 'POST',
+        'headers': {
+            'Cache-Control': 'no-cache'
+        }
+    };
+
+    $.ajax(settings).done(function(response) {        
+        showAlert('success', 'Success!', 'Country saved successfully!');
+    }).fail(function() {
+        showAlert('danger', 'Error!', 'Error while saving country');
+    });
+}
+
+</script>
