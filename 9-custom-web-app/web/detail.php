@@ -18,7 +18,7 @@ $row['country_independence_year'] = 0;
 $row['country_area'] = 0;
 $row['country_population'] = 0;
 
-echo '<h2>New Country</h2>';
+echo '<h2 id="header">New Country</h2>';
 
 } else {
 
@@ -38,7 +38,7 @@ $result = $connection->query($sql);
 $row = $result->fetch_assoc();
 
 // Displays country's name
-echo '<h2>' . $row["country_name"] . '</h2>';
+echo '<h2 id="header">' . $row["country_name"] . '</h2>';
 }
 
 // Check if the country has a flag
@@ -52,9 +52,10 @@ if ($row["country_flag"] == NULL) {
 
 <!-- Start of form -->
 <form action="save.php" method="POST">
+    <!-- <h2 id="header"></h2> -->
     <!-- Div for the id -->
     <div class="input-group mb-3" bordered="true">
-        <input type="hidden" class="form-control" name="country_id" id="idform" value="<?php echo $row["country_id"]; ?>">
+        <input type="txt" class="form-control" name="country_id" id="idform" value="<?php echo $row["country_id"]; ?>">
     </div>
 
     <!-- Div for the Name and Abbreviation fields -->
@@ -179,7 +180,17 @@ function save() {
         }
     };
 
-    $.ajax(settings).done(function(response) {        
+    $.ajax(settings).done(function(response) {     
+        // The response is the id for newly created country
+        // if the id is 0 it is an existing player
+        // only updates id if we don't already have one   
+        console.log(response);
+        console.log($("#idform").val());
+        if (response != "") {
+            $("#idform").val(response);
+        }
+
+        $("#header").html($('#nameform').val());
         showAlert('success', 'Success!', 'Country saved successfully!');
     }).fail(function() {
         showAlert('danger', 'Error!', 'Error while saving country');

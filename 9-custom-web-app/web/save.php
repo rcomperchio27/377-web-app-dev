@@ -57,16 +57,23 @@ SQL;
 // If country doesn't have an id else it will update it
 if ($country_id == -1) {
 $connection->query($add);
+$id = $connection->insert_id;
+print($id);
 } else {
     try {
     if ($connection->query($update)) {
-        http_response_code(200);
+
+        // cant send data and a response code
+        // http_response_code(200);
+        // $id = $connection->insert_id;
+        print($id);
     }
     else 
     {
         http_response_code(401);
     }
 }
+
 catch (Exception $e) {
     http_response_code(401);
 }

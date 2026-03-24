@@ -41,6 +41,41 @@ if (!isset($filtertypes)) {
 <!-- Header showing record count -->
 <h2>Countries <span id="record-count"></span></h2>
 
+<table id="main" class="stripe hover"></table>
+
+<?php 
+
+$sql =<<<SQL
+SELECT *
+FROM country
+ORDER BY country_name
+SQL;
+
+// Runs the query
+$result = $connection->query($sql);
+
+while ($row = $result->fetch_assoc()) {
+    $rows[] = $row;
+}
+
+print('<script>');
+print('var data = ' . json_encode($rows, JSON_PARTIAL_OUTPUT_ON_ERROR) . ';');
+print('</script>');
+
+?>
+
+<script>
+    var dataTable = $('#main').DataTable({
+        data: data,
+        columns: [
+            { data: 'country_name', title: 'Country Name' },
+            { data: 'country_abbreviation', title: 'Country Abrev' },
+            { data: 'country_continent', title: 'Country Continent' },
+            { data: 'country_flag', title: 'Country Flag' }
+        ]});
+</script>
+
+
 <!-- Table showing the countries -->
 <table class="table table-bordered table-hover">
     <thead class="thead-dark">
