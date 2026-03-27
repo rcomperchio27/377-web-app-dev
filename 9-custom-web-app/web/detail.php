@@ -17,6 +17,7 @@ $row['country_leader'] = '';
 $row['country_independence_year'] = 0;
 $row['country_area'] = 0;
 $row['country_population'] = 0;
+$row['country_independence'] = 0;
 
 echo '<h2 id="header">New Country</h2>';
 
@@ -92,10 +93,16 @@ if ($row["country_flag"] == NULL) {
         <input type="text" class="form-control" id="leaderform" name="country_leader" value="<?php echo $row["country_leader"]; ?>">
     </div>
 
-    <!-- Div for the Independence field -->
-    <div class="mb-3">
+    <!-- Div for the Independence year field -->
+    <!-- <div class="mb-3">
         <label for="country_independence_year" class="form-label">Independence</label>
         <input type="number" min="0" step="1" id="independenceform" class="form-control" name="country_independence_year" value="<?php echo $row["country_independence_year"]; ?>">
+    </div> -->
+
+    <!-- Div for the Independence field -->
+    <div class="mb-3">
+        <label for="country_independence" class="form-label">Independence</label>
+        <input id="independenceform" class="form-control" name="country_independence" value="<?php echo $row["country_independence"]; ?>">
     </div>
 
     <!-- Div for the Area field -->
@@ -168,10 +175,10 @@ function save() {
         '&country_continent=' + $('#continentform').val() +
         '&country_capital=' + $('#capitalform').val() +
         '&country_leader=' + $('#leaderform').val() +
-        '&country_independence_year=' + $('#independenceform').val() + 
+        // '&country_independence_year=' + $('#independenceform').val() + 
         '&country_area=' + $('#areaform').val() + 
-        '&country_population=' + $('#populationform').val(),
-
+        '&country_population=' + $('#populationform').val() +
+        '&country_independence=' + $('#independenceform').val(),
 
 
         'method': 'POST',

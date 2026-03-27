@@ -13,7 +13,11 @@ CREATE TABLE `countries`.`country` (
   `country_independence_year` INT NULL,
   `country_area` INT NULL,
   `country_population` INT NULL,
+
   PRIMARY KEY (`country_id`));
+  
+ALTER TABLE `countries`.`country` 
+CHANGE COLUMN `country_independence` `country_independence` DATETIME NULL DEFAULT NULL ;
 
 -- Example
 -- INSERT INTO country (country_name, country_abbreviation, country_continent, country_flag, country_capital, country_leader, country_independence_year, country_area, country_population) VALUES ('United States of America', 'US', 'North America', NULL, 'Washington D.C.', 'President Donald Trump', 1776, 3796742, 331449281);

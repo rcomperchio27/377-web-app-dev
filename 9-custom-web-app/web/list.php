@@ -41,7 +41,7 @@ if (!isset($filtertypes)) {
 <!-- Header showing record count -->
 <h2>Countries <span id="record-count"></span></h2>
 
-<table id="main" class="stripe hover"></table>
+<table id="main" class="stripe hover row-border compact"></table>
 
 <?php 
 
@@ -52,6 +52,7 @@ ORDER BY country_name
 SQL;
 
 // Runs the query
+$row = [];
 $result = $connection->query($sql);
 
 while ($row = $result->fetch_assoc()) {
@@ -68,10 +69,17 @@ print('</script>');
     var dataTable = $('#main').DataTable({
         data: data,
         columns: [
-            { data: 'country_name', title: 'Country Name' },
+            { data: 'country_name', title: 'Country Name', render: function(data, type, row) {
+                return ('<a class="countrylink" href="index.php?content=detail&id=' + row.country_id + '">' + row.country_name + '</a>');
+            } 
+            },
             { data: 'country_abbreviation', title: 'Country Abrev' },
             { data: 'country_continent', title: 'Country Continent' },
-            { data: 'country_flag', title: 'Country Flag' }
+            { data: 'country_flag', title: 'Country Flag' },
+            { data: 'country_independence', title: 'Independence Date', render: function(data, type, row) {
+                var date = new Date(data);
+                return date.toLocaleDateString();
+            }}
         ]});
 </script>
 

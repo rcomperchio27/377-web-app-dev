@@ -19,6 +19,7 @@ $country_leader = $connection->real_escape_string($country_leader);
 $country_independence_year = $connection->real_escape_string($country_independence_year);
 $country_area  = $connection->real_escape_string($country_area);
 $country_population = $connection->real_escape_string($country_population);
+$country_independence = $connection->real_escape_string($country_independence);
 
 // Makes sure the following values can't be NULL
 if ($country_independence_year == NULL) {
@@ -34,9 +35,9 @@ if ($country_population == NULL) {
 // SQL statement for adding a country
 $add =<<<SQL
 INSERT INTO country
-(country_name, country_abbreviation, country_continent, country_flag, country_capital, country_leader, country_independence_year, country_area, country_population)
+(country_name, country_abbreviation, country_continent, country_flag, country_capital, country_leader, country_independence_year, country_area, country_population, country_independence)
 VALUES 
-('$country_name', '$country_abbreviation', '$country_continent', '$country_flag', '$country_capital', '$country_leader', $country_independence_year, $country_area, $country_population)
+('$country_name', '$country_abbreviation', '$country_continent', '$country_flag', '$country_capital', '$country_leader', $country_independence_year, $country_area, $country_population, $country_independence)
 SQL;
 
 // SQL statement for updating a country
@@ -50,7 +51,8 @@ UPDATE country
        country_leader = '$country_leader',
        country_independence_year = $country_independence_year,
        country_area = $country_area,
-       country_population = $country_population
+       country_population = $country_population,
+       country_independence = $country_independence
  WHERE country_id = $country_id
 SQL;
 
