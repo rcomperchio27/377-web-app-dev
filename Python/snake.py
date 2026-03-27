@@ -10,7 +10,7 @@ black = (0, 0, 0)
 red = (213, 50, 80)
 green = (0, 255, 0)
 blue = (50, 153, 213)
- 
+
 dis_width = 600
 dis_height = 400
  
@@ -19,6 +19,8 @@ pygame.display.set_caption('Snake Game by Edureka')
  
 clock = pygame.time.Clock()
  
+highest_score = 0
+
 snake_block = 10
 snake_speed = 15
  
