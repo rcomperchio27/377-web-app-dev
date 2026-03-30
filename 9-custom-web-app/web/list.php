@@ -85,7 +85,7 @@ print('</script>');
 
 
 <!-- Table showing the countries -->
-<table class="table table-bordered table-hover">
+<!-- <table class="table table-bordered table-hover">
     <thead class="thead-dark">
         <tr>    
             <th>
@@ -148,7 +148,7 @@ print('</script>');
         </tr>
     </thead>
     <tbody>
-<?php
+<?php -->
 
 // Goes through list of filters changing them into thier variables for the query
 if (isset($filters)) {
