@@ -74,6 +74,7 @@ def gameLoop():
     snake2_List = []
     Length_of_snake2 = 1
 
+    win_info = []
 
     foodx = round(random.randrange(0, dis_width - snake_block) / 10.0) * 10.0
     foody = round(random.randrange(0, dis_height - snake_block) / 10.0) * 10.0
@@ -81,8 +82,9 @@ def gameLoop():
     while not game_over:
         while game_close == True:
             dis.fill(blue)
-            message("You Lost! Press C-Play Again or Q-Quit", red, dis_height / 3)
-            message("Player1" + win_info[0] + " Won!", red, dis_height / 3 + 40)
+            message(win_info[0] + " Won!", red, dis_height / 3 + 30)
+            message(win_info[1], red, dis_height / 3 + 60)
+            message("Game Over! Press C-Play Again or Q-Quit", red, dis_height / 3)
             Your_score(Length_of_snake1 - 1, Length_of_snake2 - 1)
             pygame.display.update()
  
@@ -133,27 +135,16 @@ def gameLoop():
                         snake2_y1_change = snake_block
                         snake2_x1_change = 0
 
-        # Print statements
-        print("Snake 1")
-        print(snake_List)
-        print("Snake 2")
-        print(snake2_List)
-        print("")
-
-
-        if snake1_x1 >= dis_width or snake1_x1 < 0 or snake1_y1 >= dis_height or snake1_y1 < 0:
+        if snake1_x1 >= dis_width or snake1_x1 < 0 or snake1_y1 >= dis_height or snake1_y1 < 0:    
+            win_info = ["Player 2", "Player 1 hit the edge!"]
             game_close = True
-            win_txt = score_font.render("Player 2 Wins!", True, yellow)
-            win_reason = score_font.render("Player 1 hit the edge", True, yellow)
-
-            dis.blit(win_txt, [(dis_width / 2) - (win_txt.get_width() / 2), dis_width / 2])
-            dis.blit(win_reason, [(dis_width / 2) - (win_txt.get_width() / 2), dis_width / 2])
-
+    
         snake1_x1 += snake1_x1_change
         snake1_y1 += snake1_y1_change
 
         # Snake 2 changes in direction and checks if its off the window
         if snake2_x1 >= dis_width or snake2_x1 < 0 or snake2_y1 >= dis_height or snake2_y1 < 0:
+            win_info = ["Player 1", "Player 2 hit the edge!"]
             game_close = True
 
         snake2_x1 += snake2_x1_change
@@ -176,11 +167,21 @@ def gameLoop():
         # First snake cant hit the second one
         for i in range(len(snake2_List)):
             if snake_Head[0] == snake2_List[i][0] and snake_Head[1] == snake2_List[i][1]:
+                if game_close == False:
+                    win_info = ["Player 2", "Player 1 hit player 2!"]
+                    if snake_Head[0] == snake2_Head[0] and snake_Head[1] == snake2_Head[1]: 
+                        win_info = ["No Player", "Player 1's Head hit player 2's Head!"]
+
                 game_close = True
 
         # Second snake cant hit the first one
         for i in range(len(snake_List)):
             if snake2_Head[0] == snake_List[i][0] and snake2_Head[1] == snake_List[i][1]:
+                if game_close == False:
+                    win_info = ["Player 1", "Player 2 hit player 1!"]
+                    if snake_Head[0] == snake2_Head[0] and snake_Head[1] == snake2_Head[1]: 
+                        win_info = ["No Player", "Player 1's Head hit player 2's Head!"]
+
                 game_close = True
 
 
@@ -189,14 +190,16 @@ def gameLoop():
 
         for x in snake_List[:-1]:
             if x == snake_Head:
+                win_info = ["Player 2", "Player 1 hit themselves!"]
                 game_close = True
 
-        # Second snake cant hit itself
+        # Deletes tail and second snake cant hit itself
         if len(snake2_List) > Length_of_snake2:
             del snake2_List[0]
 
         for x in snake2_List[:-1]:
             if x == snake2_Head:
+                win_info = ["Player 1", "Player 2 hit themselves!"]
                 game_close = True
         
         # added number for snake color
