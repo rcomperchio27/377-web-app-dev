@@ -1,6 +1,6 @@
 """
 - Added a second snake controlled by another player, the first snake is controlled with w, a, s, d, and the second snake is controlled with the arrow keys.
-= Added menu before game starts
+- Added menu before game starts
 - added customizable colors for both snakes while in the menu
 """
 
