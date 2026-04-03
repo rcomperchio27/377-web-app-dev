@@ -1,5 +1,6 @@
 """
-
+Added a second snake controlled by another player, the first snake is controlled with w, a, s, and d, the second snake is controlled with the arrow keys.
+Additionally
 """
 
 import pygame
@@ -51,7 +52,7 @@ def message(msg, color, height):
     dis.blit(mesg, [(dis_width / 2) - (mesg.get_width() / 2), height])
  
  
-def gameLoop():
+def gameLoop(colors):
     game_over = False
     game_close = False
  
@@ -84,7 +85,7 @@ def gameLoop():
             dis.fill(blue)
             message(win_info[0] + " Won!", red, dis_height / 3 + 30)
             message(win_info[1], red, dis_height / 3 + 60)
-            message("Game Over! Press C-Play Again or Q-Quit", red, dis_height / 3)
+            message("Game Over! Press C-Play Again or Q-Quit to the menu", red, dis_height / 3)
             Your_score(Length_of_snake1 - 1, Length_of_snake2 - 1)
             pygame.display.update()
  
@@ -203,10 +204,10 @@ def gameLoop():
                 game_close = True
         
         # added number for snake color
-        our_snake(snake_block, snake_List, color1.get_value())
+        our_snake(snake_block, snake_List, colors[0].get_value())
 
         # Draws the second snake
-        our_snake(snake_block, snake2_List, color2.get_value())
+        our_snake(snake_block, snake2_List, colors[1].get_value())
 
         Your_score(Length_of_snake1 - 1, Length_of_snake2 - 1)
  
@@ -225,22 +226,29 @@ def gameLoop():
 
         clock.tick(snake_speed)
  
-    pygame.quit()
-    quit()
+    
+    Display_menu()
+    # pygame.quit()
+    # quit()
  
 # Add menu
-menu = pygame_menu.Menu('Snake', 600, 400,
-                       theme=pygame_menu.themes.THEME_DARK)
-menu.add.button('Play', gameLoop)
+def Display_menu():
+    colors = []
+    menu = pygame_menu.Menu('Snake', dis_width, dis_height,
+                        theme=pygame_menu.themes.THEME_DARK)
+    menu.add.button('Play', gameLoop(colors), font_size=30)
 
-color1 = menu.add.color_input('Snake color 1: ',
-                     color_type=pygame_menu.widgets.COLORINPUT_TYPE_RGB,
-                     default=(200, 0, 0), font_size=15, margin=(0, 0))
+    color1 = menu.add.color_input('Snake color 1: ',
+                        color_type=pygame_menu.widgets.COLORINPUT_TYPE_RGB,
+                        default=(200, 0, 0), font_size=25, margin=(0, 0))
 
-color2 = menu.add.color_input('Snake color 2: ',
-                     color_type=pygame_menu.widgets.COLORINPUT_TYPE_RGB,
-                     default=(0, 0, 200), font_size=15, margin=(0, 0))
+    color2 = menu.add.color_input('Snake color 2: ',
+                        color_type=pygame_menu.widgets.COLORINPUT_TYPE_RGB,
+                        default=(0, 0, 200), font_size=25, margin=(0, 0))
+    colors = [color1, color2]
+    
+    menu.add.button('Quit', pygame_menu.events.EXIT, font_size=30)
 
-menu.add.button('Quit', pygame_menu.events.EXIT)
+    menu.mainloop(dis)
 
-menu.mainloop(dis)
+Display_menu()
