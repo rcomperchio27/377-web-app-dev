@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 import math
+import xml
+import xml.etree
 import xml.etree.ElementTree as ET
 
 import chess
