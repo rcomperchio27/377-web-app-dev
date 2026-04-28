@@ -9,7 +9,50 @@
     <body onload="brython()">
         <script type="text/python" src="python.py"></script>
         <div id="Board">
-            <svg id="BoardSVG" xmlns="http://www.w3.org/2000/svg" width=800 height=800></svg>
+            <svg id="PiecesSVG" xmlns="http://www.w3.org/2000/svg" width=0 height=0>
+                <rect id="light-square" x="0" y="0" width="80" height="80" fill="#f0d9b5"/>
+                <rect id="dark-square" x="0" y="0" width="80" height="80" fill="#b58863"/>
+                <g id="even-row">
+                    <use href="#light-square" x="0" y="0"/>
+                    <use href="#dark-square" x="80" y="0"/>
+                    <use href="#light-square" x="160" y="0"/>
+                    <use href="#dark-square" x="240" y="0"/>
+                    <use href="#light-square" x="320" y="0"/>
+                    <use href="#dark-square" x="400" y="0"/>
+                    <use href="#light-square" x="480" y="0"/>
+                    <use href="#dark-square" x="560" y="0"/>
+                </g>
+                <g id="odd-row">
+                    <use href="#dark-square" x="0" y="0"/>
+                    <use href="#light-square" x="80" y="0"/>
+                    <use href="#dark-square" x="160" y="0"/>
+                    <use href="#light-square" x="240" y="0"/>
+                    <use href="#dark-square" x="320" y="0"/>
+                    <use href="#light-square" x="400" y="0"/>
+                    <use href="#dark-square" x="480" y="0"/>
+                    <use href="#light-square" x="560" y="0"/>
+                </g>
+
+                <g id="white-rook" transform="scale(2)" class="white rook" fill="#fff" fill-rule="evenodd" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 39h27v-3H9v3zM12 36v-4h21v4H12zM11 14V9h4v2h5V9h5v2h5V9h4v5" stroke-linecap="butt"/><path d="M34 14l-3 3H14l-3-3"/><path d="M31 17v12.5H14V17" stroke-linecap="butt" stroke-linejoin="miter"/><path d="M31 29.5l1.5 2.5h-20l1.5-2.5"/><path d="M11 14h23" fill="none" stroke-linejoin="miter"/></g>
+                <g id="black-rook" class="black rook" fill="#000" fill-rule="evenodd" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 39h27v-3H9v3zM12.5 32l1.5-2.5h17l1.5 2.5h-20zM12 36v-4h21v4H12z" stroke-linecap="butt"/><path d="M14 29.5v-13h17v13H14z" stroke-linecap="butt" stroke-linejoin="miter"/><path d="M14 16.5L11 14h23l-3 2.5H14zM11 14V9h4v2h5V9h5v2h5V9h4v5H11z" stroke-linecap="butt"/><path d="M12 35.5h21M13 31.5h19M14 29.5h17M14 16.5h17M11 14h23" fill="none" stroke="#fff" stroke-width="1" stroke-linejoin="miter"/></g>
+            </svg>    
+            <svg id="BoardSVG" xmlns="http://www.w3.org/2000/svg" width=800 height=800>
+                <g id="squares">
+                    <use href="#even-row" x="0" y="0"/>
+                    <use href="#odd-row" x="0" y="80"/>
+                    <use href="#even-row" x="0" y="160"/>
+                    <use href="#odd-row" x="0" y="240"/>
+                    <use href="#even-row" x="0" y="320"/>
+                    <use href="#odd-row" x="0" y="400"/>
+                    <use href="#even-row" x="0" y="480"/>
+                    <use href="#odd-row" x="0" y="560"/>
+                </g>
+
+                <g id="pieces"> 
+                    <use id="white-rook-1" href="#white-rook" x="0" y="0"/>
+                    <use id="white-rook-2" href="#white-rook" x="720" y="0"/>
+                </g>
+            </svg>
         </div>
     </body>
 </html>

@@ -15,4 +15,4 @@ print(str(board))
 piece = chess.svg.PIECES["R"]
 print(piece)
 
-document["BoardSVG"].attach(html.SVG(str(chess.svg.PIECES["R"]), xmlns="http://www.w3.org/2000/svg"), width=45, height=45)
+document["BoardSVG"].attach( xmlns="http://www.w3.org/2000/svg"), width=50, height=50 ,x=x, y=y)
