@@ -12,7 +12,10 @@ board = chess.Board()
 
 print(str(board))
 
-piece = chess.svg.PIECES["R"]
-print(piece)
+# piece = chess.svg.PIECES["n"]
+# print(piece)
 
-document["BoardSVG"].attach( xmlns="http://www.w3.org/2000/svg"), width=50, height=50 ,x=x, y=y)
+def selectPiece(event):
+    print("Selected piece:", event.target.id)
+
+# document["BoardSVG"].attach(xmlns="http://www.w3.org/2000/svg"), width=50, height=50 ,x=x, y=y)
