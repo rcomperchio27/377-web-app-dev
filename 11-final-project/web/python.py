@@ -17,5 +17,6 @@ print(str(board))
 
 def selectPiece(event):
     print("Selected piece:", event.target.id)
+document
 
 # document["BoardSVG"].attach(xmlns="http://www.w3.org/2000/svg"), width=50, height=50 ,x=x, y=y)
