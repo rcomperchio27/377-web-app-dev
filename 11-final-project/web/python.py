@@ -15,7 +15,8 @@ print(str(board))
 # piece = chess.svg.PIECES["n"]
 # print(piece)
 
-def selectPiece(piece):
+def selectPiece(event):
+    print(event.target.id)
     print("Selected piece")
 
 document["white-rook-1"].bind("click", selectPiece)

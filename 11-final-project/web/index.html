@@ -8,20 +8,11 @@
 
     <body onload="brython()">
         <script type="text/python" src="python.py"></script>
-        <!-- <script type="text/python">
-            from browser import document, html, svg
+        
 
-            import django
-            import chess
-            import chess.svg
-
-            board = chess.Board()
-
-            def selectPiece():
-                print("Selected piece")
-        </script> -->
-        <div id="Board">
-            <svg id="PiecesSVG" xmlns="http://www.""w3.org/2000/svg" width=0 height=0>
+        <!-- Game Area holds the chess board, username, and times -->
+        <div id="Game-Area">
+            <svg id="PiecesSVG" xmlns="http://www.w3.org/2000/svg" width=0 height=0>
                 <rect id="light-square" x="0" y="0" width="80" height="80" fill="#f0d9b5"/>
                 <rect id="dark-square" x="0" y="0" width="80" height="80" fill="#b58863"/>
                 <g id="even-row">
@@ -58,7 +49,11 @@
                 <g id="black-king" transform="scale(2)" class="black king" fill="none" fill-rule="evenodd" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22.5 11.63V6" stroke-linejoin="miter"/><path d="M22.5 25s4.5-7.5 3-10.5c0 0-1-2.5-3-2.5s-3 2.5-3 2.5c-1.5 3 3 10.5 3 10.5" fill="#000" stroke-linecap="butt" stroke-linejoin="miter"/><path d="M11.5 37c5.5 3.5 15.5 3.5 21 0v-7s9-4.5 6-10.5c-4-6.5-13.5-3.5-16 4V27v-3.5c-3.5-7.5-13-10.5-16-4-3 6 5 10 5 10V37z" fill="#000"/><path d="M20 8h5" stroke-linejoin="miter"/><path d="M32 29.5s8.5-4 6.03-9.65C34.15 14 25 18 22.5 24.5l.01 2.1-.01-2.1C20 18 9.906 14 6.997 19.85c-2.497 5.65 4.853 9 4.853 9M11.5 30c5.5-3 15.5-3 21 0m-21 3.5c5.5-3 15.5-3 21 0m-21 3.5c5.5-3 15.5-3 21 0" stroke="#fff"/></g>
                 <g id="black-knight" transform="scale(2)" class="black knight" fill="none" fill-rule="evenodd" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M 22,10 C 32.5,11 38.5,18 38,39 L 15,39 C 15,30 25,32.5 23,18" style="fill:#000000; stroke:#000000;"/><path d="M 24,18 C 24.38,20.91 18.45,25.37 16,27 C 13,29 13.18,31.34 11,31 C 9.958,30.06 12.41,27.96 11,28 C 10,28 11.19,29.23 10,30 C 9,30 5.997,31 6,26 C 6,24 12,14 12,14 C 12,14 13.89,12.1 14,10.5 C 13.27,9.506 13.5,8.5 13.5,7.5 C 14.5,6.5 16.5,10 16.5,10 L 18.5,10 C 18.5,10 19.28,8.008 21,7 C 22,7 22,10 22,10" style="fill:#000000; stroke:#000000;"/><path d="M 9.5 25.5 A 0.5 0.5 0 1 1 8.5,25.5 A 0.5 0.5 0 1 1 9.5 25.5 z" style="fill:#ececec; stroke:#ececec;"/><path d="M 15 15.5 A 0.5 1.5 0 1 1 14,15.5 A 0.5 1.5 0 1 1 15 15.5 z" transform="matrix(0.866,0.5,-0.5,0.866,9.693,-5.173)" style="fill:#ececec; stroke:#ececec;"/><path d="M 24.55,10.4 L 24.1,11.85 L 24.6,12 C 27.75,13 30.25,14.49 32.5,18.75 C 34.75,23.01 35.75,29.06 35.25,39 L 35.2,39.5 L 37.45,39.5 L 37.5,39 C 38,28.94 36.62,22.15 34.25,17.66 C 31.88,13.17 28.46,11.02 25.06,10.5 L 24.55,10.4 z " style="fill:#ececec; stroke:none;"/></g>
             </svg>    
-            <svg id="BoardSVG" xmlns="http://www.w3.org/2000/svg" width=800 height=800>
+            <svg id="BoardSVG" xmlns="http://www.w3.org/2000/svg" width=1200 height=800>
+                <g id="Clock">
+                    <rect id="clock-display" x="0" y="0" rx="15" width="200" height="100" fill="#aaa" stroke="#000" stroke-width="2"/>
+                    <text id="clock-text" x="100" y="55" width="180" height="80" fill="#fff" font-size="70px" font-family="Arial" text-anchor="middle" alignment-baseline="middle">10:00</text>
+                </g>
                 <g id="squares">
                     <use href="#even-row" x="0" y="0"/>
                     <use href="#odd-row" x="0" y="80"/>
@@ -69,7 +64,8 @@
                     <use href="#even-row" x="0" y="480"/>
                     <use href="#odd-row" x="0" y="560"/>
                 </g>
-
+                <use id="white-clock" href="#Clock" x="640" y="540"/>
+                <use id="black-clock" href="#Clock" x="640" y="0"/>
                 <g id="pieces" transform="translate(-16, -16)"> 
                     <use id="white-rook-1" href="#white-rook" x="12" y="570"/>
                     <use id="white-knight-1" href="#white-knight" x="92" y="570"/>
