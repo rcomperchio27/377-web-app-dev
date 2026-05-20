@@ -7,6 +7,7 @@ from browser import document, html, svg
 # import django
 import chess
 import chess.svg
+import time
 
 board = chess.Board()
 
@@ -20,5 +21,6 @@ def selectPiece(event):
     print("Selected piece")
 
 document["white-rook-1"].bind("click", selectPiece)
+document["button"].bind("click", selectPiece)
 
 # document["BoardSVG"].attach(xmlns="http://www.w3.org/2000/svg"), width=50, height=50 ,x=x, y=y)
