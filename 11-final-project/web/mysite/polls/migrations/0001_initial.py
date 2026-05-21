@@ -36,16 +36,20 @@ class Migration(migrations.Migration):
                 ('game_id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('game_board', models.CharField(max_length=200)),
                 ('game_time', models.IntegerField(default=0)),
-                ('user_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='polls.User')),
+                ('user_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='polls.Game_User')),
             ],
         ),
         
         migrations.CreateModel(
-            name='User',
+            name='Game_User',
             fields=[
                 ('user_id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('user_name', models.CharField(max_length=200)),
-                ('user_score', models.IntegerField(default=0)),
+                ('user_games', models.IntegerField(default=0)),
+                ('user_wins', models.IntegerField(default=0)),
+                ('user_losses', models.IntegerField(default=0)),
+                ('user_saved_game', models.IntegerField(default=0)),
+                ('user_current_games', models.IntegerField(default=0)),
             ],
         )
     ]

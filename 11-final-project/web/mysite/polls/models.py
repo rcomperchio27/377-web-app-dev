@@ -6,6 +6,21 @@ from django.utils import timezone
 
 from django.contrib import admin
 
+class Game(models.Model):
+    game_id = models.BigAutoField(primary_key=True)
+    game_board = models.CharField(max_length=200)
+    game_time = models.IntegerField(default=0)
+    user_id = models.ForeignKey('User', on_delete=models.CASCADE)
+
+class User(models.Model):
+    user_id = models.BigAutoField(primary_key=True)
+    user_name = models.CharField(max_length=200)
+    user_games = models.IntegerField(default=0)
+    user_wins = models.IntegerField(default=0)
+    user_losses = models.IntegerField(default=0)
+    user_saved_game = models.IntegerField(default=0)
+    user_current_games = models.IntegerField(default=0)
+
 class Question(models.Model):
     
     question_text = models.CharField(max_length=200)

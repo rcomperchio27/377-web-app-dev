@@ -14,6 +14,6 @@ class Migration(migrations.Migration):
             name='Game',
         ),
         migrations.DeleteModel(
-            name='User',
+            name='Game_User',
         ),
     ]
