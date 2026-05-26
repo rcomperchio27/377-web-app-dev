@@ -2,7 +2,7 @@
 
 <link rel="stylesheet" href="{% static 'polls/style.css' %}">
 
-{% if latest_question_list %}
+<!-- {% if latest_question_list %}
     <ul>
     {% for question in latest_question_list %}
         <li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></li>
@@ -10,29 +10,33 @@
     </ul>
 {% else %}
     <p>No polls are available.</p>
-{% endif %}
+{% endif %} -->
 
 
-{% if latest_question_list %}
+{% if games_list %}
     <ul>
-    {% for question in latest_question_list %}
-        <li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></li>
+    {% for game in games_list %}
+        <li><a href="{% url 'polls:detail' game.game_id %}">{{ game.game_id }}</a></li>
     {% endfor %}
     </ul>
 {% else %}
-    <p>No polls are available.</p>
+    <p>No games are available.</p>
 {% endif %}
+
+{% with currentgame=games_list.0 %}
+    <p>Current Game: {{ currentgame.game_time }}</p>
+{% endwith %}
 
 <html>
     <head>
         <meta charset="utf-8">
-        <script type="text/javascript" src="brython.js"></script>
-        <script type="text/javascript" src="brython_stdlib.js"></script>
+        <script type="text/javascript" src="{% static 'polls/brython.js' %}"></script>
+        <script type="text/javascript" src="{% static 'polls/brython_stdlib.js' %}"></script>
         <title>Chess</title>
     </head>
 
     <body onload="brython()">
-        <script type="text/python" src="python.py"></script>
+        <script type="text/python" src="{% static 'polls/python.py' %}"></script>
         
 
         <!-- Game Area holds the chess board, username, and times -->
@@ -77,7 +81,7 @@
             <svg id="BoardSVG" xmlns="http://www.w3.org/2000/svg" width=1200 height=800>
                 <g id="Clock">
                     <rect id="clock-display" x="0" y="0" rx="15" width="200" height="100" fill="#aaa" stroke="#000" stroke-width="2"/>
-                    <text id="clock-text" x="100" y="55" width="180" height="80" fill="#fff" font-size="70px" font-family="Arial" text-anchor="middle" alignment-baseline="middle">10:00</text>
+                    <text id="clock-text" x="100" y="55" width="180" height="80" fill="#fff" font-size="70px" font-family="Arial" text-anchor="middle" alignment-baseline="middle">{{ currentgame.game_time }}</text>
                 </g>
                 <g id="squares">
                     <use href="#even-row" x="0" y="0"/>
@@ -127,7 +131,5 @@
                 </g>    
             </svg>
         </div>
-        <h1>{{ question.question_text }}</h1>
-
     </body>
 </html>
