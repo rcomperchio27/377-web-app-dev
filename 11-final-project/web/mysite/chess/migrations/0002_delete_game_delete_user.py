@@ -6,7 +6,7 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('polls', '0001_initial'),
+        ('chess', '0001_initial'),
     ]
 
     operations = [
@@ -14,6 +14,6 @@ class Migration(migrations.Migration):
             name='Game',
         ),
         migrations.DeleteModel(
-            name='Game_User',
+            name='User',
         ),
     ]

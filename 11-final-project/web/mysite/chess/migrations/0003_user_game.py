@@ -7,7 +7,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('polls', '0002_delete_game_delete_user'),
+        ('chess', '0002_delete_game_delete_user'),
     ]
 
     operations = [
@@ -29,7 +29,7 @@ class Migration(migrations.Migration):
                 ('game_id', models.BigAutoField(primary_key=True, serialize=False)),
                 ('game_board', models.CharField(max_length=200)),
                 ('game_time', models.IntegerField(default=0)),
-                ('user_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='polls.user')),
+                ('user_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='chess.user')),
             ],
         ),
     ]
