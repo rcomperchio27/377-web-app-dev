@@ -36,7 +36,8 @@ class Migration(migrations.Migration):
                 ('game_id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('game_board', models.CharField(max_length=200)),
                 ('game_time', models.IntegerField(default=0)),
-                ('user_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='chess.User')),
+                ('user1_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='chess.User')),
+                ('user2_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='chess.User')),
             ],
         ),
         
@@ -49,7 +50,8 @@ class Migration(migrations.Migration):
                 ('user_wins', models.IntegerField(default=0)),
                 ('user_losses', models.IntegerField(default=0)),
                 ('user_saved_game', models.IntegerField(default=0)),
-                ('user_current_games', models.IntegerField(default=0)),
+                ('user_current_game', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='chess.Game')),
+                ('user_password', models.CharField(max_length=200)),
             ],
         )
     ]

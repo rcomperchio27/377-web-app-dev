@@ -5,3 +5,38 @@ li a {
 body {
     background: white url("images/background.png") no-repeat;
 }
+
+#nav-bar {
+    background-color: #222222;
+    padding: 15px;
+}
+
+#nav-bar a {
+    border-radius: 10px;
+    padding: 5px;
+    color:#dddddd;
+    font-size: 30px;
+    text-decoration: none;
+    text-align: center;
+    vertical-align: center;
+}
+
+#nav-bar a:hover {
+    background-color: #444444;
+    color:#ffffff;
+}
+
+.square {
+    x: 0;
+    y: 0;
+    width: 80px;
+    height: 80px;
+}
+
+.dark {
+    fill: #b58863;
+}
+
+.light {
+    fill: #f0d9b5;
+}

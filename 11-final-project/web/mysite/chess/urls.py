@@ -5,7 +5,7 @@ from . import views
 app_name = "chess"
 urlpatterns = [
     path("", views.GameIndexView.as_view(), name="index"),
-    path("<int:pk>/", views.GameDetailView.as_view(), name="detail"),
-    path("<int:pk>/results/", views.ResultsView.as_view(), name="results"),
-    path("<int:question_id>/vote/", views.vote, name="vote"),
+    path("<int:pk>/", views.UserDetailView.as_view(), name="detail"),
+    # path("<int:pk>/results/", views.ResultsView.as_view(), name="results"),
+    # path("<int:question_id>/vote/", views.vote, name="vote"),
 ]
