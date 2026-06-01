@@ -15,15 +15,37 @@ print(str(board))
 print(board.legal_moves)
 print(board)
 
-def convertSan(san):
-    print(len(strabc.split(str(san[0]))[0]), san[len(list(san)) - 1])
-    return (len(strabc.split(str(san[0]))[0]), int(san[len(list(san)) - 1]))
+# needs checks, disambiguation, and special moves (castling, en passant, promotion), and checkmate
+def convertSan(move, piece):
+    print(move, piece)
+    if piece == "Knight":
+        return "N" + move
+    elif piece == "Bishop":
+        return "B" + move
+    elif piece == "Rook":
+        return "R" + move
+    elif piece == "Queen":
+        return "Q" + move
+    elif piece == "King":
+        return "K" + move
+    else:
+        return move
 
-def move(san, piece):
-    print(san, piece)
-    board.push_san(san)
+def convertSqr(sqr):
+    print(len(strabc.split(str(sqr[0]))[0]), sqr[len(list(sqr)) - 1])
+    return (len(strabc.split(str(sqr[0]))[0]), 8 - int(sqr[len(list(sqr)) - 1]))
+
+def move(sqr, piece):
+    print(sqr, piece)
+    try:
+        board.push_san(sqr)
+    except ValueError:
+        return
+    
     print(board)
-    mov = convertSan(san)
+    mov = convertSqr(sqr)
+    print("move")
+    print(mov)
     document[piece].attrs["x"] = (int(mov[0]) * 80) + 12
     document[piece].attrs["y"] = (int(mov[1]) * 80) + 12
 
