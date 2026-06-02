@@ -4,8 +4,8 @@ from . import views
 
 app_name = "chess"
 urlpatterns = [
-    path("", views.GameIndexView.as_view(), name="index"),
-    path("<int:pk>/", views.UserDetailView.as_view(), name="detail"),
+    path("<int:pk>/", views.GameIndexView.as_view(), name="index"),
+    path("<int:pk>/detail/", views.UserDetailView.as_view(), name="detail"),
     # path("<int:pk>/results/", views.ResultsView.as_view(), name="results"),
-    # path("<int:question_id>/vote/", views.vote, name="vote"),
+    # path("<int:game_id>/save/", views.save.as_view(), name="save"),
 ]

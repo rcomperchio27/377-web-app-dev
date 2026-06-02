@@ -43,17 +43,11 @@
 
         <p id="selectedPiece"></p>
         <p id="selectedSquare"></p>
-         
+         <p id="Player-turn"></p>
         <!-- Game Area holds the chess board, username, and times -->
         <div id="Game-Area">
             
             <svg id="PiecesSVG" xmlns="http://www.w3.org/2000/svg" width=0 height=0>
-                <g id="Clock">
-                    <rect id="clock-display" x="0" y="0" rx="15" width="200" height="100" fill="#aaa" stroke="#000" stroke-width="2"/>
-                    <text id="clock-text" x="100" y="55" width="180" height="80" fill="#fff" font-size="70px" font-family="Arial" text-anchor="middle" alignment-baseline="middle">
-                        
-                    </text>
-                </g>
                 <rect id="light-square" x="0" y="0" width="80" height="80" fill="#f0d9b5"/>
                 <rect id="dark-square" x="0" y="0" width="80" height="80" fill="#b58863"/>
     
@@ -72,6 +66,7 @@
                 <g id="black-knight" class="piece" transform="scale(2)" class="black knight" fill="none" fill-rule="evenodd" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M 22,10 C 32.5,11 38.5,18 38,39 L 15,39 C 15,30 25,32.5 23,18" style="fill:#000000; stroke:#000000;"/><path d="M 24,18 C 24.38,20.91 18.45,25.37 16,27 C 13,29 13.18,31.34 11,31 C 9.958,30.06 12.41,27.96 11,28 C 10,28 11.19,29.23 10,30 C 9,30 5.997,31 6,26 C 6,24 12,14 12,14 C 12,14 13.89,12.1 14,10.5 C 13.27,9.506 13.5,8.5 13.5,7.5 C 14.5,6.5 16.5,10 16.5,10 L 18.5,10 C 18.5,10 19.28,8.008 21,7 C 22,7 22,10 22,10" style="fill:#000000; stroke:#000000;"/><path d="M 9.5 25.5 A 0.5 0.5 0 1 1 8.5,25.5 A 0.5 0.5 0 1 1 9.5 25.5 z" style="fill:#ececec; stroke:#ececec;"/><path d="M 15 15.5 A 0.5 1.5 0 1 1 14,15.5 A 0.5 1.5 0 1 1 15 15.5 z" transform="matrix(0.866,0.5,-0.5,0.866,9.693,-5.173)" style="fill:#ececec; stroke:#ececec;"/><path d="M 24.55,10.4 L 24.1,11.85 L 24.6,12 C 27.75,13 30.25,14.49 32.5,18.75 C 34.75,23.01 35.75,29.06 35.25,39 L 35.2,39.5 L 37.45,39.5 L 37.5,39 C 38,28.94 36.62,22.15 34.25,17.66 C 31.88,13.17 28.46,11.02 25.06,10.5 L 24.55,10.4 z " style="fill:#ececec; stroke:none;"/></g>
             </svg>    
             <svg id="BoardSVG" xmlns="http://www.w3.org/2000/svg" width=1200 height=800>
+                
                 <use id="a8" href="#light-square" x="0" y="0"/>
                 <use id="b8" href="#dark-square" x="80" y="0"/>
                 <use id="c8" href="#light-square" x="160" y="0"/>
@@ -137,8 +132,21 @@
                 <use id="g1" href="#dark-square" x="480" y="560"/>
                 <use id="h1" href="#light-square" x="560" y="560"/>
 
-                <use id="white-clock" href="#Clock" x="640" y="540"/>
-                <use id="black-clock" href="#Clock" x="640" y="0"/>
+                <!-- <use id="white-clock" href="#Clock" x="640" y="540"/>
+                <use id="black-clock" href="#Clock" x="640" y="0"/> -->
+                <g id="white-clock">
+                    <rect id="white-clock-display" x="640" y="540" rx="15" width="200" height="100" fill="#aaa" stroke="#000" stroke-width="2"/>
+                    <text id="white-clock-text" x="740" y="595" width="180" height="80" fill="#fff" font-size="70px" font-family="Arial" text-anchor="middle" alignment-baseline="middle">
+                        
+                    </text>
+                </g>
+                <g id="black-clock">
+                    <rect id="black-clock-display" x="640" y="0" rx="15" width="200" height="100" fill="#aaa" stroke="#000" stroke-width="2"/>
+                    <text id="black-clock-text" x="740" y="55" width="180" height="80" fill="#fff" font-size="70px" font-family="Arial" text-anchor="middle" alignment-baseline="middle">
+                        
+                    </text>
+                </g>
+            
                 <g id="pieces" transform="translate(-16, -16)"> 
                     <use id="white-rook-1" href="#white-rook" x="12" y="570"/>
                     <use id="white-knight-1" href="#white-knight" x="92" y="570"/>
@@ -177,21 +185,31 @@
             <script type="text/python">
                 from browser import document, html, svg, timer
 
+                def clockDisplay(time):
+                    if (int(time) % 60 == 0):
+                        return str(int(time) // 60) + ":00"
+                    elif (int(time) % 60 < 10):
+                        return str(int(time) // 60) + ":0" + str(int(time) % 60)
+                    else: 
+                        return str(int(time) // 60) + ":" + str(int(time) % 60)
+
+                document["white-clock-text"].html = clockDisplay(document["game_time_1"].html)
+                document["black-clock-text"].html = clockDisplay(document["game_time_1"].html)
+
+                # ticks clock
                 def updatetimer():
+                    clock = document["Player-turn"].html + "-clock-text"
                     game_time = document["game_time_1"].html
                     game_time = str(int(game_time) - 1)
                     if (game_time == 0):
                         print("Game out")
                     document["game_time_1"].html = game_time
-                    if (int(game_time) % 60 == 0):
-                        document["clock-text"].html = str(int(game_time) // 60) + ":00"
-                    elif (int(game_time) % 60 < 10):
-                        document["clock-text"].html = str(int(game_time) // 60) + ":0" + str(int(game_time) % 60)
-                    else: 
-                        document["clock-text"].html = str(int(game_time) // 60) + ":" + str(int(game_time) % 60)
+                    document[clock].html = clockDisplay(game_time)
 
-                # ticks clock
-                timer.set_interval(updatetimer, 1000)
+                def updateGame():
+                    updatetimer()
+
+                timer.set_interval(updateGame, 1000)
 
             </script>
         </div>

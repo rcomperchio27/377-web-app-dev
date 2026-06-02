@@ -3,7 +3,7 @@
 # python -m pip install Django==6.0.4
 # python3 -m pip install svg.py
 
-from browser import document, html, svg, timer
+from browser import document, html, svg, timer, window
 
 import chess
 
@@ -15,42 +15,27 @@ print(str(board))
 print(board.legal_moves)
 print(board)
 
-# needs checks, disambiguation, and special moves (castling, en passant, promotion), and checkmate
-def convertSan(move, piece):
-    print(move, piece)
-    if piece == "Knight":
-        return "N" + move
-    elif piece == "Bishop":
-        return "B" + move
-    elif piece == "Rook":
-        return "R" + move
-    elif piece == "Queen":
-        return "Q" + move
-    elif piece == "King":
-        return "K" + move
-    else:
-        return move
-
 def convertSqr(sqr):
-    print(len(strabc.split(str(sqr[0]))[0]), sqr[len(list(sqr)) - 1])
     return (len(strabc.split(str(sqr[0]))[0]), 8 - int(sqr[len(list(sqr)) - 1]))
 
-def move(sqr, piece):
-    print(sqr, piece)
+def move(sqr, origin, piece):
+    if document["Player-turn"].html == "white":
+        document["Player-turn"].html = "black"
+    else:
+        document["Player-turn"].html = "white"
+    notation = chess.Board().san(chess.Move.from_uci(origin + sqr))
     try:
-        board.push_san(sqr)
+        board.push_san(notation)
+        document["game_board_1"].html = str(board)
     except ValueError:
         return
     
     print(board)
     mov = convertSqr(sqr)
-    print("move")
-    print(mov)
     document[piece].attrs["x"] = (int(mov[0]) * 80) + 12
     document[piece].attrs["y"] = (int(mov[1]) * 80) + 12
 
 def convertSquare(sqr):
-    print(sqr)
     letter = sqr[0]
     num = sqr[1]
     return (len(strabc.split(str(letter))[0])) + ((int(num) - 1) * 8)
@@ -64,13 +49,10 @@ def selectSquare(event):
         return
     piecetype = piece.split(" at ")[0]
     piecetype = piecetype.split(" Piece: ")[1]
-    print("----------------")
-    print(piecetype)
+
     pieceloc = piece.split("at ")[1]
     move_str = pieceloc + sqrloc
-    move(sqrloc, piecetype)
-    print(board)
-    print(piece)
+    move(sqrloc, pieceloc, piecetype)
 
 def selectPiece(event):
     piece = document[event.target.id]
@@ -119,3 +101,9 @@ document["black-queen-1"].bind("click", selectPiece)
 for i in range(8):
     for j in range(8):
         document[str(abc[i]) + str(j + 1)].bind("click", selectSquare)
+
+document["Player-turn"].html = "white"
+
+# Get the full URL as a string
+current_url = window.location.href
+print(current_url)

@@ -42,6 +42,13 @@ class UserDetailView(generic.DetailView):
 
     def get_queryset(self):
         return User.objects.all()
+
+class save(generic.DetailView):
+    model = Game
+    template_name = "chess/detail.html"
+
+    def get_queryset(self):
+        return Game.objects.all()
     
 # class GameResultsView(generic.DetailView):
 #     model = Question
