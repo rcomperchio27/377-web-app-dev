@@ -18,6 +18,7 @@
         <div id="nav-bar">
             <a href="login.html">Login</a>
         </div>
+        <p id="gamenum"></p>
         <!-- Python Script -->
         <script type="text/python" src="{% static 'chess/python.py' %}"></script>
 
@@ -182,8 +183,11 @@
                     <use id="black-pawn-8" href="#black-pawn" x="572" y="90"/>
                 </g>         
             </svg>
+            <a href="save">Save</a>
             <script type="text/python">
                 from browser import document, html, svg, timer
+
+                gamenum = document["gamenum"].html
 
                 def clockDisplay(time):
                     if (int(time) % 60 == 0):
@@ -193,17 +197,17 @@
                     else: 
                         return str(int(time) // 60) + ":" + str(int(time) % 60)
 
-                document["white-clock-text"].html = clockDisplay(document["game_time_1"].html)
-                document["black-clock-text"].html = clockDisplay(document["game_time_1"].html)
+                document["white-clock-text"].html = clockDisplay(document["game_time_" + gamenum].html)
+                document["black-clock-text"].html = clockDisplay(document["game_time_" + gamenum].html)
 
                 # ticks clock
                 def updatetimer():
                     clock = document["Player-turn"].html + "-clock-text"
-                    game_time = document["game_time_1"].html
+                    game_time = document["game_time_" + gamenum].html
                     game_time = str(int(game_time) - 1)
                     if (game_time == 0):
                         print("Game out")
-                    document["game_time_1"].html = game_time
+                    document["game_time_" + gamenum].html = game_time
                     document[clock].html = clockDisplay(game_time)
 
                 def updateGame():

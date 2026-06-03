@@ -26,7 +26,7 @@ def move(sqr, origin, piece):
     notation = chess.Board().san(chess.Move.from_uci(origin + sqr))
     try:
         board.push_san(notation)
-        document["game_board_1"].html = str(board)
+        document["game_board_" + gamenum].html = str(board)
     except ValueError:
         return
     
@@ -74,7 +74,17 @@ def selectPiece(event):
     print(parts)
     print(event.target.id)
 
-document["game_board_1"].html = str(board)
+# Get the full URL as a string
+current_url = window.location.href
+print(current_url)
+
+# ex:
+# http://127.0.0.1:8000/chess/0/
+
+gamenum = str(int(current_url.split("/")[4]) + 1)
+document["gamenum"].html = gamenum
+
+document["game_board_" + gamenum].html = str(board)
 
 for i in range(2):
     document["white-knight-" + str(i + 1)].bind("click", selectPiece)
@@ -103,7 +113,3 @@ for i in range(8):
         document[str(abc[i]) + str(j + 1)].bind("click", selectSquare)
 
 document["Player-turn"].html = "white"
-
-# Get the full URL as a string
-current_url = window.location.href
-print(current_url)

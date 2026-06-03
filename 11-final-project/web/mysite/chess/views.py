@@ -2,7 +2,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from .models import Choice, Question, Game, User
 from django.http import Http404
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, render, redirect
 from django.db.models import F
 from django.urls import reverse
 from django.views import generic
@@ -43,38 +43,57 @@ class UserDetailView(generic.DetailView):
     def get_queryset(self):
         return User.objects.all()
 
-class save(generic.DetailView):
+class save(generic.ListView):
     model = Game
-    template_name = "chess/detail.html"
+    template_name = "chess/save.html"
+    context_object_name = "games_list"
 
     def get_queryset(self):
         return Game.objects.all()
     
-# class GameResultsView(generic.DetailView):
-#     model = Question
-#     template_name = "chess/results.html"
 
-# def vote(request, question_id):
-#     question = get_object_or_404(Question, pk=question_id)
-#     try:
-#         selected_choice = question.choice_set.get(pk=request.POST["choice"])
-#     except (KeyError, Choice.DoesNotExist):
-#         # Redisplay the question voting form.
-#         return render(
-#             request,
-#             "chess/detail.html",
-#             {
-#                 "question": question,
-#                 "error_message": "You didn't select a choice.",
-#             },
-#         )
-#     else:
-#         selected_choice.votes = F("votes") + 1
-#         selected_choice.save()
-#         # Always return an HttpResponseRedirect after successfully dealing
-#         # with POST data. This prevents data from being posted twice if a
-#         # user hits the Back button.
-#         return HttpResponseRedirect(reverse("chess:results", args=(question.id,)))
+from .forms import YourModelForm
+
+def update_data(request, pk):
+    # Fetch the specific row you want to update using its primary key
+    instance = get_object_or_404(Game, pk=pk)
+    print(instance)
+    if request.method == 'POST':
+        # Bind the submitted data and existing instance to the form
+        form = YourModelForm(request.POST, instance=instance)
+        if form.is_valid():
+            form.save() # This updates the existing row in your database
+            return redirect('success_url') # Redirect to a success page
+    else:
+        form = YourModelForm(instance=instance)
+        
+    return render(request, 'chess/save.html', {'form': form})
+
+class GameResultsView(generic.DetailView):
+    model = Question
+    template_name = "chess/results.html"
+
+    def vote(request, question_id):
+        question = get_object_or_404(Question, pk=question_id)
+        try:
+            selected_choice = question.choice_set.get(pk=request.POST["choice"])
+        except (KeyError, Choice.DoesNotExist):
+            # Redisplay the question voting form.
+            return render(
+                request,
+                "chess/save.html",
+                {
+                    "question": question,
+                    "error_message": "You didn't select a choice.",
+                },
+            )
+        else:
+            selected_choice.votes = F("votes") + 1
+            selected_choice.save()
+            # Always return an HttpResponseRedirect after successfully dealing
+            # with POST data. This prevents data from being posted twice if a
+            # user hits the Back button.
+            return HttpResponseRedirect(reverse("chess:results", args=(question.id,)))
 
 # class IndexView(generic.ListView):
 #     template_name = "chess/index.html"
