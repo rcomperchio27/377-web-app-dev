@@ -2,14 +2,14 @@
     {% csrf_token %}
     
     
-
+    {{ game_list.0 }}
     {{ games_list.0.game_time }}
     {{ games_list.0.game_board }}
     <button type="submit" value="update_data">Submit Information</button>
 </form>
 
 
-<form action="{% url 'chess:vote' question.id %}" method="post">
+<form action="{% url 'chess:vote' 0 %}" method="post">
 {% csrf_token %}
 {{ game_list.0.game_id}}
 <fieldset>
