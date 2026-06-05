@@ -18,8 +18,7 @@ class QuestionAdmin(admin.ModelAdmin):
     inlines = [ChoiceInline]
 
 class GameAdmin(admin.ModelAdmin):
-    list_display = ["game_board", "game_time", "user_id"]
-    list_filter = ["game_time"]
+    list_display = ["game_board", "user_id"]
     search_fields = ["game_board"]
 
 class UserAdmin(admin.ModelAdmin):

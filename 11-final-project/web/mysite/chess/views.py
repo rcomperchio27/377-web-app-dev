@@ -75,25 +75,38 @@ class GameResultsView(generic.ListView):
     context_object_name = "games_list"
     template_name = "chess/save.html"
 
-    # game = Game.objects.get(pk=0)
-    # print(game)
-
-    # def get_queryset(self):
-    #     return Game.objects.all()
-    def get_queryset(self):
-        return Game.objects.all()
-    
-
-# If you are making a POST request, 'POST' must be in this list
     from django.views.decorators.http import require_http_methods
 
-    @require_http_methods(["POST"])
-    def vote(request, game_id):
-        if request.method == 'POST':
-            print("POST request received")
-            # Handle post
-            pass
+    def post(self, request, *args, **kwargs):
+        pk = kwargs.get('pk')
+        game_time_white = 1000
+        
+        user = User.objects.get(pk=1)
+        game = Game.objects.get(pk=pk)
+        game_board = request.POST["board"]
+        game_time_white = request.POST["white-time"]
+        game_time_black = request.POST["black-time"]
 
+        # game = Game(game_board=game_board, game_time_white=game_time_white, game_time_black=game_time_black, user_id=user)
+        game.game_board = game_board
+        game.game_time_white = game_time_white
+        game.game_time_black = game_time_black
+        
+        game.save() 
+        return HttpResponse(f"Post ID: {pk}, {game_board} ")
+    
+
+    # If you are making a POST request, 'POST' must be in this list
+
+    # @require_http_methods(["POST"])
+    # def vote(request, pk):
+        
+    #     if request.method == 'POST':
+    #         HttpResponse("POST request received")
+    #         # Handle post
+    #         pass
+
+        # pk = 1
         # try:
         #     game = Game.objects.get(pk=game_id)
         #     print(game)

@@ -7,33 +7,155 @@ from browser import document, html, svg, timer, window
 
 import chess
 
-board = chess.Board()
+# board = chess.Board()
 abc = ["a", "b", "c", "d", "e", "f", "g", "h"]
 strabc = "abcdefgh"
-print(str(board))
 
-print(board.legal_moves)
+# Get the full URL as a string
+current_url = window.location.href
+print(current_url)
+
+# ex:
+# http://127.0.0.1:8000/chess/0/
+
+gamenum = str(int(current_url.split("/")[4]) + 1)
+document["form-action"].action = "/chess/" + gamenum + "/save/"
+document["gamenum"].html = gamenum
+
+# make fen work so you can load games --------------------------------
+fenlist =[]
+fen = document["game_board_" + gamenum].html
+for i in range(len(fen)):
+    if i % 8:
+        
+        fenlist.append("/")
+    fenlist.append(fen[i])
+
+print(fen)
+# ---------------------------------------------------------------------
+board = chess.Board()
+
+document["game_board_" + gamenum].html = str(board)
+
 print(board)
+def resetPieces():
+    for i in range(2):
+        document["white-knight-" + str(i + 1)].attrs["x"] = -100
+        document["white-knight-" + str(i + 1)].attrs["y"] = -100
+    for i in range(2):
+        document["black-knight-" + str(i + 1)].attrs["x"] = -100
+        document["black-knight-" + str(i + 1)].attrs["y"] = -100
+    for i in range(2):
+        document["white-bishop-" + str(i + 1)].attrs["x"] = -100
+        document["white-bishop-" + str(i + 1)].attrs["y"] = -100
+    for i in range(2):
+        document["black-bishop-" + str(i + 1)].attrs["x"] = -100
+        document["black-bishop-" + str(i + 1)].attrs["y"] = -100
+    for i in range(2):
+        document["white-rook-" + str(i + 1)].attrs["x"] = -100
+        document["white-rook-" + str(i + 1)].attrs["y"] = -100
+    for i in range(2):
+        document["black-rook-" + str(i + 1)].attrs["x"] = -100
+        document["black-rook-" + str(i + 1)].attrs["y"] = -100
+    for i in range(8):
+        document["white-pawn-" + str(i + 1)].attrs["x"] = -100
+        document["white-pawn-" + str(i + 1)].attrs["y"] = -100
+    for i in range(8):
+        document["black-pawn-" + str(i + 1)].attrs["x"] = -100
+        document["black-pawn-" + str(i + 1)].attrs["y"] = -100
+             
+    document["white-king-1"].attrs["x"] = -100
+    document["white-king-1"].attrs["y"] = -100
+    document["black-king-1"].attrs["x"] = -100
+    document["black-king-1"].attrs["y"] = -100
+    document["white-queen-1"].attrs["x"] = -100
+    document["white-queen-1"].attrs["y"] = -100
+    document["black-queen-1"].attrs["x"] = -100
+    document["black-queen-1"].attrs["y"] = -100
+
+
+
+def movePiece(piece_id, position):
+    document[piece_id].attrs["x"] = (int(position[0]) * 80) + 12
+    document[piece_id].attrs["y"] = (int(position[1]) * 80) + 12
+
+def displayBoard():
+    resetPieces()
+    tally = {
+        "white-pawns" : 0,
+        "white-rooks" : 0,
+        "white-knights" : 0,
+        "white-bishops" : 0,
+        "white-queens" : 0,
+        "white-kings" : 0,
+        "black-pawns" : 0,
+        "black-rooks" : 0,
+        "black-knights" : 0,
+        "black-bishops" : 0,
+        "black-queens" : 0,
+        "black-kings" : 0
+    }
+    layout = ""
+    displaylayout = document["game_board_" + gamenum].html
+    print(displaylayout)
+    for i in range(len(displaylayout)):
+        if displaylayout[i] != " " and displaylayout[i] != "\n":
+            layout += (displaylayout[i])
+            
+    print(layout)
+
+    for i in range(len(layout)):
+        piece = layout[i]
+        if piece != ".":
+            position = [(i) % 8, (i) // 8]
+            
+            piece_id = ""
+            if piece.isupper():
+                piece_id += "white-"
+            else:
+                piece_id += "black-"
+            if piece.lower() == "r":
+                piece_id += "rook-"
+            if piece.lower() == "n":
+                piece_id += "knight-"
+            if piece.lower() == "b":
+                piece_id += "bishop-"
+            if piece.lower() == "q":
+                piece_id += "queen-"
+            if piece.lower() == "k":
+                piece_id += "king-"
+            if piece.lower() == "p":
+                piece_id += "pawn-"
+
+            tally[piece_id[:-1] + 's'] += 1
+            piece_id += str(tally[piece_id[:-1] + 's'])
+            movePiece(piece_id, position)
 
 def convertSqr(sqr):
     return (len(strabc.split(str(sqr[0]))[0]), 8 - int(sqr[len(list(sqr)) - 1]))
 
 def move(sqr, origin, piece):
-    if document["Player-turn"].html == "white":
-        document["Player-turn"].html = "black"
-    else:
-        document["Player-turn"].html = "white"
-    notation = chess.Board().san(chess.Move.from_uci(origin + sqr))
+    notation = board.san(chess.Move.from_uci(origin + sqr))
+    # print(board.is_capture(chess.Move(convertSquare(origin), convertSquare(sqr), None, None)))
+    print(notation)
     try:
         board.push_san(notation)
         document["game_board_" + gamenum].html = str(board)
+        
+        if document["Player-turn"].html == "white":
+            document["Player-turn"].html = "black"
+        else:
+            document["Player-turn"].html = "white"
+            
     except ValueError:
         return
     
-    print(board)
+    
     mov = convertSqr(sqr)
     document[piece].attrs["x"] = (int(mov[0]) * 80) + 12
     document[piece].attrs["y"] = (int(mov[1]) * 80) + 12
+    print(board)
+    displayBoard()
 
 def convertSquare(sqr):
     letter = sqr[0]
@@ -74,18 +196,6 @@ def selectPiece(event):
     print(parts)
     print(event.target.id)
 
-# Get the full URL as a string
-current_url = window.location.href
-print(current_url)
-
-# ex:
-# http://127.0.0.1:8000/chess/0/
-
-gamenum = str(int(current_url.split("/")[4]) + 1)
-document["gamenum"].html = gamenum
-
-document["game_board_" + gamenum].html = str(board)
-
 for i in range(2):
     document["white-knight-" + str(i + 1)].bind("click", selectPiece)
 for i in range(2):
@@ -113,3 +223,4 @@ for i in range(8):
         document[str(abc[i]) + str(j + 1)].bind("click", selectSquare)
 
 document["Player-turn"].html = "white"
+

@@ -9,7 +9,8 @@ from django.contrib import admin
 class Game(models.Model):
     game_id = models.BigAutoField(primary_key=True)
     game_board = models.CharField(max_length=200)
-    game_time = models.IntegerField(default=0)
+    game_time_white = models.IntegerField(default=0)
+    game_time_black = models.IntegerField(default=0)
     user_id = models.ForeignKey('User', on_delete=models.CASCADE)
 
 class User(models.Model):

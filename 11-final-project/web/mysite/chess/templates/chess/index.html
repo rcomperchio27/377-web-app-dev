@@ -28,18 +28,19 @@
                 <tr>
                     <th id="game_id_{{game.game_id}}">{{game.game_id}}</th>
                     <th id="game_board_{{game.game_id}}">{{game.game_board}}</th>
-                    <th id="game_time_{{game.game_id}}">{{game.game_time}}</th>
+                    <th id="game_time_white_{{game.game_id}}">{{game.game_time_white}}</th>
+                    <th id="game_time_black_{{game.game_id}}">{{game.game_time_black}}</th>
                     <th id="game_user1_{{game.game_id}}">{{game.game_user}}</th>
                 </tr>
             {% endfor %}
-            {% for user in user_list %}
+            <!-- {% for user in user_list %}
                 <tr>
                     <th id="game_id_{{game.game_id}}">{{game.game_id}}</th>
                     <th id="game_board_{{game.game_id}}">{{game.game_board}}</th>
                     <th id="game_time_{{game.game_id}}">{{game.game_time}}</th>
                     <th id="game_user1_{{game.game_id}}">{{game.game_user}}</th>
                 </tr>
-            {% endfor %}
+            {% endfor %} -->
         </table>
 
         <p id="selectedPiece"></p>
@@ -197,25 +198,46 @@
                     else: 
                         return str(int(time) // 60) + ":" + str(int(time) % 60)
 
-                document["white-clock-text"].html = clockDisplay(document["game_time_" + gamenum].html)
-                document["black-clock-text"].html = clockDisplay(document["game_time_" + gamenum].html)
+                document["white-clock-text"].html = clockDisplay(document["game_time_white_" + gamenum].html)
+                document["black-clock-text"].html = clockDisplay(document["game_time_black_" + gamenum].html)
 
                 # ticks clock
-                def updatetimer():
+                def updateTimer():
                     clock = document["Player-turn"].html + "-clock-text"
-                    game_time = document["game_time_" + gamenum].html
+                    game_time = document["game_time_" + document["Player-turn"].html + "_" + gamenum].html
                     game_time = str(int(game_time) - 1)
                     if (game_time == 0):
                         print("Game out")
-                    document["game_time_" + gamenum].html = game_time
+                    document["game_time_" + document["Player-turn"].html + "_" + gamenum].html = game_time
                     document[clock].html = clockDisplay(game_time)
 
+                def updateData():
+                    document["board-field"].value = document["game_board_" + document["gamenum"].html].html
+                    document["black-time-field"].value = document["game_time_black_" + document["gamenum"].html].html
+                    document["white-time-field"].value = document["game_time_white_" + document["gamenum"].html].html
+
                 def updateGame():
-                    updatetimer()
+                    updateTimer()
+                    updateData()
 
                 timer.set_interval(updateGame, 1000)
 
             </script>
         </div>
+        
+        <form id="form-action" action="{% url 'chess:vote' 0 %}" method="POST">
+
+        {% csrf_token %}
+        <label for="board"></label>
+        <input type="text" id="board-field" name="board" value="" required>
+        <br><br>
+        <label for="white-time"></label>
+        <input type="text" id="white-time-field" name="white-time" value="" required>
+        <br><br>
+        <label for="black-time"></label>
+        <input type="text" id="black-time-field" name="black-time" value="" required>
+        <br><br>
+        <input type="submit" value="John Doe">
+        </form>
     </body>
 </html>
