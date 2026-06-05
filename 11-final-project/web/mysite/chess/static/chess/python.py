@@ -138,6 +138,7 @@ def move(sqr, origin, piece):
     notation = board.san(chess.Move.from_uci(origin + sqr))
     # print(board.is_capture(chess.Move(convertSquare(origin), convertSquare(sqr), None, None)))
     print(notation)
+
     try:
         board.push_san(notation)
         document["game_board_" + gamenum].html = str(board)
