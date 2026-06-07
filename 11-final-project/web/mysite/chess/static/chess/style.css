@@ -1,3 +1,7 @@
+body {
+    font-family: Arial;
+}
+
 #nav-bar {
     background-color: #222222;
     padding: 15px;
@@ -11,6 +15,7 @@
     text-decoration: none;
     text-align: center;
     vertical-align: center;
+    margin-right: 50px;
 }
 
 #nav-bar a:hover {
@@ -18,17 +23,35 @@
     color:#ffffff;
 }
 
+.login-form-input {
+    text-align: center;
+}
+/* 
 .square {
     x: 0;
     y: 0;
     width: 80px;
     height: 80px;
-}
+} */
 
-.dark {
+/* .dark {
     fill: #b58863;
 }
 
 .light {
     fill: #f0d9b5;
+} */
+
+
+.light {
+    fill: #a47752;
+}
+
+.dark {
+    fill: #825530;
+}
+
+
+.SVGbackground {
+    fill: #444444;
 }

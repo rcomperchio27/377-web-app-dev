@@ -1,57 +1,55 @@
 {% load static %}
 
-<link rel="stylesheet" href="{% static 'chess/style.css' %}">
+<!-- <link rel="stylesheet" href="{% static 'chess/style.css' %}"> -->
 
 <html>
     <head>
         <meta charset="utf-8">
+        <link rel="stylesheet" href="{% static 'chess/style.css' %}">
+        
         <!-- Brython Scripts -->
         <script type="text/javascript" src="{% static 'chess/brython.js' %}"></script>
         <script type="text/javascript" src="{% static 'chess/brython_stdlib.js' %}"></script>
+        
+              <!-- <link rel="stylesheet" href="{% static 'chess/style.css' %}"> -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        <script type="text/javascript" src="{% static 'chess/style.css' %}"></script>
 
         <title>Chess</title>
     </head>
 
     <body onload="brython()">
         <div id="nav-bar">
-            <a href="login.html">Login</a>
+            <a href="login">Sign In</a>          
         </div>
-        <p id="gamenum"></p>
+        <p id="gamenum" hidden></p>
         <!-- Python Script -->
         <script type="text/python" src="{% static 'chess/python.py' %}"></script>
 
         <!-- Table to hold data because I cant figure out how to have Django and Brython communicate -->
-        <table>
+        <table hidden>
             {% for game in games_list %}
                 <tr>
                     <th id="game_id_{{game.game_id}}">{{game.game_id}}</th>
                     <th id="game_board_{{game.game_id}}">{{game.game_board}}</th>
+                    <th id="game_fen_{{game.game_id}}">{{game.game_board}}</th>
                     <th id="game_time_white_{{game.game_id}}">{{game.game_time_white}}</th>
                     <th id="game_time_black_{{game.game_id}}">{{game.game_time_black}}</th>
-                    <th id="game_user1_{{game.game_id}}">{{game.game_user}}</th>
+                    <th id="game_user_{{game.game_id}}">{{game.user_id.user_name}}</th>
                 </tr>
             {% endfor %}
-            <!-- {% for user in user_list %}
-                <tr>
-                    <th id="game_id_{{game.game_id}}">{{game.game_id}}</th>
-                    <th id="game_board_{{game.game_id}}">{{game.game_board}}</th>
-                    <th id="game_time_{{game.game_id}}">{{game.game_time}}</th>
-                    <th id="game_user1_{{game.game_id}}">{{game.game_user}}</th>
-                </tr>
-            {% endfor %} -->
         </table>
 
-        <p id="selectedPiece"></p>
-        <p id="selectedSquare"></p>
-         <p id="Player-turn"></p>
+        <p id="selectedPiece" hidden></p>
+        <p id="selectedSquare" hidden></p>
+        <p id="Player-turn" hidden></p>
+        <p id="game-state" hidden></p>
+        <p id="fen" hidden></p>
         <!-- Game Area holds the chess board, username, and times -->
+         
         <div id="Game-Area">
-            
             <svg id="PiecesSVG" xmlns="http://www.w3.org/2000/svg" width=0 height=0>
-                <rect id="light-square" x="0" y="0" width="80" height="80" fill="#f0d9b5"/>
-                <rect id="dark-square" x="0" y="0" width="80" height="80" fill="#b58863"/>
+                <rect id="light-square" class="light" x="0" y="0" width="80" height="80"/>
+                <rect id="dark-square" class="dark" x="0" y="0" width="80" height="80"/>
     
                 <g id="white-rook" class="piece" transform="scale(2)" class="white rook" fill="#fff" fill-rule="evenodd" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 39h27v-3H9v3zM12 36v-4h21v4H12zM11 14V9h4v2h5V9h5v2h5V9h4v5" stroke-linecap="butt"/><path d="M34 14l-3 3H14l-3-3"/><path d="M31 17v12.5H14V17" stroke-linecap="butt" stroke-linejoin="miter"/><path d="M31 29.5l1.5 2.5h-20l1.5-2.5"/><path d="M11 14h23" fill="none" stroke-linejoin="miter"/></g>
                 <g id="white-bishop" class="piece" transform="scale(2)" class="white bishop" fill="none" fill-rule="evenodd" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><g fill="#fff" stroke-linecap="butt"><path d="M9 36c3.39-.97 10.11.43 13.5-2 3.39 2.43 10.11 1.03 13.5 2 0 0 1.65.54 3 2-.68.97-1.65.99-3 .5-3.39-.97-10.11.46-13.5-1-3.39 1.46-10.11.03-13.5 1-1.354.49-2.323.47-3-.5 1.354-1.94 3-2 3-2zM15 32c2.5 2.5 12.5 2.5 15 0 .5-1.5 0-2 0-2 0-2.5-2.5-4-2.5-4 5.5-1.5 6-11.5-5-15.5-11 4-10.5 14-5 15.5 0 0-2.5 1.5-2.5 4 0 0-.5.5 0 2zM25 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 1 1 5 0z"/></g><path d="M17.5 26h10M15 30h15m-7.5-14.5v5M20 18h5" stroke-linejoin="miter"/></g>
@@ -67,7 +65,87 @@
                 <g id="black-king" class="piece" transform="scale(2)" class="black king" fill="none" fill-rule="evenodd" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22.5 11.63V6" stroke-linejoin="miter"/><path d="M22.5 25s4.5-7.5 3-10.5c0 0-1-2.5-3-2.5s-3 2.5-3 2.5c-1.5 3 3 10.5 3 10.5" fill="#000" stroke-linecap="butt" stroke-linejoin="miter"/><path d="M11.5 37c5.5 3.5 15.5 3.5 21 0v-7s9-4.5 6-10.5c-4-6.5-13.5-3.5-16 4V27v-3.5c-3.5-7.5-13-10.5-16-4-3 6 5 10 5 10V37z" fill="#000"/><path d="M20 8h5" stroke-linejoin="miter"/><path d="M32 29.5s8.5-4 6.03-9.65C34.15 14 25 18 22.5 24.5l.01 2.1-.01-2.1C20 18 9.906 14 6.997 19.85c-2.497 5.65 4.853 9 4.853 9M11.5 30c5.5-3 15.5-3 21 0m-21 3.5c5.5-3 15.5-3 21 0m-21 3.5c5.5-3 15.5-3 21 0" stroke="#fff"/></g>
                 <g id="black-knight" class="piece" transform="scale(2)" class="black knight" fill="none" fill-rule="evenodd" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M 22,10 C 32.5,11 38.5,18 38,39 L 15,39 C 15,30 25,32.5 23,18" style="fill:#000000; stroke:#000000;"/><path d="M 24,18 C 24.38,20.91 18.45,25.37 16,27 C 13,29 13.18,31.34 11,31 C 9.958,30.06 12.41,27.96 11,28 C 10,28 11.19,29.23 10,30 C 9,30 5.997,31 6,26 C 6,24 12,14 12,14 C 12,14 13.89,12.1 14,10.5 C 13.27,9.506 13.5,8.5 13.5,7.5 C 14.5,6.5 16.5,10 16.5,10 L 18.5,10 C 18.5,10 19.28,8.008 21,7 C 22,7 22,10 22,10" style="fill:#000000; stroke:#000000;"/><path d="M 9.5 25.5 A 0.5 0.5 0 1 1 8.5,25.5 A 0.5 0.5 0 1 1 9.5 25.5 z" style="fill:#ececec; stroke:#ececec;"/><path d="M 15 15.5 A 0.5 1.5 0 1 1 14,15.5 A 0.5 1.5 0 1 1 15 15.5 z" transform="matrix(0.866,0.5,-0.5,0.866,9.693,-5.173)" style="fill:#ececec; stroke:#ececec;"/><path d="M 24.55,10.4 L 24.1,11.85 L 24.6,12 C 27.75,13 30.25,14.49 32.5,18.75 C 34.75,23.01 35.75,29.06 35.25,39 L 35.2,39.5 L 37.45,39.5 L 37.5,39 C 38,28.94 36.62,22.15 34.25,17.66 C 31.88,13.17 28.46,11.02 25.06,10.5 L 24.55,10.4 z " style="fill:#ececec; stroke:none;"/></g>
             </svg>    
-            <svg id="BoardSVG" xmlns="http://www.w3.org/2000/svg" width=1200 height=800>
+            <svg id="TopInforBardSVG" xmlns="http://www.w3.org/2000/svg" width=100% height=50>
+                
+                <rect class="SVGbackground" x="0" y="0" fill="#444444" width="100%" height="50"></rect>
+                <text x="20" y="35" fill="#ffffff" font-size="30px">Guest</text>
+                <g id="black-clock">
+                    <rect id="black-clock-display" x="540" y="0" rx="15" width="100" height="50" fill="#777777" stroke="#333333" stroke-width="2"/>
+                    <text id="black-clock-text" x="590" y="30" width="45" height="20" fill="#fff" font-size="38px" font-family="Arial" text-anchor="middle" alignment-baseline="middle">  
+                    </text>
+                </g>
+                
+            </svg>
+            <svg id="BoardSVG" xmlns="http://www.w3.org/2000/svg" width=100% height=800>
+                <rect class="SVGbackground" x="0" y="0"  fill="#444444"width="100%" height="640"></rect><g id="white-clock">
+                <rect class="SVGbackground" x="0" y="640" fill="#444444" width="100%" height="50"></rect>
+                <text id="username" x="20" y="675" fill="#ffffff" font-size="30px"></text>
+                <g id="white-clock">
+                    <rect id="white-clock-display" x="540" y="640" rx="15" width="100" height="50" fill="#777777" stroke="#333333" stroke-width="2"/>
+                    <text id="white-clock-text" x="590" y="670" width="45" height="20" fill="#fff" font-size="38px" font-family="Arial" text-anchor="middle" alignment-baseline="middle">
+                    </text>
+                </g>
+
+                <g id="sideInfoContainer">
+                    <rect id="InfoContainerBackground" x="700" y="0" rx="15" fill="#999999" width="400" height="50"></rect>
+                    <!-- <rect id="Back-button"  -->
+                </g>
+                <g id="gameCreationArea">
+                    <rect id="gameCreationBackground" x="1200" y="50" rx="15" fill="#999999" width="600" height="500"></rect>
+                    <text id="gameCreationText" x="1500" y="35" fill="#ffffff" font-size="30px" font-family="Arial" text-anchor="middle">Create New Game</text>
+                    <line id="line1" x1="1300" y1="100" x2="1710" y2="100" stroke="#ffffff" stroke-width="5"/>
+                    
+                    <rect id="3-minute" x="1220" y="110" rx="10" fill="#777777" width="160" height="40"/>
+                    <text id="3-minute-text" x="1300" y="135" fill="#fff" font-size="20px" font-family="Arial" text-anchor="middle" alignment-baseline="middle">3 Minute</text>
+                    
+                    <rect id="5-minute" x="1420" y="110" rx="10" fill="#777777" width="160" height="40"/>
+                    <text id="5-minute-text" x="1500" y="135" fill="#fff" font-size="20px" font-family="Arial" text-anchor="middle" alignment-baseline="middle">5 Minute</text>
+
+                    <rect id="10-minute" x="1620" y="110" rx="10" fill="#777777" width="160" height="40"/>
+                    <text id="10-minute-text" x="1700" y="135" fill="#fff" font-size="20px" font-family="Arial" text-anchor="middle" alignment-baseline="middle">10 Minute</text>
+                    
+                    <rect id="15-minute" x="1220" y="170" rx="10" fill="#777777" width="160" height="40"/>
+                    <text id="15-minute-text" x="1300" y="195" fill="#fff" font-size="20px" font-family="Arial" text-anchor="middle" alignment-baseline="middle">15 Minute</text>
+
+                    <rect id="20-minute" x="1420" y="170" rx="10" fill="#777777" width="160" height="40"/>
+                    <text id="20-minute-text" x="1500" y="195" fill="#fff" font-size="20px" font-family="Arial" text-anchor="middle" alignment-baseline="middle">20 Minute</text>
+
+                    <rect id="25-minute" x="1620" y="170" rx="10" fill="#777777" width="160" height="40"/>
+                    <text id="25-minute-text" x="1700" y="195" fill="#fff" font-size="20px" font-family="Arial" text-anchor="middle" alignment-baseline="middle">25 Minute</text>
+
+                    <rect id="30-minute" x="1220" y="230" rx="10" fill="#777777" width="160" height="40"/>
+                    <text id="30-minute-text" x="1300" y="255" fill="#fff" font-size="20px" font-family="Arial" text-anchor="middle" alignment-baseline="middle">30 Minute</text>
+
+                    <rect id="45-minute" x="1420" y="230" rx="10" fill="#777777" width="160" height="40"/>
+                    <text id="45-minute-text" x="1500" y="255" fill="#fff" font-size="20px" font-family="Arial" text-anchor="middle" alignment-baseline="middle">45 Minute</text>
+                
+                    <rect id="60-minute" x="1620" y="230" rx="10" fill="#777777" width="160" height="40"/>
+                    <text id="60-minute-text" x="1700" y="255" fill="#fff" font-size="20px" font-family="Arial" text-anchor="middle" alignment-baseline="middle">60 Minute</text>
+
+                    <text id="Time-Controls" x="1500" y="80" fill="#ffffff" font-size="30px" font-family="Arial" text-anchor="middle" alignment-baseline="middle">Time Controls</text>
+
+                    <line id="line2" x1="1300" y1="320" x2="1710" y2="320" stroke="#ffffff" stroke-width="5"/>
+                    <text id="board-controls" x="1500" y="300" fill="#ffffff" font-size="30px" font-family="Arial" text-anchor="middle" alignment-baseline="middle">Board Controls</text>
+                    
+                    <text id="remove_pieces" x="1300" y="375" fill="#ffffff" font-size="25px" font-family="Arial" text-anchor="middle" alignment-baseline="middle">Remove Pieces</text>
+
+                    <rect id="no_queen" x="1420" y="350" rx="10" fill="#777777" width="160" height="40"/>
+                    <text id="no_queen-text" x="1500" y="375" fill="#fff" font-size="20px" font-family="Arial" text-anchor="middle" alignment-baseline="middle">No Queens</text>
+
+                    <rect id="no_rooks" x="1620" y="350" rx="10" fill="#777777" width="160" height="40"/>
+                    <text id="no_rooks-text" x="1700" y="375" fill="#fff" font-size="20px" font-family="Arial" text-anchor="middle" alignment-baseline="middle">No Rooks</text>
+
+                    <rect id="no_bishops" x="1420" y="410" rx="10" fill="#777777" width="160" height="40"/>
+                    <text id="no_bishops-text" x="1500" y="435" fill="#fff" font-size="20px" font-family="Arial" text-anchor="middle" alignment-baseline="middle">No Bishops</text>
+
+                    <rect id="no_knights" x="1620" y="410" rx="10" fill="#777777" width="160" height="40"/>
+                    <text id="no_knights-text" x="1700" y="435" fill="#fff" font-size="20px" font-family="Arial" text-anchor="middle" alignment-baseline="middle">No Knights</text>
+
+                    <line id="line3" x1="1300" y1="480" x2="1710" y2="480" stroke="#ffffff" stroke-width="5"/>
+                    
+                    <rect id="create-game" x="1220" y="500" rx="10" fill="#777777" width="560" height="40"/>
+                    <text id="create-game-text" x="1500" y="525" fill="#fff" font-size="20px" font-family="Arial" text-anchor="middle" alignment-baseline="middle">Create Game</text>
+                </g>
                 
                 <use id="a8" href="#light-square" x="0" y="0"/>
                 <use id="b8" href="#dark-square" x="80" y="0"/>
@@ -133,21 +211,6 @@
                 <use id="f1" href="#light-square" x="400" y="560"/>
                 <use id="g1" href="#dark-square" x="480" y="560"/>
                 <use id="h1" href="#light-square" x="560" y="560"/>
-
-                <!-- <use id="white-clock" href="#Clock" x="640" y="540"/>
-                <use id="black-clock" href="#Clock" x="640" y="0"/> -->
-                <g id="white-clock">
-                    <rect id="white-clock-display" x="640" y="540" rx="15" width="200" height="100" fill="#aaa" stroke="#000" stroke-width="2"/>
-                    <text id="white-clock-text" x="740" y="595" width="180" height="80" fill="#fff" font-size="70px" font-family="Arial" text-anchor="middle" alignment-baseline="middle">
-                        
-                    </text>
-                </g>
-                <g id="black-clock">
-                    <rect id="black-clock-display" x="640" y="0" rx="15" width="200" height="100" fill="#aaa" stroke="#000" stroke-width="2"/>
-                    <text id="black-clock-text" x="740" y="55" width="180" height="80" fill="#fff" font-size="70px" font-family="Arial" text-anchor="middle" alignment-baseline="middle">
-                        
-                    </text>
-                </g>
             
                 <g id="pieces" transform="translate(-16, -16)"> 
                     <use id="white-rook-1" href="#white-rook" x="12" y="570"/>
@@ -206,37 +269,42 @@
                     clock = document["Player-turn"].html + "-clock-text"
                     game_time = document["game_time_" + document["Player-turn"].html + "_" + gamenum].html
                     game_time = str(int(game_time) - 1)
-                    if (game_time == 0):
-                        print("Game out")
+                    if (int(game_time) <= 0):
+                        if (document["Player-turn"].html == "white"):
+                            document["game-state"].html = "Loss"
+                        else:
+                            document["game-state"].html = "Win"
+
                     document["game_time_" + document["Player-turn"].html + "_" + gamenum].html = game_time
                     document[clock].html = clockDisplay(game_time)
 
                 def updateData():
-                    document["board-field"].value = document["game_board_" + document["gamenum"].html].html
+                    document["board-field"].value = document["fen"].html
                     document["black-time-field"].value = document["game_time_black_" + document["gamenum"].html].html
                     document["white-time-field"].value = document["game_time_white_" + document["gamenum"].html].html
 
                 def updateGame():
                     updateTimer()
                     updateData()
+                    if (document["game-state"].html == "Draw" or document["game-state"].html == "Win" or document["game-state"].html == "Loss"):
+                        timer.clear_interval(updateGame)
+                        
 
                 timer.set_interval(updateGame, 1000)
+                
 
             </script>
         </div>
         
-        <form id="form-action" action="{% url 'chess:vote' 0 %}" method="POST">
+        <form id="form-action" action="{% url 'chess:save' 0 %}" method="POST">
 
         {% csrf_token %}
-        <label for="board"></label>
-        <input type="text" id="board-field" name="board" value="" required>
-        <br><br>
-        <label for="white-time"></label>
-        <input type="text" id="white-time-field" name="white-time" value="" required>
-        <br><br>
-        <label for="black-time"></label>
-        <input type="text" id="black-time-field" name="black-time" value="" required>
-        <br><br>
+        <label for="board"></label hidden>
+        <input type="text" id="board-field" name="board" value="" required hidden>
+        <label for="white-time"></label hidden>
+        <input type="text" id="white-time-field" name="white-time" value="" required hidden>
+        <label for="black-time"></label hidden>
+        <input type="text" id="black-time-field" name="black-time" value="" required hidden>
         <input type="submit" value="Save">
         </form>
     </body>

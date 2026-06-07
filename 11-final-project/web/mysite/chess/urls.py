@@ -6,6 +6,7 @@ app_name = "chess"
 urlpatterns = [
     path("<int:pk>/", views.GameIndexView.as_view(), name="index"),
     path("<int:pk>/detail/", views.UserDetailView.as_view(), name="detail"),
-    path("<int:pk>/save/", views.GameResultsView.as_view(), name="vote"),
-    # path("<int:game_id>/save/", views.save.as_view(), name="save"),
+    path("<int:pk>/save/", views.GameResultsView.as_view(), name="save"),
+    path("<int:pk>/login/", views.UserLoginView.as_view(), name="login"),
+    path("login/", views.UserLoginView.as_view(), name="login"),
 ]

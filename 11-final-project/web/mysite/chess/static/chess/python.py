@@ -7,9 +7,9 @@ from browser import document, html, svg, timer, window
 
 import chess
 
-# board = chess.Board()
 abc = ["a", "b", "c", "d", "e", "f", "g", "h"]
 strabc = "abcdefgh"
+
 
 # Get the full URL as a string
 current_url = window.location.href
@@ -21,23 +21,13 @@ print(current_url)
 gamenum = str(int(current_url.split("/")[4]) + 1)
 document["form-action"].action = "/chess/" + gamenum + "/save/"
 document["gamenum"].html = gamenum
-
-# make fen work so you can load games --------------------------------
-fenlist =[]
-fen = document["game_board_" + gamenum].html
-for i in range(len(fen)):
-    if i % 8:
-        
-        fenlist.append("/")
-    fenlist.append(fen[i])
-
-print(fen)
-# ---------------------------------------------------------------------
-board = chess.Board()
-
+fen = document["game_fen_" + gamenum].html
+if not(fen):
+    board = chess.Board()
+else:
+    board = chess.Board(fen)
 document["game_board_" + gamenum].html = str(board)
 
-print(board)
 def resetPieces():
     for i in range(2):
         document["white-knight-" + str(i + 1)].attrs["x"] = -100
@@ -140,17 +130,33 @@ def move(sqr, origin, piece):
     print(notation)
 
     try:
-        board.push_san(notation)
-        document["game_board_" + gamenum].html = str(board)
+        legalmoves = str(board.legal_moves).split("(")[1].split(")")[0].split(", ")
+        print(legalmoves)
+        move_is_legal = False
+        for i in range(len(legalmoves)):
+            if legalmoves[i] == notation:
+                move_is_legal = True
         
-        if document["Player-turn"].html == "white":
-            document["Player-turn"].html = "black"
-        else:
-            document["Player-turn"].html = "white"
-            
+        if move_is_legal:
+            board.push_san(notation)
+            document["game_board_" + gamenum].html = str(board)
+            document["fen"].html = board.fen()
+            if document["Player-turn"].html == "white":
+                document["Player-turn"].html = "black"
+            else:
+                document["Player-turn"].html = "white"
+
+            pastboards.append(str(board))
+            # Checks for 3 move repetition
+            repetition_count = 0
+            for i in range(len(pastboards)):
+                if pastboards[i] == str(board):
+                    repetition_count += 1
+            if repetition_count >= 3:
+                document["game-state"].html = "Draw"
+
     except ValueError:
         return
-    
     
     mov = convertSqr(sqr)
     document[piece].attrs["x"] = (int(mov[0]) * 80) + 12
@@ -179,7 +185,6 @@ def selectSquare(event):
 
 def selectPiece(event):
     piece = document[event.target.id]
-    print(str(piece))
     parts = str(piece).split(" ")
 
     for i in range(len(parts)):
@@ -192,10 +197,28 @@ def selectPiece(event):
     square = (x - 12) // 80, (y - 10) // 80
     position = str(abc[square[0]]) + str(8 - square[1])
     document["selectedPiece"].html = "Selected Piece: " + event.target.id + " at " + position
-    print(position)
-    print(x, y)
-    print(parts)
-    print(event.target.id)
+    # print(position)
+    # print(x, y)
+    # print(parts)
+    # print(event.target.id)
+
+
+# uses fen to load games --------------------------------
+
+fen = document["game_fen_" + gamenum].html
+if not(fen):
+    board = chess.Board()
+else:
+    board = chess.Board(fen)
+    displayBoard()
+    print(board)
+
+# ---------------------------------------------------------------------
+pastboards = [str(board)]
+
+document["game_board_" + gamenum].html = str(board)
+document["username"].html = document["game_user_" + gamenum].html
+
 
 for i in range(2):
     document["white-knight-" + str(i + 1)].bind("click", selectPiece)
