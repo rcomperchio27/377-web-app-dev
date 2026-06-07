@@ -144,8 +144,10 @@ def move(sqr, origin, piece):
             document["fen"].html = board.fen()
             if document["Player-turn"].html == "white":
                 document["Player-turn"].html = "black"
+                document["PlayerTurnDisplay"].html = "Black's turn to move"
             else:
                 document["Player-turn"].html = "white"
+                document["PlayerTurnDisplay"].html = "White's turn to move"
 
             pastboards.append(str(board))
             # Checks for 3 move repetition
@@ -389,7 +391,13 @@ for i in range(8):
     for j in range(8):
         document[str(abc[i]) + str(j + 1)].bind("click", selectSquare)
 
-document["Player-turn"].html = "white"
+if document["game_fen_" + gamenum].html.split(" ")[1] == "w":
+    document["Player-turn"].html = "white"
+    document["PlayerTurnDisplay"].html = "White's turn to move"
+else:
+    document["Player-turn"].html = "black"
+    document["PlayerTurnDisplay"].html = "Black's turn to move"
+
 
 document["3-minute-text"].bind("click", timeControlSelection)
 document["3-minute"].bind("click", timeControlSelection)
