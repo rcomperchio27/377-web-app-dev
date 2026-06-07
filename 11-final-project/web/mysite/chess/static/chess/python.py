@@ -18,9 +18,10 @@ print(current_url)
 # ex:
 # http://127.0.0.1:8000/chess/0/
 
-gamenum = str(int(current_url.split("/")[4]) + 1)
+gamenum = str(int(current_url.split("/")[4]))
 document["form-action"].action = "/chess/" + gamenum + "/save/"
 document["gamenum"].html = gamenum
+
 fen = document["game_fen_" + gamenum].html
 if not(fen):
     board = chess.Board()
@@ -202,16 +203,158 @@ def selectPiece(event):
     # print(parts)
     # print(event.target.id)
 
+def resetTimeControlButtons():
+    document["3-minute"].attrs["fill"] = "#777777"
+
+    for i in range(6):
+        document[str((i + 1) * 5) + "-minute"].attrs["fill"] = "#777777"
+
+    document["45-minute"].attrs["fill"] = "#777777"
+    document["60-minute"].attrs["fill"] = "#777777"
+
+def timeControlSelection(event):
+    resetTimeControlButtons()
+    if len(event.target.id.split("-")) == 3:
+        textid = event.target.id
+        id = textid.split("-")[0] + "-" + textid.split("-")[1]
+        document[id].attrs["fill"] = "#555555"
+    else:
+        document[event.target.id].attrs["fill"] = "#555555"
+    document["new-game-time-control"].html = event.target.id.split("-")[0]
+
+def boardControlSelection(event):
+    if len(event.target.id.split("-")) == 2:
+        textid = event.target.id
+        id = textid.split("-")[0]
+        print(id)
+        if document[id].attrs["fill"] == "#555555":
+            document[id].attrs["fill"] = "#777777"
+            removelist = document["new-game-board-control"].html.split("-")
+            removeset = set()
+            for i in range(len(removelist)):
+                if removelist[i] != "" and removelist[i] != str(id.split("_")[1]):
+                    removeset.add(removelist[i])
+            document["new-game-board-control"].html = ""
+            for item in removeset:
+                document["new-game-board-control"].html += str(item + '-')
+        else:
+            document[id].attrs["fill"] = "#555555"
+            document["new-game-board-control"].html += id.split("_")[1] + "-"
+    else:
+        id = event.target.id
+        if document[id].attrs["fill"] == "#555555":
+            document[id].attrs["fill"] = "#777777"
+            removelist = document["new-game-board-control"].html.split("-")
+            removeset = set()
+            for i in range(len(removelist)):
+                if removelist[i] != "" and removelist[i] != str(id.split("_")[1]):
+                    removeset.add(removelist[i])
+            document["new-game-board-control"].html = ""
+            for item in removeset:
+                document["new-game-board-control"].html += str(item + '-')
+        else:
+            document[id].attrs["fill"] = "#555555"
+            document["new-game-board-control"].html += id.split("_")[1] + '-'
+
+def createGame(event):
+    if document["new-game-time-control"].html == "":
+        return
+    missingPieces = {
+        "Queen" : False,
+        "Rooks" : False,
+        "Bishops" : False,
+        "Knights" : False
+    }
+
+    remove = document["new-game-board-control"].html.split("-")
+    print(remove)
+    defaultfen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
+    newfen = defaultfen.split(" ")[0]
+    for i in range(len(remove)):
+        if remove[i] == "queen":
+                missingPieces["Queen"] = True
+        if remove[i] == "rooks":
+                missingPieces["Rooks"] = True
+        if remove[i] == "bishops":
+                missingPieces["Bishops"] = True
+        if remove[i] == "knights":
+                missingPieces["Knights"] = True
+
+    if missingPieces["Rooks"] == True:
+        newfen = "1" + newfen[1:]
+        newfen = newfen.split("r")[0] + "1" + newfen.split("r")[1]
+        newfen = newfen[:-1]
+        newfen = newfen.split("R")[0] + "1" + newfen.split("R")[1] + "1"
+    
+    if missingPieces["Knights"] == True:
+        if newfen[0] == "1":
+            newfen = "2" + newfen[2:-2] + "2"
+            newfen = newfen.split("n1")[0] + "2" + newfen.split("n1")[1]
+            newfen = newfen.split("1N")[0] + "2" + newfen.split("1N")[1]
+        else:
+            newfen = newfen.split("n")[0] + "1" + newfen.split("n")[1] + "1" + newfen.split("n")[2]
+            newfen = newfen.split("N")[0] + "1" + newfen.split("N")[1] + "1" + newfen.split("N")[2]
+    if missingPieces["Bishops"] == True:
+        if missingPieces["Knights"] == True:
+            if missingPieces["Rooks"] == True:
+                newfen = "3" + newfen[2:-2] + "3"
+                newfen = newfen.split("b2")[0] + "3" + newfen.split("b2")[1]
+                newfen = newfen.split("2B")[0] + "3" + newfen.split("2B")[1]
+            else:
+                newfen = "r2qk2r/pppppppp/8/8/8/8/PPPPPPPP/R2QK2R"
+
+        else:
+            newfen = newfen.split("b")[0] + "1" + newfen.split("b")[1] + "1" + newfen.split("b")[2]
+            newfen = newfen.split("B")[0] + "1" + newfen.split("B")[1] + "1" + newfen.split("B")[2]
+    
+    if missingPieces["Queen"] == True and missingPieces["Bishops"] == False:
+        newfen = newfen.split("q")[0] + "1" + newfen.split("q")[1]
+        newfen = newfen.split("Q")[0] + "1" + newfen.split("Q")[1]
+
+    
+    if missingPieces["Queen"] == True and missingPieces["Bishops"] == True and missingPieces["Knights"] == False and missingPieces["Rooks"] == True:
+        newfen = "2n1kn2/pppppppp/8/8/8/8/PPPPPPPP/2N1KN2"
+    if missingPieces["Queen"] == True and missingPieces["Bishops"] == True and missingPieces["Knights"] == False and missingPieces["Rooks"] == False:
+        newfen = "r1n1kn1r/pppppppp/8/8/8/8/PPPPPPPP/R1N1KN1R"
+    if missingPieces["Queen"] == True and missingPieces["Bishops"] == True and missingPieces["Knights"] == True and missingPieces["Rooks"] == False:
+        newfen = "r3k2r/pppppppp/8/8/8/8/PPPPPPPP/R3K2R"
+    if missingPieces["Queen"] == True and missingPieces["Bishops"] == True and missingPieces["Knights"] == True and missingPieces["Rooks"] == True:
+            newfen = "4k3/pppppppp/8/8/8/8/PPPPPPPP/4K3"    
+
+    print(missingPieces)
+        
+
+    print(newfen)
+
+
+    print(document["new-game-board-control"].html)
+    print(document["new-game-time-control"].html)
+    document["game-state"].html = "Pause"
+    document["white-time-field"].value = str(int(document["new-game-time-control"].html) * 60)
+    document["black-time-field"].value = str(int(document["new-game-time-control"].html) * 60)
+    document["new-game-field"].value = "true"
+    document["board-field"].value = newfen + " w - - 0 1"
+
+    document["form-action"].submit()
+
+def saveGame(event):
+    document["form-action"].submit()
+    # document[event.target.id].attrs["font-size"] = 40
+    # document[event.target.id].html = "Save"
+    
 
 # uses fen to load games --------------------------------
 
 fen = document["game_fen_" + gamenum].html
+
 if not(fen):
     board = chess.Board()
 else:
     board = chess.Board(fen)
     displayBoard()
     print(board)
+
+document["fen"].html = board.fen()
 
 # ---------------------------------------------------------------------
 pastboards = [str(board)]
@@ -248,3 +391,29 @@ for i in range(8):
 
 document["Player-turn"].html = "white"
 
+document["3-minute-text"].bind("click", timeControlSelection)
+document["3-minute"].bind("click", timeControlSelection)
+
+for i in range(6):
+    document[str((i + 1) * 5) + "-minute-text"].bind("click", timeControlSelection)
+    document[str((i + 1) * 5) + "-minute"].bind("click", timeControlSelection)
+
+
+document["45-minute-text"].bind("click", timeControlSelection)
+document["45-minute"].bind("click", timeControlSelection)
+document["60-minute-text"].bind("click", timeControlSelection)
+document["60-minute"].bind("click", timeControlSelection)
+
+document["no_queen"].bind("click", boardControlSelection)
+document["no_queen-text"].bind("click", boardControlSelection)
+document["no_rooks-text"].bind("click", boardControlSelection)
+document["no_rooks"].bind("click", boardControlSelection)
+document["no_bishops"].bind("click", boardControlSelection)
+document["no_bishops-text"].bind("click", boardControlSelection)
+document["no_knights-text"].bind("click", boardControlSelection)
+document["no_knights"].bind("click", boardControlSelection)
+
+document["create-game"].bind("click", createGame)
+
+document["Save-btn"].bind("click", saveGame)
+document["Save-btn-text"].bind("click", saveGame)

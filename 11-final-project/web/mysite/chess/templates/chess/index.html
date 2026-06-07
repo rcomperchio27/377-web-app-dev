@@ -38,12 +38,14 @@
                 </tr>
             {% endfor %}
         </table>
-
+        <p id="loadedTime" hidden>0</p>
         <p id="selectedPiece" hidden></p>
         <p id="selectedSquare" hidden></p>
         <p id="Player-turn" hidden></p>
         <p id="game-state" hidden></p>
         <p id="fen" hidden></p>
+        <p id="new-game-time-control" hidden></p>
+        <p id="new-game-board-control" hidden></p>
         <!-- Game Area holds the chess board, username, and times -->
          
         <div id="Game-Area">
@@ -87,13 +89,31 @@
                 </g>
 
                 <g id="sideInfoContainer">
-                    <rect id="InfoContainerBackground" x="700" y="0" rx="15" fill="#999999" width="400" height="50"></rect>
-                    <!-- <rect id="Back-button"  -->
+                    <rect id="InfoContainerBackground" x="700" y="50" rx="15" fill="#999999" width="400" height="400"></rect>
+                    <text id="InfocontainerText" x="900" y="35" fill="#ffffff" font-size="30px" font-family="Arial" text-anchor="middle">Game Info</text>
+                    <text id="PlayerTurnDisplay" x="900" y="100" fill="#ffffff" font-size="30px" font-family="Arial" text-anchor="middle">Whites turn to move</text>
+                    <line id="line1" x1="750" y1="120" x2="1050" y2="120" stroke="#ffffff" stroke-width="5"/>
+                    <text id="GameOutcomeDisplay" x="900" y="170" fill="#ffffff" font-size="30px" font-family="Arial" text-anchor="middle">Game is not over yet ...</text>
+                    <text id="PlayerTurnDisplay" x="900" y="100" fill="#ffffff" font-size="30px" font-family="Arial" text-anchor="middle">Whites turn to move</text>
+                    <rect id="Back-button" x="700" y="470" width="80" height="80" fill="#999999" rx="10"></rect>
+                    <rect id="Pause-button" x="800" y="470" width="200" height="80" fill="#999999" rx="10"></rect>
+                    <rect id="Forward-button" x="1020" y="470" width="80" height="80" fill="#999999" rx="10"></rect>
+                    <text id="Back-text" x="740" y="520" fill="#ffffff" font-size="100px" font-family="Arial" text-anchor="middle" alignment-baseline="middle"><</text>
+                    <text id="Forward-text" x="1060" y="520" fill="#ffffff" font-size="100px" font-family="Arial" text-anchor="middle" alignment-baseline="middle">></text>
+                    <text id="Pause-text" x="900" y="510" fill="#ffffff" font-size="60px" font-family="Arial" text-anchor="middle" alignment-baseline="middle">||</text>
+                    <text id="WhitesStatsText" x="900" y="230" fill="#ffffff" font-size="30px" font-family="Arial" text-anchor="middle" alignment-baseline="middle">Whites Stats</text>
+                    <line id="line2" x1="750" y1="200" x2="1050" y2="200" stroke="#ffffff" stroke-width="5"/>
+                    <text id="WhitesWinsText" x="900" y="280" fill="#ffffff" font-size="30px" font-family="Arial" text-anchor="middle" alignment-baseline="middle">Wins: 1</text>
+                    <text id="WhitesLossesText" x="900" y="340" fill="#ffffff" font-size="30px" font-family="Arial" text-anchor="middle" alignment-baseline="middle">Losses: 2</text>
+                    <text id="WhitesDrawsText" x="900" y="400" fill="#ffffff" font-size="30px" font-family="Arial" text-anchor="middle" alignment-baseline="middle">Draws: 4</text>
+
+                    <rect id="Save-btn" x="720" y="580" width="200" height="80" fill="#999999" rx="10"></rect>
+                    <text id="Save-btn-text" x="820" y="620" fill="#ffffff" font-size="30px" font-family="Arial" text-anchor="middle" alignment-baseline="middle">Game Saved!</text>
+
                 </g>
                 <g id="gameCreationArea">
                     <rect id="gameCreationBackground" x="1200" y="50" rx="15" fill="#999999" width="600" height="500"></rect>
                     <text id="gameCreationText" x="1500" y="35" fill="#ffffff" font-size="30px" font-family="Arial" text-anchor="middle">Create New Game</text>
-                    <line id="line1" x1="1300" y1="100" x2="1710" y2="100" stroke="#ffffff" stroke-width="5"/>
                     
                     <rect id="3-minute" x="1220" y="110" rx="10" fill="#777777" width="160" height="40"/>
                     <text id="3-minute-text" x="1300" y="135" fill="#fff" font-size="20px" font-family="Arial" text-anchor="middle" alignment-baseline="middle">3 Minute</text>
@@ -124,10 +144,11 @@
 
                     <text id="Time-Controls" x="1500" y="80" fill="#ffffff" font-size="30px" font-family="Arial" text-anchor="middle" alignment-baseline="middle">Time Controls</text>
 
-                    <line id="line2" x1="1300" y1="320" x2="1710" y2="320" stroke="#ffffff" stroke-width="5"/>
+                    <!-- <line id="line2" x1="1300" y1="320" x2="1710" y2="320" stroke="#ffffff" stroke-width="5"/> -->
                     <text id="board-controls" x="1500" y="300" fill="#ffffff" font-size="30px" font-family="Arial" text-anchor="middle" alignment-baseline="middle">Board Controls</text>
                     
                     <text id="remove_pieces" x="1300" y="375" fill="#ffffff" font-size="25px" font-family="Arial" text-anchor="middle" alignment-baseline="middle">Remove Pieces</text>
+                    <text id="remove_pieces_extra" x="1315" y="400" fill="#ffffff" font-size="15px" font-family="Arial" text-anchor="middle" alignment-baseline="middle">leave blank for the default board</text>
 
                     <rect id="no_queen" x="1420" y="350" rx="10" fill="#777777" width="160" height="40"/>
                     <text id="no_queen-text" x="1500" y="375" fill="#fff" font-size="20px" font-family="Arial" text-anchor="middle" alignment-baseline="middle">No Queens</text>
@@ -141,7 +162,7 @@
                     <rect id="no_knights" x="1620" y="410" rx="10" fill="#777777" width="160" height="40"/>
                     <text id="no_knights-text" x="1700" y="435" fill="#fff" font-size="20px" font-family="Arial" text-anchor="middle" alignment-baseline="middle">No Knights</text>
 
-                    <line id="line3" x1="1300" y1="480" x2="1710" y2="480" stroke="#ffffff" stroke-width="5"/>
+                    <!-- <line id="line3" x1="1300" y1="480" x2="1710" y2="480" stroke="#ffffff" stroke-width="5"/> -->
                     
                     <rect id="create-game" x="1220" y="500" rx="10" fill="#777777" width="560" height="40"/>
                     <text id="create-game-text" x="1500" y="525" fill="#fff" font-size="20px" font-family="Arial" text-anchor="middle" alignment-baseline="middle">Create Game</text>
@@ -247,7 +268,6 @@
                     <use id="black-pawn-8" href="#black-pawn" x="572" y="90"/>
                 </g>         
             </svg>
-            <!-- <a href="save">Save</a> -->
             <script type="text/python">
                 from browser import document, html, svg, timer
 
@@ -266,6 +286,7 @@
 
                 # ticks clock
                 def updateTimer():
+                    loadedtime = int(document["loadedTime"].html) + 1
                     clock = document["Player-turn"].html + "-clock-text"
                     game_time = document["game_time_" + document["Player-turn"].html + "_" + gamenum].html
                     game_time = str(int(game_time) - 1)
@@ -277,20 +298,28 @@
 
                     document["game_time_" + document["Player-turn"].html + "_" + gamenum].html = game_time
                     document[clock].html = clockDisplay(game_time)
+                    document["loadedTime"].html = loadedtime
+                    if loadedtime >= 2:
+                        document["Save-btn-text"].attrs["font-size"] = 40
+                        document["Save-btn-text"].html = "Save"
+    
 
                 def updateData():
                     document["board-field"].value = document["fen"].html
                     document["black-time-field"].value = document["game_time_black_" + document["gamenum"].html].html
                     document["white-time-field"].value = document["game_time_white_" + document["gamenum"].html].html
+                    document["user-field"].value = document["game_user_" + document["gamenum"].html].html
 
                 def updateGame():
+                    if (document["game-state"].html == "Draw" or document["game-state"].html == "Win" or document["game-state"].html == "Loss" or document["game-state"].html == "Pause"):
+                            timer.clear_interval(gametimer)
                     updateTimer()
                     updateData()
-                    if (document["game-state"].html == "Draw" or document["game-state"].html == "Win" or document["game-state"].html == "Loss"):
-                        timer.clear_interval(updateGame)
+                    if (document["game-state"].html == "Draw" or document["game-state"].html == "Win" or document["game-state"].html == "Loss" or document["game-state"].html == "Pause"):
+                        timer.clear_interval(gametimer)
                         
 
-                timer.set_interval(updateGame, 1000)
+                gametimer = timer.set_interval(updateGame, 1000)
                 
 
             </script>
@@ -299,13 +328,12 @@
         <form id="form-action" action="{% url 'chess:save' 0 %}" method="POST">
 
         {% csrf_token %}
-        <label for="board"></label hidden>
-        <input type="text" id="board-field" name="board" value="" required hidden>
-        <label for="white-time"></label hidden>
-        <input type="text" id="white-time-field" name="white-time" value="" required hidden>
-        <label for="black-time"></label hidden>
-        <input type="text" id="black-time-field" name="black-time" value="" required hidden>
-        <input type="submit" value="Save">
+        <input type="text" id="board-field" name="board" value="" required >
+        <input type="text" id="white-time-field" name="white-time" value="" required >
+        <input type="text" id="black-time-field" name="black-time" value="" required >
+        <input type="text" id="new-game-field" name="new-game" value="false" required >
+        <input type="text" id="user-field" name="user" value="" required >
+        <input id="save-button" type="submit" value="Save">
         </form>
     </body>
 </html>

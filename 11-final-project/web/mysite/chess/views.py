@@ -59,21 +59,32 @@ class GameResultsView(generic.ListView):
     from django.views.decorators.http import require_http_methods
 
     def post(self, request, *args, **kwargs):
-        pk = kwargs.get('pk')
-        
-        user = User.objects.get(pk=1)
-        game = Game.objects.get(pk=pk)
-        game_board = request.POST["board"]
-        game_time_white = request.POST["white-time"]
-        game_time_black = request.POST["black-time"]
-
-        # game = Game(game_board=game_board, game_time_white=game_time_white, game_time_black=game_time_black, user_id=user)
-        game.game_board = game_board
-        game.game_time_white = game_time_white
-        game.game_time_black = game_time_black
-        
-        game.save() 
-        return HttpResponse(f"Post ID: {pk}, {game_board} ")
+        if request.POST["new-game"] == "false":
+            pk = kwargs.get('pk')
+            
+            game = Game.objects.get(pk=pk)
+            user = User.objects.get(user_name=request.POST["user"])
+            game_board = request.POST["board"]
+            game_time_white = request.POST["white-time"]
+            game_time_black = request.POST["black-time"]
+            game_id = pk - 1
+            game.game_board = game_board
+            game.game_time_white = game_time_white
+            game.game_time_black = game_time_black
+            id = game.game_id
+            
+            game.save() 
+            return redirect(f"/chess/{id}/")
+            # return HttpResponse(f"Post ID: {pk}, {game_board} ")
+        else:
+            user = User.objects.get(user_name=request.POST["user"])
+            game_board = request.POST["board"]
+            game_time_white = request.POST["white-time"]
+            game_time_black = request.POST["black-time"]
+            game = Game(game_board=game_board, game_time_white=game_time_white, game_time_black=game_time_black, user_id=user)
+            game.save()
+            id = game.game_id
+            return redirect(f"/chess/{id}/")
     
 class UserLoginView(generic.ListView):
 
