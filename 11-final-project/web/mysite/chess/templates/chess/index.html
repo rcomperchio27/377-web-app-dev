@@ -35,6 +35,9 @@
                     <th id="game_time_white_{{game.game_id}}">{{game.game_time_white}}</th>
                     <th id="game_time_black_{{game.game_id}}">{{game.game_time_black}}</th>
                     <th id="game_user_{{game.game_id}}">{{game.user_id.user_name}}</th>
+                    <th id="game_user_wins_{{game.game_id}}">{{game.user_id.user_wins}}</th>
+                    <th id="game_user_losses_{{game.game_id}}">{{game.user_id.user_losses}}</th>
+                    <th id="game_user_games_played_{{game.game_id}}">{{game.user_id.user_games}}</th>
                 </tr>
             {% endfor %}
         </table>
@@ -46,6 +49,7 @@
         <p id="fen" hidden></p>
         <p id="new-game-time-control" hidden></p>
         <p id="new-game-board-control" hidden></p>
+        <p id="pastboards"></p>
         <!-- Game Area holds the chess board, username, and times -->
          
         <div id="Game-Area">
@@ -308,6 +312,10 @@
                     document["black-time-field"].value = document["game_time_black_" + document["gamenum"].html].html
                     document["white-time-field"].value = document["game_time_white_" + document["gamenum"].html].html
                     document["user-field"].value = document["game_user_" + document["gamenum"].html].html
+                    document["WhitesWinsText"].html = "Wins: " + str(document["game_user_wins_" + document["gamenum"].html].html)
+                    document["WhitesLossesText"].html = "Losses: " + str(document["game_user_losses_" + document["gamenum"].html].html)
+                    document["WhitesDrawsText"].html = "Draws: " + str(int(document["game_user_games_played_" + document["gamenum"].html].html) - int(document["game_user_losses_" + document["gamenum"].html].html) + int(document["game_user_wins_" + document["gamenum"].html].html))
+
 
                 def updateGame():
                     if (document["game-state"].html == "Draw" or document["game-state"].html == "Win" or document["game-state"].html == "Loss" or document["game-state"].html == "Pause"):

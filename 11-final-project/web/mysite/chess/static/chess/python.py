@@ -29,6 +29,9 @@ else:
     board = chess.Board(fen)
 document["game_board_" + gamenum].html = str(board)
 
+def checkmate(player):
+    print(player)
+
 def resetPieces():
     for i in range(2):
         document["white-knight-" + str(i + 1)].attrs["x"] = -100
@@ -125,6 +128,13 @@ def displayBoard():
 def convertSqr(sqr):
     return (len(strabc.split(str(sqr[0]))[0]), 8 - int(sqr[len(list(sqr)) - 1]))
 
+def backbutton(event):
+    pastboards = document["pastboards"].html.split(", ")
+    print(pastboards)
+    board = chess.Board(pastboards[len(pastboards) - 2])
+    document["game_board_" + gamenum].html = board
+    displayBoard()
+
 def move(sqr, origin, piece):
     notation = board.san(chess.Move.from_uci(origin + sqr))
     # print(board.is_capture(chess.Move(convertSquare(origin), convertSquare(sqr), None, None)))
@@ -140,6 +150,11 @@ def move(sqr, origin, piece):
         
         if move_is_legal:
             board.push_san(notation)
+
+            if board.is_checkmate(): 
+                checkmate(document["Player-turn"].html)
+
+
             document["game_board_" + gamenum].html = str(board)
             document["fen"].html = board.fen()
             if document["Player-turn"].html == "white":
@@ -150,6 +165,7 @@ def move(sqr, origin, piece):
                 document["PlayerTurnDisplay"].html = "White's turn to move"
 
             pastboards.append(str(board))
+            document["pastboards"].html += str(board.fen()) + ", "
             # Checks for 3 move repetition
             repetition_count = 0
             for i in range(len(pastboards)):
@@ -425,3 +441,6 @@ document["create-game"].bind("click", createGame)
 
 document["Save-btn"].bind("click", saveGame)
 document["Save-btn-text"].bind("click", saveGame)
+
+document["Back-button"].bind("click", backbutton)
+document["pastboards"].html = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
