@@ -442,5 +442,5 @@ document["create-game"].bind("click", createGame)
 document["Save-btn"].bind("click", saveGame)
 document["Save-btn-text"].bind("click", saveGame)
 
-document["Back-button"].bind("click", backbutton)
-document["pastboards"].html = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
+# document["Back-button"].bind("click", backbutton)
+# document["pastboards"].html = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"

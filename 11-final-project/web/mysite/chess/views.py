@@ -7,6 +7,8 @@ from django.db.models import F
 from django.urls import reverse
 from django.views import generic
 from django.utils import timezone
+from django.contrib.auth.hashers import make_password
+from django.contrib.auth.hashers import check_password
 
 class GameIndexView(generic.ListView):
     template_name = "chess/index.html"
@@ -95,19 +97,30 @@ class UserLoginView(generic.ListView):
     from django.views.decorators.http import require_http_methods
 
     def post(self, request, *args, **kwargs):
-        pk = kwargs.get('pk')
-        
-        user = User.objects.get(pk=pk)
-        list_display = ["user_name", "user_games", "user_wins", "user_losses", "user_saved_game", "user_current_games"]
-        user_name = request.POST["user-name"]
-        game_time_white = request.POST["white-time"]
-        game_time_black = request.POST["black-time"]
-
-        # game = Game(game_board=game_board, game_time_white=game_time_white, game_time_black=game_time_black, user_id=user)
-        game.game_board = game_board
-        game.game_time_white = game_time_white
-        game.game_time_black = game_time_black
-        
-        game.save() 
-        return HttpResponse(f"Post ID: {pk}, {game_board} ")
+        # list_display = ["user_name", "user_games", "user_wins", "user_losses", "user_saved_game", "user_current_games"]
+        # user = User.objects.get(pk=pk)
+        user_name = request.POST["name"]
+        login = False
+        try:
+            User.objects.get(user_name=user_name)
+            user_exist = True
+        except:
+            user_exist = False
+        if user_exist == True:
+            user = User.objects.get(user_name=user_name)
+            if check_password(str(request.POST["password"]), user.user_password):
+                pk = user.pk
+                
+                id = user.user_id
+                return redirect(f"/chess/{id}/login")
+        else:
+            user_password = str(request.POST["password"])
+                
+            hashed = make_password(user_password)
+            user = User(user_name=user_name, user_password=hashed)
+            game = Game(game_board="rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1", game_time_white=600, game_time_black=600, user_id=user)
+            user.save() 
+            game.save()
+            id = game.game_id
+            return redirect(f"/chess/{id}/")
     

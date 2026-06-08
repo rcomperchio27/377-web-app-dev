@@ -16,6 +16,7 @@ class Game(models.Model):
 class User(models.Model):
     user_id = models.BigAutoField(primary_key=True)
     user_name = models.CharField(max_length=200)
+    user_password = models.CharField(max_length=200)
     user_games = models.IntegerField(default=0)
     user_wins = models.IntegerField(default=0)
     user_losses = models.IntegerField(default=0)

@@ -13,53 +13,44 @@
         <title>Chess</title>
     </head>
 
-    <body onload="brython()">
+    <body class="body" onload="brython()">
+
         <div id="nav-bar">
-            <a href="login.html">Login</a>
+            <p>Login/Sign up</p>
         </div>
         <!-- Python Script -->
-        <!-- <script type="text/python" src="{% static 'chess/python.py' %}"></script> -->
+        <script type="text/python" src="{% static 'chess/login.py' %}"></script>
 
         <!-- Table to hold data because I cant figure out how to have Django and Brython communicate -->
-        <table>
+        <table hidden>
             {% for user in user_list %}
                 <tr>
                     <th id="user_id">{{user.user_id}}</th>
                     <th id="user_name">{{user.user_name}}</th>
-                    <!-- <th id="game_tim">{{user.game_time}}</th>
-                    <th id="game_use">{{user.game_user}}</th> -->
                 </tr>
             {% endfor %}
         </table>
-        
-        <form id="form-action" action="{% url 'chess:login' 0 %}" method="POST">
+        <div id="Sign-up">
+            <div id="form-container">
+                <form id="form-action" action="{% url 'chess:login' 0 %}" method="POST">
 
-        {% csrf_token %}
-        <br></br>
-        <label for="name">User Name</label>
-        <br></br>
-        <input type="text" id="name-field" class="login-form-input" name="name" value="" required>
-        <br><br>
-        <label for="password">Password</label>
-        <br></br>
-        <input type="text" id="password-field" class="login-form-input" name="password" value="" required>
-        <br><br>
-        <!-- <label for="name"></label>
-        <input type="text" id="name-field" class="login-form-input" name="name" value="" required>
-        <br><br>
-        <label for="total-games"></label>
-        <input type="text" id=total-games-field" class="login-form-input" name="total-games" value="" required>
-        <br><br>
-        <label for="wins"></label>
-        <input type="text" id="win-field" class="login-form-input" name="wins" value="" required>
-        <br></br>
-        <label for="losses"></label>
-        <input type="text" id="losses-field" class="login-form-input" name="losses" value="" required>
-        <br><br>
-        <label for="saved-game"></label>
-        <input type="text" id=saved-game-field" class="login-form-input" name="saved-game" value="" required>
-        <br><br> -->
-        <input type="submit" value="Sign up">
-        </form>
+                    {% csrf_token %}
+                    <br></br>
+                    <label for="name">User Name</label>
+                    <br></br>
+                    <input type="text" id="name-field" class="login-form-input" name="name" placeholder="John Doe" value="" required>
+                    <br></br>
+                    
+                    <label for="password">Password</label>
+                    <br></br>
+                    <input type="password" id="password-field" class="login-form-input" name="password" value="" required>
+                    <br></br>
+                    <input class="round" type="submit" value="Sign up">
+                </form>
+            </div>
+            <div id="game-select-container" hidden>
+                
+            </div>
+        </div>
     </body>
 </html>

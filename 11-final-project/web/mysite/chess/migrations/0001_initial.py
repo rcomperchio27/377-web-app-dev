@@ -51,7 +51,7 @@ class Migration(migrations.Migration):
                 ('user_losses', models.IntegerField(default=0)),
                 ('user_saved_game', models.IntegerField(default=0)),
                 ('user_current_game', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='chess.Game')),
-                ('user_password', models.CharField(max_length=200)),
+                ('user_password', models.CharField(max_length=500)),
             ],
         )
     ]

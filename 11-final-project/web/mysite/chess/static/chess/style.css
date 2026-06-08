@@ -1,6 +1,46 @@
-body {
+.body {
     font-family: Arial;
     background-color: #444444;
+}
+
+#Sign-up {
+    margin: 0;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#form-container {
+    width: 1400px;
+    height: 800px;
+    background-color: #555555;
+    border-radius: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 30px;
+}
+
+#game-select-container {
+    width: 1400px;
+    height: 800px;
+    background-color: #555555;
+    border-radius: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 30px;
+}
+
+#form-container input{
+    margin-left: 20px;
+}
+
+#form-container label{
+    margin-left: 20px;
 }
 
 #nav-bar {
@@ -14,7 +54,15 @@ body {
     color:#dddddd;
     font-size: 30px;
     text-decoration: none;
-    text-align: center;
+    vertical-align: center;
+    margin-right: 50px;
+}
+
+#nav-bar p {
+    padding: 5px;
+    color:#dddddd;
+    font-size: 30px;
+    text-decoration: none;
     vertical-align: center;
     margin-right: 50px;
 }
@@ -23,6 +71,11 @@ body {
     background-color: #444444;
     color:#ffffff;
 }
+
+.round {
+    border-radius: 15px;
+}
+
 
 .login-form-input {
     text-align: center;
