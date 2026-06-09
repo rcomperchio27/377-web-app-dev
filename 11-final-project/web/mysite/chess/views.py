@@ -44,14 +44,6 @@ class UserDetailView(generic.DetailView):
     def get_queryset(self):
         return User.objects.all()
 
-# class save(generic.ListView):
-#     model = Game
-#     template_name = "chess/save.html"
-#     context_object_name = "games_list"
-
-#     def get_queryset(self):
-#         return Game.objects.all()
-    
 class GameResultsView(generic.ListView):
 
     model = Game
@@ -98,14 +90,15 @@ class UserLoginView(generic.ListView):
 
     def post(self, request, *args, **kwargs):
         # list_display = ["user_name", "user_games", "user_wins", "user_losses", "user_saved_game", "user_current_games"]
-        # user = User.objects.get(pk=pk)
         user_name = request.POST["name"]
         login = False
         try:
             User.objects.get(user_name=user_name)
+
             user_exist = True
         except:
             user_exist = False
+
         if user_exist == True:
             user = User.objects.get(user_name=user_name)
             if check_password(str(request.POST["password"]), user.user_password):
@@ -123,4 +116,17 @@ class UserLoginView(generic.ListView):
             game.save()
             id = game.game_id
             return redirect(f"/chess/{id}/")
+        
+    def query(self, request, *args, **kwargs):
+
+        # Parametrized query using %s placeholder   
+        query = "SELECT * FROM User WHERE user_id = 9"
+        users = User.objects.raw(query, 9)
+
+        for user in users:
+            print(user.user_name)
+
+        # return HttpResponse(f"Post ID:, {users} ")
+
+
     

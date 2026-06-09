@@ -16,8 +16,10 @@
     <body class="body" onload="brython()">
 
         <div id="nav-bar">
-            <p>Login/Sign up</p>
+            <p id="login-text">Login/Sign up</p>
         </div>
+        <p id="gamenum" hidden></p>
+
         <!-- Python Script -->
         <script type="text/python" src="{% static 'chess/login.py' %}"></script>
 
@@ -45,11 +47,37 @@
                     <br></br>
                     <input type="password" id="password-field" class="login-form-input" name="password" value="" required>
                     <br></br>
-                    <input class="round" type="submit" value="Sign up">
+                    <input id="Signup-button" class="round" type="submit" value="Sign up">
+                    <input id="user_id-field" name="id" type="text" value="" hidden/>
                 </form>
             </div>
             <div id="game-select-container" hidden>
-                
+                {% for user in user_list %}
+                <tr>
+                    <th id="user_id">{{user.user_id}}</th>
+                    <br></br>
+                    <th id="user_name">{{user.user_name}}</th>
+                    <br></br>
+                    <th id="user_game1"></th>
+                    <br></br>
+                </tr>
+                {% endfor %}
+                <!-- <form id="form-action" method="POST">
+
+                    {% csrf_token %}
+                    <br></br>
+                    <label for="name">User Name</label>
+                    <br></br>
+                    <input type="text" id="name-field" class="login-form-input" name="name" placeholder="John Doe" value="" required>
+                    <br></br>
+                    
+                    <label for="password">Password</label>
+                    <br></br>
+                    <input type="password" id="password-field" class="login-form-input" name="password" value="" required>
+                    <br></br>
+                    <input id="Signup-button" class="round" type="submit" value="Sign up">
+                    <input id="user_id-field" name="id" type="text" value="" hidden/> -->
+                </form>
             </div>
         </div>
     </body>
