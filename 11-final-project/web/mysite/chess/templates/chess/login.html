@@ -18,7 +18,7 @@
         <div id="nav-bar">
             <p id="login-text">Login/Sign up</p>
         </div>
-        <p id="gamenum" hidden></p>
+        <p id="usernum" hidden></p>
 
         <!-- Python Script -->
         <script type="text/python" src="{% static 'chess/login.py' %}"></script>
@@ -27,8 +27,8 @@
         <table hidden>
             {% for user in user_list %}
                 <tr>
-                    <th id="user_id">{{user.user_id}}</th>
-                    <th id="user_name">{{user.user_name}}</th>
+                    <th id="user_id{{user.user_id}}">{{user.user_id}}</th>
+                    <th id="user_name{{user.user_id}}">{{user.user_name}}</th>
                 </tr>
             {% endfor %}
         </table>
@@ -52,16 +52,26 @@
                 </form>
             </div>
             <div id="game-select-container" hidden>
-                {% for user in user_list %}
-                <tr>
-                    <th id="user_id">{{user.user_id}}</th>
-                    <br></br>
-                    <th id="user_name">{{user.user_name}}</th>
-                    <br></br>
-                    <th id="user_game1"></th>
-                    <br></br>
-                </tr>
-                {% endfor %}
+                <h1 id="User-name-text" style="margin-left: 20px;"></h1>
+                <table class="center">
+                    <tr>
+                        <th>User Id</th>
+                        <th>User Name</th>
+                        <th>User Game 1</th>
+                    </tr>
+                    {% for user in user_list %}
+                    <tr>
+                        <td id="user_id">{{user.user_id}}</td>
+                        <td id="user_name">{{user.user_name}}</td>
+                        <td id="user_games">
+                            {% for game in user.game_set.all %}
+                                <li id="user_game{{ forloop.counter }}">{{game.game_id}}</li>
+                            {% endfor %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+
+                </table>
                 <!-- <form id="form-action" method="POST">
 
                     {% csrf_token %}

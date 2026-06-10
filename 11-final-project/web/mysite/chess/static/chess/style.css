@@ -28,9 +28,6 @@
     height: 800px;
     background-color: #555555;
     border-radius: 30px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     color: white;
     font-size: 30px;
 }
@@ -79,6 +76,12 @@
 
 .login-form-input {
     text-align: center;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 /* 
 .square {

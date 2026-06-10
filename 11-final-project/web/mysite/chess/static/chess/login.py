@@ -1,6 +1,5 @@
 from browser import document, html, svg, timer, window
 
-
 # Get the full URL as a string
 current_url = window.location.href
 
@@ -14,7 +13,7 @@ print(usernum)
 if usernum != "login":
     document["login-text"].html = "Login"
     document["Signup-button"].value = "Login"
-    document["gamenum"].html = usernum
+    document["usernum"].html = usernum
     document["user_id-field"].value = usernum
     
     
@@ -23,6 +22,9 @@ else:
     document["Signup-button"].value = "Sign up"
 
 print(current_url)
+document["User-name-text"].html = document["user_name" + str(usernum)].html
+
+
 
 document["form-container"].hidden = True
 document["game-select-container"].hidden = False
