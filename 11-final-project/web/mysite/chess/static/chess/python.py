@@ -135,22 +135,54 @@ def backbutton(event):
     document["game_board_" + gamenum].html = board
     displayBoard()
 
+def promotePawn(event):
+    document["pawn-promotion-choice"].html = event.target.id.split('-')[0]
+    document["promotion-menu"].attrs["visibility"] = "hidden"
+    sqrloc = document["selectedSquare"].html.split(": ")[1]
+    piece = document["selectedPiece"].html
+    if piece == "":
+        return
+    piecetype = piece.split(" at ")[0]
+    piecetype = piecetype.split(" Piece: ")[1]
+    pieceloc = piece.split("at ")[1]
+
+    move(sqrloc, pieceloc, piecetype)
+
 def move(sqr, origin, piece):
     notation = board.san(chess.Move.from_uci(origin + sqr))
-    # print(board.is_capture(chess.Move(convertSquare(origin), convertSquare(sqr), None, None)))
     print(notation)
 
     try:
         legalmoves = str(board.legal_moves).split("(")[1].split(")")[0].split(", ")
         print(legalmoves)
         move_is_legal = False
-        for i in range(len(legalmoves)):
-            if legalmoves[i] == notation:
-                move_is_legal = True
+        promotion = False
+        if list(notation)[1] == "8":
+            promotion = True
+            move_is_legal = True
+            document["promotion-menu"].attrs["visibility"] = "visible"
         
-        if move_is_legal:
-            board.push_san(notation)
+        if promotion == False:
+            for i in range(len(legalmoves)):
+                if legalmoves[i] == notation:
+                    move_is_legal = True
 
+
+        if move_is_legal:
+            print("----")
+            print(notation)
+            if list(notation)[1] == "8":
+                promotePiece = document["pawn-promotion-choice"].html
+                print(promotePiece)
+                if promotePiece == "":
+                    return
+                else:
+                    if promotePiece == "knight":
+                        board.push_san(board.san(chess.Move.from_uci(origin + sqr)) + 'N')
+                    else:
+                        board.push_san(board.san(chess.Move.from_uci(origin + sqr)) + list(promotePiece)[0].upper())
+            else:
+                board.push_san(notation)
             if board.is_checkmate(): 
                 checkmate(document["Player-turn"].html)
 
@@ -166,6 +198,7 @@ def move(sqr, origin, piece):
 
             pastboards.append(str(board))
             document["pastboards"].html += str(board.fen()) + ", "
+
             # Checks for 3 move repetition
             repetition_count = 0
             for i in range(len(pastboards)):
@@ -360,7 +393,6 @@ def saveGame(event):
     # document[event.target.id].attrs["font-size"] = 40
     # document[event.target.id].html = "Save"
     
-
 # uses fen to load games --------------------------------
 
 fen = document["game_fen_" + gamenum].html
@@ -444,3 +476,12 @@ document["Save-btn-text"].bind("click", saveGame)
 
 # document["Back-button"].bind("click", backbutton)
 # document["pastboards"].html = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
+
+document["queen-promote"].bind("click", promotePawn)
+document["queen-promotion-background"].bind("click", promotePawn)
+document["rook-promote"].bind("click", promotePawn)
+document["rook-promotion-background"].bind("click", promotePawn)
+document["bishop-promote"].bind("click", promotePawn)
+document["bishop-promotion-background"].bind("click", promotePawn)
+document["knight-promote"].bind("click", promotePawn)
+document["knight-promotion-background"].bind("click", promotePawn)

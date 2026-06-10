@@ -47,6 +47,7 @@
         <p id="new-game-time-control" hidden></p>
         <p id="new-game-board-control" hidden></p>
         <p id="pastboards" hidden></p>
+        <p id="pawn-promotion-choice" hidden></p>
 
         <!-- Game Area holds the chess board, username, and times -->
         <div id="Game-Area">
@@ -88,7 +89,7 @@
                     <text id="white-clock-text" x="590" y="670" width="45" height="20" fill="#fff" font-size="38px" font-family="Arial" text-anchor="middle" alignment-baseline="middle">
                     </text>
                 </g>
-
+                
                 <g id="sideInfoContainer">
                     <rect id="InfoContainerBackground" x="700" y="50" rx="15" fill="#999999" width="400" height="400"></rect>
                     <text id="InfocontainerText" x="900" y="35" fill="#ffffff" font-size="30px" font-family="Arial" text-anchor="middle">Game Info</text>
@@ -266,7 +267,27 @@
                     <use id="black-pawn-6" href="#black-pawn" x="412" y="90"/>
                     <use id="black-pawn-7" href="#black-pawn" x="492" y="90"/>
                     <use id="black-pawn-8" href="#black-pawn" x="572" y="90"/>
-                </g>         
+
+                    <use id="white-rook-3" href="#white-rook" x="-100" y="570"/>
+                    <use id="white-rook-4" href="#white-rook" x="-100" y="570"/>
+                    <use id="white-rook-5" href="#white-rook" x="-100" y="570"/>
+                    <use id="white-rook-6" href="#white-rook" x="-100" y="570"/>
+                    <use id="white-rook-7" href="#white-rook" x="-100" y="570"/>
+                    <use id="white-rook-8" href="#white-rook" x="-100" y="570"/>
+                    <use id="white-rook-9" href="#white-rook" x="-100" y="570"/>
+                    <use id="white-rook-10" href="#white-rook" x="-100" y="570"/>
+                </g>       
+                <g id="promotion-menu" visibility="hidden">
+                    <rect id="promotion-background" x="0" y="0" rx="10" fill="#777777" width="100" height="420"/>
+                    <rect id="queen-promotion-background" x="10" y="15" rx="10" fill="#686868" width="80" height="80"/>
+                    <use id="queen-promote" href="#white-queen" x="5" y="10"/>
+                    <rect id="rook-promotion-background" x="10" y="115" rx="10" fill="#686868" width="80" height="80"/>
+                    <use id="rook-promote" href="#white-rook" x="5" y="110"/>
+                    <rect id="bishop-promotion-background" x="10" y="215" rx="10" fill="#686868" width="80" height="80"/>
+                    <use id="bishop-promote" href="#white-bishop" x="5" y="210"/>
+                    <rect id="knight-promotion-background" x="10" y="315" rx="10" fill="#686868" width="80" height="80"/>
+                    <use id="knight-promote" href="#white-knight" x="5" y="310"/>
+                </g>  
             </svg>
             <script type="text/python">
                 from browser import document, html, svg, timer
