@@ -30,6 +30,11 @@ else:
 document["game_board_" + gamenum].html = str(board)
 
 def checkmate(player):
+    document["GameOutcomeDisplay"].html = player + "'s by checkmate!"
+    if player == "white":
+        document["game-state"].html = "Win"
+    else:
+        document["game-state"].html = "Loss"
     print(player)
 
 def resetPieces():
@@ -157,10 +162,13 @@ def move(sqr, origin, piece):
         print(legalmoves)
         move_is_legal = False
         promotion = False
-        if list(notation)[1] == "8":
-            promotion = True
-            move_is_legal = True
-            document["promotion-menu"].attrs["visibility"] = "visible"
+        for i in range(len(legalmoves)):
+            if len(list(legalmoves[i])) > 3:
+                print(list(legalmoves[i])[1:3])
+                
+                if list(legalmoves[i])[1] + list(legalmoves[i])[2] == "8=" or list(legalmoves[i])[1] + list(legalmoves[i])[2] == "1=":
+                    promotion = True
+                    move_is_legal = True
         
         if promotion == False:
             for i in range(len(legalmoves)):
@@ -171,18 +179,22 @@ def move(sqr, origin, piece):
         if move_is_legal:
             print("----")
             print(notation)
-            if list(notation)[1] == "8":
+        
+            if list(notation)[1] == "8" or  list(notation)[1] == "1":
                 promotePiece = document["pawn-promotion-choice"].html
                 print(promotePiece)
                 if promotePiece == "":
+                    document["promotion-menu"].attrs["visibility"] = "visible"
                     return
                 else:
+                    document["promotion-menu"].attrs["visibility"] = "hidden"
                     if promotePiece == "knight":
                         board.push_san(board.san(chess.Move.from_uci(origin + sqr)) + 'N')
                     else:
                         board.push_san(board.san(chess.Move.from_uci(origin + sqr)) + list(promotePiece)[0].upper())
             else:
                 board.push_san(notation)
+                
             if board.is_checkmate(): 
                 checkmate(document["Player-turn"].html)
 
@@ -213,6 +225,8 @@ def move(sqr, origin, piece):
     mov = convertSqr(sqr)
     document[piece].attrs["x"] = (int(mov[0]) * 80) + 12
     document[piece].attrs["y"] = (int(mov[1]) * 80) + 12
+        
+    document["fen"].html = board.fen()
     print(board)
     displayBoard()
 
@@ -413,27 +427,29 @@ document["game_board_" + gamenum].html = str(board)
 document["username"].html = document["game_user_" + gamenum].html
 
 
-for i in range(2):
+for i in range(10):
     document["white-knight-" + str(i + 1)].bind("click", selectPiece)
-for i in range(2):
+for i in range(10):
     document["black-knight-" + str(i + 1)].bind("click", selectPiece)
-for i in range(2):
+for i in range(10):
     document["white-bishop-" + str(i + 1)].bind("click", selectPiece)
-for i in range(2):
+for i in range(10):
     document["black-bishop-" + str(i + 1)].bind("click", selectPiece)
-for i in range(2):
+for i in range(10):
     document["white-rook-" + str(i + 1)].bind("click", selectPiece)
-for i in range(2):
+for i in range(10):
     document["black-rook-" + str(i + 1)].bind("click", selectPiece)
 for i in range(8):
     document["white-pawn-" + str(i + 1)].bind("click", selectPiece)
 for i in range(8):
     document["black-pawn-" + str(i + 1)].bind("click", selectPiece)
+for i in range(9):
+    document["white-queen-" + str(i + 1)].bind("click", selectPiece)
+for i in range(9):
+    document["black-queen-" + str(i + 1)].bind("click", selectPiece)
 
 document["white-king-1"].bind("click", selectPiece)
 document["black-king-1"].bind("click", selectPiece)
-document["white-queen-1"].bind("click", selectPiece)
-document["black-queen-1"].bind("click", selectPiece)
 
 for i in range(8):
     for j in range(8):
