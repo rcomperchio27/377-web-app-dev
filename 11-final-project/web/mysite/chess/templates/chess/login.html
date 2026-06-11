@@ -61,9 +61,9 @@
                     </tr>
                     {% for user in user_list %}
                     <tr>
-                        <td id="user_id">{{user.user_id}}</td>
-                        <td id="user_name">{{user.user_name}}</td>
-                        <td id="user_games">
+                        <td id="user_id{{ forloop.counter }}">{{user.user_id}}</td>
+                        <td id="user_name{{ forloop.counter }}">{{user.user_name}}</td>
+                        <td id="user_games{{ forloop.counter }}">
                             {% for game in user.game_set.all %}
                                 <li id="user_game{{ forloop.counter }}">{{game.game_id}}</li>
                             {% endfor %}

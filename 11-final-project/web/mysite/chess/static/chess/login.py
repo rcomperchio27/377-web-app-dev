@@ -24,6 +24,15 @@ else:
 print(current_url)
 document["User-name-text"].html = document["user_name" + str(usernum)].html
 
+while True:
+    users = document["Game-table"].html.split("<tr")[2:]
+    for i in range(len(users)):
+        print(users[i])
+        id = users[i].split("id=")[1].split(">")[0][8:-1]
+        print(id)
+    print(len(users))
+    print(users)
+    break
 
 
 document["form-container"].hidden = True
