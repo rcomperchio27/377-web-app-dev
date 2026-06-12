@@ -32,6 +32,31 @@
     font-size: 30px;
 }
 
+#Game-table {
+    margin: 10px;
+    border-radius: 30px;
+    color: white;
+    font-size: 30px;
+    border: 1px solid;
+}
+
+
+#Game-table a{
+    margin: 10px;
+    border-radius: 30px;
+    color: white;
+    font-size: 30px;
+}
+
+
+#Game-table th{
+    margin: 10px;
+    text-align: center;
+    border-radius: 30px;
+    color: white;
+    font-size: 40px;
+}
+
 #form-container input{
     margin-left: 20px;
 }

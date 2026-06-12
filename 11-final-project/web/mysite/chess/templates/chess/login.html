@@ -55,17 +55,17 @@
                 <h1 id="User-name-text" style="margin-left: 20px;"></h1>
                 <table id="Game-table" class="center">
                     <tr>
-                        <th>User Id</th>
-                        <th>User Name</th>
-                        <th>User Game 1</th>
+                        <th hidden>User Id</th>
+                        <th hidden>User Name</th>
+                        <th>Saved Games</th>
                     </tr>
                     {% for user in user_list %}
-                    <tr>
-                        <td id="user_id{{ forloop.counter }}">{{user.user_id}}</td>
-                        <td id="user_name{{ forloop.counter }}">{{user.user_name}}</td>
+                    <tr id="tr-row{{ forloop.counter }}">
+                        <td id="user_id{{ forloop.counter }}" hidden>{{user.user_id}}</td>
+                        <td id="user_name{{ forloop.counter }}" hidden>{{user.user_name}}</td>
                         <td id="user_games{{ forloop.counter }}">
                             {% for game in user.game_set.all %}
-                                <li id="user_game{{ forloop.counter }}">{{game.game_id}}</li>
+                                <li id="user_game{{ forloop.counter }}"><a href="http://127.0.0.1:8000/chess/{{game.game_id}}/">Game {{game.game_id}}</a></li>
                             {% endfor %}
                         </td>
                     </tr>
