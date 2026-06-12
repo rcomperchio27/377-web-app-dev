@@ -43,7 +43,6 @@ def checkmate(player):
         document["game-state"].html = "Win"
     else:
         document["game-state"].html = "Loss"
-    print(player)
 
 # Clears the pieces off the board
 def resetPieces():
@@ -173,7 +172,6 @@ def move(sqr, origin, piece):
         # Checks if the move is a legal promotion
         for i in range(len(legalmoves)):
             if len(list(legalmoves[i])) > 3:
-                print(list(legalmoves[i])[1:3])
                 
                 if list(legalmoves[i])[1] + list(legalmoves[i])[2] == "8=" or list(legalmoves[i])[1] + list(legalmoves[i])[2] == "1=":
                     promotion = True
@@ -309,7 +307,6 @@ def boardControlSelection(event):
     if len(event.target.id.split("-")) == 2:
         textid = event.target.id
         id = textid.split("-")[0]
-        print(id)
         if document[id].attrs["fill"] == "#555555":
             document[id].attrs["fill"] = "#777777"
             removelist = document["new-game-board-control"].html.split("-")
@@ -431,7 +428,6 @@ if not(fen):
 else:
     board = chess.Board(fen)
     displayBoard()
-    print(board)
 
 document["fen"].html = board.fen()
 

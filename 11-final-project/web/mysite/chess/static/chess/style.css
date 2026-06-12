@@ -1,15 +1,8 @@
-.body {
-    font-family: Arial;
-    background-color: #444444;
-}
+/* 
+    style.css
 
-#Sign-up {
-    margin: 0;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+    This css page holds the styles for the login.pages and index.html pages
+*/
 
 #form-container {
     width: 1400px;
@@ -23,6 +16,14 @@
     font-size: 30px;
 }
 
+#form-container input{
+    margin-left: 20px;
+}
+
+#form-container label{
+    margin-left: 20px;
+}
+
 #game-select-container {
     width: 1400px;
     height: 800px;
@@ -32,24 +33,23 @@
     font-size: 30px;
 }
 
-#Game-table {
+#game-table {
+    border: #dddddd;
     margin: 10px;
     border-radius: 30px;
     color: white;
     font-size: 30px;
-    border: 1px solid;
+    border: 10px solid;
 }
 
-
-#Game-table a{
+#game-table a{
     margin: 10px;
     border-radius: 30px;
     color: white;
     font-size: 30px;
 }
 
-
-#Game-table th{
+#game-table th{
     margin: 10px;
     text-align: center;
     border-radius: 30px;
@@ -57,30 +57,13 @@
     font-size: 40px;
 }
 
-#form-container input{
-    margin-left: 20px;
-}
-
-#form-container label{
-    margin-left: 20px;
-}
-
 #nav-bar {
     background-color: #222222;
     padding: 15px;
 }
 
-#nav-bar a {
+#nav-bar a{
     border-radius: 10px;
-    padding: 5px;
-    color:#dddddd;
-    font-size: 30px;
-    text-decoration: none;
-    vertical-align: center;
-    margin-right: 50px;
-}
-
-#nav-bar p {
     padding: 5px;
     color:#dddddd;
     font-size: 30px;
@@ -94,19 +77,26 @@
     color:#ffffff;
 }
 
-#Game-table {
-    border: #dddddd;
-    border-width: 10px;
-    border-style: solid;
+#nav-bar p{
+    padding: 5px;
+    color:#dddddd;
+    font-size: 30px;
+    text-decoration: none;
+    vertical-align: center;
+    margin-right: 50px;
 }
 
-.round {
-    border-radius: 15px;
+#sign-up {
+    margin: 0;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-
-.login-form-input {
-    text-align: center;
+.body {
+    font-family: Arial;
+    background-color: #444444;
 }
 
 .center {
@@ -115,32 +105,21 @@
     align-items: center;
 }
 
-
-/* 
-.square {
-    x: 0;
-    y: 0;
-    width: 80px;
-    height: 80px;
-} */
-
-/* .dark {
-    fill: #b58863;
+.dark {
+    fill: #825530;
 }
-
-.light {
-    fill: #f0d9b5;
-} */
-
 
 .light {
     fill: #a47752;
 }
 
-.dark {
-    fill: #825530;
+.login-form-input {
+    text-align: center;
 }
 
+.round {
+    border-radius: 15px;
+}
 
 .SVGbackground {
     fill: #444444;
