@@ -38,7 +38,7 @@ document["game_board_" + gamenum].html = str(board)
 
 # Runs when a give player gets checkmate and displays that information
 def checkmate(player):
-    document["game-outcome-display"].html = player + "'s by checkmate!"
+    document["game-outcome-display"].html = player + " win's by checkmate!"
     if player == "white":
         document["game-state"].html = "Win"
     else:
