@@ -61,7 +61,6 @@ class GameResultsView(generic.ListView):
             game_board = request.POST["board"]
             game_time_white = request.POST["white-time"]
             game_time_black = request.POST["black-time"]
-            game_id = pk - 1
             game.game_board = game_board
             game.game_time_white = game_time_white
             game.game_time_black = game_time_black
@@ -89,7 +88,6 @@ class UserLoginView(generic.ListView):
     from django.views.decorators.http import require_http_methods
 
     def post(self, request, *args, **kwargs):
-        # list_display = ["user_name", "user_games", "user_wins", "user_losses", "user_saved_game", "user_current_games"]
         user_name = request.POST["name"]
         login = False
         try:
@@ -119,7 +117,6 @@ class UserLoginView(generic.ListView):
         
     def query(self, request, *args, **kwargs):
 
-        # Parametrized query using %s placeholder   
         query = "SELECT * FROM User WHERE user_id = 9"
         users = User.objects.raw(query, 9)
 
