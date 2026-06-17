@@ -26,6 +26,6 @@ class UserAdmin(admin.ModelAdmin):
     list_filter = ["user_games"]
     search_fields = ["user_name"]
 
-admin.site.register(Question, QuestionAdmin)
+# admin.site.register(Question, QuestionAdmin)
 admin.site.register(Game, GameAdmin)
 admin.site.register(User, UserAdmin)

@@ -68,7 +68,6 @@ class GameResultsView(generic.ListView):
             
             game.save() 
             return redirect(f"/chess/{id}/")
-            # return HttpResponse(f"Post ID: {pk}, {game_board} ")
         else:
             user = User.objects.get(user_name=request.POST["user"])
             game_board = request.POST["board"]
@@ -122,8 +121,5 @@ class UserLoginView(generic.ListView):
 
         for user in users:
             print(user.user_name)
-
-        # return HttpResponse(f"Post ID:, {users} ")
-
 
     
