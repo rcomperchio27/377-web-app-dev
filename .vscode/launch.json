@@ -5,6 +5,13 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "type": "java",
+            "name": "day1",
+            "request": "launch",
+            "mainClass": "day1",
+            "projectName": "377-web-app-dev_9cbfb700"
+        },
+        {
             "name": "Python Debugger: Current File",
             "type": "debugpy",
             "request": "launch",
